@@ -1,0 +1,263 @@
+﻿@administration_1 = "gfx/interface/icons/culture_innovations/innovation_administration_01.dds"
+@administration_2 = "gfx/interface/icons/culture_innovations/innovation_administration_02.dds"
+@administration_3 = "gfx/interface/icons/culture_innovations/innovation_administration_03.dds"
+@ambushers = "gfx/interface/icons/culture_innovations/ambushers.dds"
+@arbalest = "gfx/interface/icons/culture_innovations/arbalest.dds"
+@armillary_sphere = "gfx/interface/icons/culture_innovations/armillary_sphere.dds"
+@artesian_well = "gfx/interface/icons/culture_innovations/artesian_well.dds"
+@articulated = "gfx/interface/icons/culture_innovations/articulated.dds"
+@bailiffs = "gfx/interface/icons/culture_innovations/bailiffs.dds"
+@banking = "gfx/interface/icons/culture_innovations/banking.dds"
+@bannus = "gfx/interface/icons/culture_innovations/bannus.dds"
+@battailes = "gfx/interface/icons/culture_innovations/battailes.dds"
+@billmen = "gfx/interface/icons/culture_innovations/billmen.dds"
+@black_army = "gfx/interface/icons/culture_innovations/black_army.dds"
+@blast = "gfx/interface/icons/culture_innovations/blast_3.dds"
+@bombard = "gfx/interface/icons/culture_innovations/bombard.dds"
+@bonus_pay = "gfx/interface/icons/culture_innovations/bonus_pay.dds"
+@book_keeping = "gfx/interface/icons/culture_innovations/book_keeping.dds"
+@camel = "gfx/interface/icons/culture_innovations/innovation_camel.dds"
+@canals = "gfx/interface/icons/culture_innovations/canals.dds"
+@canoe = "gfx/interface/icons/culture_innovations/canoe.dds"
+@catalan = "gfx/interface/icons/culture_innovations/catalan.dds"
+@cataphract = "gfx/interface/icons/culture_innovations/cataphract.dds"
+@cellar = "gfx/interface/icons/culture_innovations/cellar.dds"
+@centralized_bureaucracy = "gfx/interface/icons/culture_innovations/centralized_bureaucracy.dds"
+@cesspits = "gfx/interface/icons/culture_innovations/cesspits.dds"
+@charter_of_rights = "gfx/interface/icons/culture_innovations/charter_of_rights.dds"
+@chivalric_code = "gfx/interface/icons/culture_innovations/chivalric_code.dds"
+@chronicles = "gfx/interface/icons/culture_innovations/chronicles.dds"
+@city_day = "gfx/interface/icons/culture_innovations/city_day.dds"
+@city_square = "gfx/interface/icons/culture_innovations/city_square.dds"
+@civil_construction_1 = "gfx/interface/icons/culture_innovations/innovation_civil_construction_01.dds"
+@civil_construction_2 = "gfx/interface/icons/culture_innovations/innovation_civil_construction_02.dds"
+@closed_sewers = "gfx/interface/icons/culture_innovations/closed_sewers.dds"
+@coat = "gfx/interface/icons/culture_innovations/coat.dds"
+@coinage = "gfx/interface/icons/culture_innovations/coinage.dds"
+@collective_responsibility = "gfx/interface/icons/culture_innovations/collective_responsibility.dds"
+@colonialism = "gfx/interface/icons/culture_innovations/colonialism.dds"
+@condottieri = "gfx/interface/icons/culture_innovations/condottieri.dds"
+@corpus_juris_civilis = "gfx/interface/icons/culture_innovations/corpus_juris_civilis.dds"
+@coutiliers = "gfx/interface/icons/culture_innovations/coutiliers.dds"
+@craft_guilds = "gfx/interface/icons/culture_innovations/craft_guilds.dds"
+@crane = "gfx/interface/icons/culture_innovations/crane.dds"
+@crop_rotation = "gfx/interface/icons/culture_innovations/crop_rotation.dds"
+@de_re_militari = "gfx/interface/icons/culture_innovations/de_re_militari.dds"
+@deccan = "gfx/interface/icons/culture_innovations/deccan.dds"
+@defense_in_depth = "gfx/interface/icons/culture_innovations/defense_in_depth.dds"
+@dike = "gfx/interface/icons/culture_innovations/dike.dds"
+@divine_right = "gfx/interface/icons/culture_innovations/divine_right.dds"
+@eastern_heavy_cav = "gfx/interface/icons/culture_innovations/eastern_heavy_cav.dds"
+@elephant = "gfx/interface/icons/culture_innovations/innovation_elephant.dds"
+@elephantry = "gfx/interface/icons/culture_innovations/elephantry.dds"
+@enclosures = "gfx/interface/icons/culture_innovations/enclosures.dds"
+@fahnlein = "gfx/interface/icons/culture_innovations/fahnlein.dds"
+@fairs = "gfx/interface/icons/culture_innovations/fairs.dds"
+@field_fortifications = "gfx/interface/icons/culture_innovations/field_fortifications.dds"
+@field_guns = "gfx/interface/icons/culture_innovations/field_guns.dds"
+@field_surgery = "gfx/interface/icons/culture_innovations/field_surgery.dds"
+@fire_pots = "gfx/interface/icons/culture_innovations/fire_pots.dds"
+@fortifications = "gfx/interface/icons/culture_innovations/innovation_fortifications.dds"
+@free_cities = "gfx/interface/icons/culture_innovations/free_cities.dds"
+@free_comp = "gfx/interface/icons/culture_innovations/free_comp.dds"
+@gallowglass = "gfx/interface/icons/culture_innovations/gallowglass.dds"
+@gendarme = "gfx/interface/icons/culture_innovations/gendarme.dds"
+@goedendag = "gfx/interface/icons/culture_innovations/goedendag.dds"
+@gunpowder = "gfx/interface/icons/culture_innovations/gunpowder.dds"
+@halberds = "gfx/interface/icons/culture_innovations/halberds.dds"
+@heavy_plow = "gfx/interface/icons/culture_innovations/heavy_plow.dds"
+@heraldry = "gfx/interface/icons/culture_innovations/heraldry.dds"
+@hereditary_rule = "gfx/interface/icons/culture_innovations/hereditary_rule.dds"
+@high_med = "gfx/interface/icons/culture_innovations/high_med.dds"
+@horseshoes = "gfx/interface/icons/culture_innovations/horseshoes.dds"
+@household_troops = "gfx/interface/icons/culture_innovations/household_troops.dds"
+@humanism = "gfx/interface/icons/culture_innovations/humanism.dds"
+@indenture = "gfx/interface/icons/culture_innovations/indenture.dds"
+@inf_rev = "gfx/interface/icons/culture_innovations/inf_rev.dds"
+@janissaries = "gfx/interface/icons/culture_innovations/janissaries.dds"
+@justices_of_the_peace = "gfx/interface/icons/culture_innovations/justices_of_the_peace.dds"
+@khandayat = "gfx/interface/icons/culture_innovations/khandayat.dds"
+@kite = "gfx/interface/icons/culture_innovations/kite.dds"
+@knight = "gfx/interface/icons/culture_innovations/innovation_knight.dds"
+@knighthood = "gfx/interface/icons/culture_innovations/knighthood.dds"
+@knightly_retinue = "gfx/interface/icons/culture_innovations/knightly_retinue.dds"
+@konni = "gfx/interface/icons/culture_innovations/konni.dds"
+@landsknecht = "gfx/interface/icons/culture_innovations/landsknecht.dds"
+@leadership_1 = "gfx/interface/icons/culture_innovations/innovation_leadership_01.dds"
+@leadership_2 = "gfx/interface/icons/culture_innovations/innovation_leadership_02.dds"
+@legal_profession = "gfx/interface/icons/culture_innovations/legal_profession.dds"
+@levy = "gfx/interface/icons/culture_innovations/levy.dds"
+@levy_building = "gfx/interface/icons/culture_innovations/innovation_levy_building.dds"
+@lockgates = "gfx/interface/icons/culture_innovations/lockgates.dds"
+@logistics = "gfx/interface/icons/culture_innovations/logistics.dds"
+@longbowmen = "gfx/interface/icons/culture_innovations/longbowmen.dds"
+@maa_01 = "gfx/interface/icons/culture_innovations/innovation_maa_01.dds"
+@maa_02 = "gfx/interface/icons/culture_innovations/innovation_maa_02.dds"
+@maa_1 = "gfx/interface/icons/culture_innovations/maa_1.dds"
+@maa_2 = "gfx/interface/icons/culture_innovations/maa_2.dds"
+@machi = "gfx/interface/icons/culture_innovations/machi.dds"
+@majesty_01 = "gfx/interface/icons/culture_innovations/innovation_majesty_01.dds"
+@majesty_02 = "gfx/interface/icons/culture_innovations/innovation_majesty_02.dds"
+@majesty_03 = "gfx/interface/icons/culture_innovations/innovation_majesty_03.dds"
+@majesty_04 = "gfx/interface/icons/culture_innovations/innovation_nobility_04.dds"
+@mangonel = "gfx/interface/icons/culture_innovations/mangonel.dds"
+@map = "gfx/interface/icons/culture_innovations/imperialism.dds"
+@market_1 = "gfx/interface/icons/culture_innovations/market_1.dds"
+@market_2 = "gfx/interface/icons/culture_innovations/market_2.dds"
+@market_3 = "gfx/interface/icons/culture_innovations/market_3.dds"
+@market_4 = "gfx/interface/icons/culture_innovations/market_4.dds"
+@market_5 = "gfx/interface/icons/culture_innovations/market_5.dds"
+@matchlock = "gfx/interface/icons/culture_innovations/matchlock.dds"
+@mechanical_clocks = "gfx/interface/icons/culture_innovations/mechanical_clocks.dds"
+@merchant_guilds = "gfx/interface/icons/culture_innovations/merchant_guilds.dds"
+@misc_inventions = "gfx/interface/icons/culture_innovations/innovation_misc_inventions.dds"
+@muladi = "gfx/interface/icons/culture_innovations/muladi.dds"
+@nobility_01 = "gfx/interface/icons/culture_innovations/innovation_nobility_01.dds"
+@nobility_02 = "gfx/interface/icons/culture_innovations/innovation_nobility_02.dds"
+@nobility_03 = "gfx/interface/icons/culture_innovations/innovation_nobility_03.dds"
+@nobility_04 = "gfx/interface/icons/culture_innovations/innovation_nobility_04.dds"
+@oathbound_service = "gfx/interface/icons/culture_innovations/oathbound_service.dds"
+@old_soldiers = "gfx/interface/icons/culture_innovations/old_soldiers.dds"
+@ostsiedlung = "gfx/interface/icons/culture_innovations/ostsiedlung.dds"
+@outriders = "gfx/interface/icons/culture_innovations/outriders.dds"
+@palace_guards "gfx/interface/icons/culture_innovations/palace_guards.dds"
+@patronage = "gfx/interface/icons/culture_innovations/patronage.dds"
+@pavise = "gfx/interface/icons/culture_innovations/pavise.dds"
+@pavise_crossbowmen = "gfx/interface/icons/culture_innovations/pavise_crossbowmen.dds"
+@pike_and_shot = "gfx/interface/icons/culture_innovations/pike_and_shot.dds"
+@pikes = "gfx/interface/icons/culture_innovations/pikes.dds"
+@primogeniture = "gfx/interface/icons/culture_innovations/primogeniture.dds"
+@printing_press = "gfx/interface/icons/culture_innovations/printing_press.dds"
+@quarantine = "gfx/interface/icons/culture_innovations/quarantine.dds"
+@raised_banner = "gfx/interface/icons/culture_innovations/innovation_raised_banner.dds"
+@ransoms = "gfx/interface/icons/culture_innovations/ransoms.dds"
+@reconquista = "gfx/interface/icons/culture_innovations/reconquista.dds"
+@reg_colors = "gfx/interface/icons/culture_innovations/reg_colors.dds"
+@reislaufer = "gfx/interface/icons/culture_innovations/reislaufer.dds"
+@reiters = "gfx/interface/icons/culture_innovations/reiters.dds"
+@reliquaries = "gfx/interface/icons/culture_innovations/reliquaries.dds"
+@rib_1 = "gfx/interface/icons/culture_innovations/rib_1.dds"
+@rib_2 = "gfx/interface/icons/culture_innovations/rib_2.dds"
+@rivet = "gfx/interface/icons/culture_innovations/rivet.dds"
+@sappers = "gfx/interface/icons/culture_innovations/sappers.dds"
+@schiltron = "gfx/interface/icons/culture_innovations/schiltron.dds"
+@scorched_earth = "gfx/interface/icons/culture_innovations/scorched_earth.dds"
+@share_trading = "gfx/interface/icons/culture_innovations/share_trading.dds"
+@siege_weapons = "gfx/interface/icons/culture_innovations/innovation_siege_weapons.dds"
+@signoria = "gfx/interface/icons/culture_innovations/signoria.dds"
+@silver_standard = "gfx/interface/icons/culture_innovations/silver_standard.dds"
+@skoutatoi = "gfx/interface/icons/culture_innovations/skoutatoi.dds"
+@social_mobility = "gfx/interface/icons/culture_innovations/social_mobility.dds"
+@special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
+@special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
+@standing_armies = "gfx/interface/icons/culture_innovations/standing_armies.dds"
+@state_banks = "gfx/interface/icons/culture_innovations/state_banks.dds"
+@stem_duchies = "gfx/interface/icons/culture_innovations/stem_duchies.dds"
+@stipendiary_police = "gfx/interface/icons/culture_innovations/stipendiary_police.dds"
+@stratioti = "gfx/interface/icons/culture_innovations/stratioti.dds"
+@streltsy = "gfx/interface/icons/culture_innovations/streltsy.dds"
+@tabory = "gfx/interface/icons/culture_innovations/tabory.dds"
+@tercio = "gfx/interface/icons/culture_innovations/tercio.dds"
+@toll_roads = "gfx/interface/icons/culture_innovations/toll_roads.dds"
+@town_charters = "gfx/interface/icons/culture_innovations/town_charters.dds"
+@trebuchet = "gfx/interface/icons/culture_innovations/trebuchet.dds"
+@universities = "gfx/interface/icons/culture_innovations/universities.dds"
+@urban_freedom = "gfx/interface/icons/culture_innovations/urban_freedom.dds"
+@urban_mil = "gfx/interface/icons/culture_innovations/urban_mil.dds"
+@urban_militias = "gfx/interface/icons/culture_innovations/urban_militias.dds"
+@viking = "gfx/interface/icons/culture_innovations/viking.dds"
+@walled_city = "gfx/interface/icons/culture_innovations/walled_city.dds"
+@war_drums = "gfx/interface/icons/culture_innovations/war_drums.dds"
+@warhorses = "gfx/interface/icons/culture_innovations/warhorses.dds"
+@water_wheels = "gfx/interface/icons/culture_innovations/water_wheels.dds"
+@weapons_and_armor_01 = "gfx/interface/icons/culture_innovations/innovation_weapons_and_armor_01.dds"
+@weapons_and_armor_02 = "gfx/interface/icons/culture_innovations/innovation_weapons_and_armor_02.dds"
+@wetland_drainage = "gfx/interface/icons/culture_innovations/wetland_drainage.dds"
+@windmills = "gfx/interface/icons/culture_innovations/windmills.dds"
+@winged_hussars = "gfx/interface/icons/culture_innovations/winged_hussars.dds"
+@wolf_furnace = "gfx/interface/icons/culture_innovations/wolf_furnace.dds"
+@wootz = "gfx/interface/icons/culture_innovations/wootz.dds"
+@zhanmadao = "gfx/interface/icons/culture_innovations/zhanmadao.dds"
+
+######################################################
+# Vanilla Overwrites to remove techs from game
+######################################################
+
+
+innovation_mubarizuns = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @chasseur
+
+	potential = { always = no }
+
+	flag = global_maa
+}
+
+innovation_khandayats = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @chasseur
+
+	potential = { always = no }
+
+	flag = global_maa
+}
+
+innovation_desert_tactics = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @chasseur
+
+	potential = { always = no }
+
+	flag = global_maa
+}
+
+innovation_light_footman = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @chasseur
+	
+	unlock_maa = light_footmen
+
+	potential = { always = no }
+
+	flag = global_maa
+}
+
+innovation_adaptive_militia = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @chasseur
+
+	potential = { always = no }
+
+	flag = global_maa
+}
+
+innovation_mobile_guards = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @ambushers
+	
+	potential = { always = no }
+
+	unlock_maa = shomer
+	
+	flag = global_maa
+}
+
+innovation_legionnaires = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @praetorian
+
+	potential = { always = no }
+
+	unlock_maa = praetorian
+
+	flag = global_maa
+}
+
+

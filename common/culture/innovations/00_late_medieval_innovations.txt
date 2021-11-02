@@ -1,0 +1,272 @@
+﻿# LM
+innovation_primogeniture = {
+	group = culture_group_civic
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_primo.jpg"
+	
+	unlock_law = single_heir_succession_law
+	unlock_law = single_heir_succession_law_youngest
+	
+	
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+# LM
+innovation_manorialism = {
+	group = culture_group_civic
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_fairs.dds"
+	
+	custom = doctrine_parameter_demd_meta_trade_post_max_bonus_1
+
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+# LM
+innovation_currency_01 = {
+	group = culture_group_civic
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_freedom.dds"
+	
+	custom = doctrine_parameter_demd_meta_university_max_bonus_1
+	custom = doctrine_parameter_demd_meta_temple_max_bonus_1
+	modifier = {
+		learning = 2 
+		cultural_head_fascination_mult = 0.10
+	}
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+# LM
+innovation_windmills = {
+	group = culture_group_civic
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_windmills.dds"
+	
+	custom = doctrine_parameter_demd_meta_food_mult_2
+	custom = doctrine_parameter_demd_meta_food_districts_mult_3
+	custom = doctrine_parameter_demd_meta_construction_speed_mult_20
+	
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+################################
+# LM
+innovation_castle_baileys = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_urban_mil.dds"
+	
+	modifier = {
+		heavy_infantry_damage_mult = 0.05
+		pikemen_damage_mult = 0.05
+		archers_damage_mult = 0.05
+	}
+	custom = doctrine_parameter_demd_meta_hospital_max_bonus_1
+
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+
+# LM
+innovation_advanced_bowmaking = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_pikemen.png"
+
+	potential = {
+		NOR = {
+			AND = {
+				this.culture_group = culture_group:brythonic_group
+				NOT = { this = culture:gaelic }
+			}
+			this.culture_group = culture_group:west_germanic_group
+			this.culture_group = culture_group:central_germanic_group
+			this.culture_group = culture_group:latin_group
+			this.culture_group = culture_group:chinese_group
+			AND = {
+				this.culture_group = culture_group:north_germanic_group
+				has_fp1_dlc_trigger = yes
+			}
+		}		
+	}
+	
+	unlock_maa = pikemen
+
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+innovation_bondi = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_bondi.png"
+
+	potential = {
+		has_fp1_dlc_trigger = yes
+		this.culture_group = culture_group:north_germanic_group
+	}
+
+	unlock_maa = bondi
+
+	flag = global_maa
+}
+
+innovation_billmen = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_billmen.dds"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:brythonic_group
+			this.culture_group = culture_group:west_germanic_group
+		}
+	}
+	
+	unlock_maa = billmen
+		
+	flag = global_maa
+}
+
+innovation_zweihanders = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_landsknecht.dds"
+
+	potential = {
+		this.culture_group = culture_group:central_germanic_group
+	}
+
+	unlock_maa = landsknecht
+
+	flag = global_maa
+}
+
+innovation_pike_columns = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_reislaufer.dds"
+
+	potential = {
+		this.culture_group = culture_group:latin_group
+	}
+
+	unlock_maa = picchieri
+
+	flag = global_maa
+}
+
+innovation_rectilinear_schiltron = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_schiltron.dds"
+
+	potential = {
+		OR = {
+			this = culture:gaelic
+			this = culture:scottish
+		}
+	}
+	
+	unlock_maa = schiltron
+
+	flag = global_maa
+}
+
+innovation_zhanmadao = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_zhanmadao.dds"
+	
+	potential = {
+		this.culture_group = culture_group:chinese_group
+	}
+	
+	unlock_maa = zhanmadao
+	
+	flag = global_maa
+}
+
+#################################
+
+# LM
+innovation_horseshoes = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+	
+	modifier = {
+		heavy_infantry_toughness_mult = 0.05
+		pikemen_toughness_mult = 0.05
+		heavy_cavalry_toughness_mult = 0.05
+	}
+	custom = doctrine_parameter_demd_meta_goods_mult_5
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+# LM
+innovation_trebuchet = {
+	group = culture_group_military
+	culture_era = culture_era_late_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_trebuchet.png"
+	
+	unlock_maa = trebuchet
+
+	flag = global_regular
+	flag = late_medieval_era_regular
+}
+
+##########################################
+
+innovation_wierdijks = {
+	group = culture_group_regional
+	culture_era = culture_era_late_medieval
+	region = custom_netherlands
+	icon = "gfx/interface/icons/culture_innovations/demd_dike.dds"
+	
+	modifier = {
+		levy_size = 0.01 #Not that kind of levee!
+		city_holding_build_speed = -0.1
+		city_holding_holding_build_speed = -0.1
+		development_growth_factor = 0.05
+
+	}
+
+	flag = global_regional
+	flag = late_medieval_era_regional
+}
+
+innovation_condottieri = {
+	group = culture_group_regional
+	culture_era = culture_era_late_medieval
+	region = world_europe_south_italy
+	icon = "gfx/interface/icons/culture_innovations/demd_condottieri.dds"
+	
+	modifier = {
+		mercenary_count_mult = 1
+		same_culture_mercenary_hire_cost_mult = -0.25
+	}
+
+	flag = global_regional
+	flag = late_medieval_era_regional
+}
+
+innovation_deccan_unity = {
+	group = culture_group_regional
+	culture_era = culture_era_late_medieval
+	region = world_india_deccan
+	icon = "gfx/interface/icons/culture_innovations/innovation_leadership_02.dds"
+	
+	modifier = {
+		same_faith_opinion = 5
+	}
+
+	flag = global_regional
+	flag = late_medieval_era_regional
+}

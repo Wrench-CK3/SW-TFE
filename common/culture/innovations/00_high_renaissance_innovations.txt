@@ -1,0 +1,192 @@
+﻿
+
+# HR
+innovation_ermine_cloaks = {
+	group = culture_group_civic
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_banking.dds"
+	
+	custom = doctrine_parameter_demd_meta_trade_post_max_bonus_1
+
+
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+# HR
+innovation_land_grants = {
+	group = culture_group_civic
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_legal_profession.dds"
+	
+	custom = doctrine_parameter_demd_meta_public_order_mult_5
+	custom = doctrine_parameter_demd_meta_theater_max_bonus_1
+
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+# HR
+innovation_development_03 = {
+	group = culture_group_civic
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_printing_press.dds"
+		
+	modifier = {
+		tyranny_gain_mult = 0.15
+	}
+	custom = doctrine_parameter_demd_meta_university_max_bonus_1
+
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+# HR
+innovation_currency_04 = {
+	group = culture_group_civic
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_dike.dds"
+	
+	custom = doctrine_parameter_demd_meta_food_mult_2
+	custom = doctrine_parameter_demd_meta_food_districts_mult_3
+	custom = doctrine_parameter_demd_meta_construction_speed_mult_20
+	
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+########################################################
+
+# HR
+innovation_standing_armies = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_standing_armies.dds"
+	
+	modifier = {
+		men_at_arms_maintenance = -0.10
+	}
+	custom = doctrine_parameter_demd_meta_hospital_max_bonus_1
+
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+#################################################
+# HR
+innovation_demd_matchlock = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_handgunners.png"
+
+	potential = {
+		NOR = {
+			this.culture_group = culture_group:iberian_group
+			
+			#East Slavic
+			this.culture_group = culture_group:east_slavic_group
+			
+			#Turkish
+			this = culture:turkish
+
+			this.culture_group = culture_group:west_slavic_group
+		}
+	}
+	
+	unlock_maa = handgunners
+
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+innovation_janissaries = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_janissaries.dds"
+	
+	potential = {
+		this = culture:turkish
+	}
+	
+	unlock_maa = janissaries
+	
+	flag = global_maa
+}
+
+innovation_streltsy = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_streltsy.dds"
+	
+	potential = {
+		this.culture_group = culture_group:east_slavic_group
+	}
+	
+	unlock_maa = streltsy
+	
+	flag = global_maa
+}
+
+innovation_tercio = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_tercio.dds"
+	
+	potential = {
+		this.culture_group = culture_group:iberian_group
+	}
+	
+	unlock_maa = tercio
+	
+	flag = global_maa
+}
+
+innovation_tabory = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_tabory.dds"
+	
+	potential = { 
+		this.culture_group = culture_group:west_slavic_group
+	}
+	
+	unlock_maa = tabory
+	
+	flag = global_maa
+}
+#################################
+
+# HR
+innovation_demd_articulated_plate = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_articulated.dds"
+	
+	modifier = { 
+		heavy_cavalry_toughness_mult = 0.1 
+		pikemen_toughness_mult = 0.05
+		heavy_infantry_toughness_mult = 0.05
+	}
+	custom = doctrine_parameter_demd_meta_goods_mult_5
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+# HR
+innovation_trace_italienne = {
+	group = culture_group_military
+	culture_era = culture_era_high_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_trace.jpg"
+	
+	custom = doctrine_parameter_demd_meta_walls_max_bonus_1
+
+	flag = global_regular
+	flag = high_renaissance_era_regular
+}
+
+
+
+
+
+
+

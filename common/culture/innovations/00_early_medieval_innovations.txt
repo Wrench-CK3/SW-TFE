@@ -1,0 +1,213 @@
+﻿# EM
+innovation_hereditary_rule = {
+	group = culture_group_civic
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_hereditary_rule.dds"
+
+	unlock_law = partition_succession_law
+	unlock_law = crown_authority_2
+	
+	modifier = {
+		monthly_prestige_gain_mult = 0.05
+	}
+	
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+# EM
+innovation_city_planning = {
+	group = culture_group_civic
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/innovation_administration_02.dds"
+	
+	modifier = {
+		holding_build_gold_cost = -0.33
+		holding_build_speed = 0.25
+	}
+	# Include building construction time 
+	custom = doctrine_parameter_demd_meta_temple_max_bonus_1
+	custom = doctrine_parameter_demd_meta_theater_max_bonus_1
+	custom = doctrine_parameter_demd_meta_construction_speed_mult_20
+	
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+# EM
+innovation_royal_prerogative = {
+	group = culture_group_civic
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_bailiffs.dds"
+	
+	custom = doctrine_parameter_demd_meta_barracks_max_bonus_1
+
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+
+# EM
+innovation_development_01 = {
+	group = culture_group_civic
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_manorialism.png"
+	
+	custom = doctrine_parameter_demd_meta_food_mult_2
+	custom = doctrine_parameter_demd_meta_food_districts_mult_3
+	
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+#############################################
+
+# EM
+innovation_barracks = {
+	group = culture_group_military
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_levy.png"
+	
+	modifier = {
+		army_maintenance_mult = -0.05
+		
+	}
+
+	custom = doctrine_parameter_demd_meta_manpower_mult_10
+
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+########################################
+innovation_house_soldiers = {
+	group = culture_group_military
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_xbow.png"
+	
+	unlock_maa = crossbowmen
+
+	potential = {
+		NOR = {
+			this.culture_group = culture_group:chinese_group
+			this.culture_group = culture_group:central_germanic_group
+			this.culture_group = culture_group:latin_group	
+		}
+	}
+
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+innovation_pavise_crossbowmen = {
+	group = culture_group_military
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_pavise.dds"
+
+	potential = {
+		OR = {
+			this.culture_group = culture_group:central_germanic_group
+			this.culture_group = culture_group:latin_group			
+		}
+	}
+
+	unlock_maa = pavise_crossbowmen
+
+	flag = global_maa
+}
+
+innovation_repeating_crossbow = {
+	group = culture_group_military
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+	
+	potential = {
+		this.culture_group = culture_group:chinese_group
+	}
+	
+	unlock_maa = chu_ko_nu
+	
+	flag = global_maa
+}
+
+########################################
+
+# EM
+innovation_motte = {
+	group = culture_group_military
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_horseshoes.dds"
+	
+	modifier = {		
+		movement_speed = 0.1
+		heavy_cavalry_pursuit_mult = 0.1
+		heavy_cavalry_damage_mult = 0.05
+		light_cavalry_pursuit_mult = 0.1
+		light_cavalry_damage_mult = 0.05
+	}
+	custom = doctrine_parameter_demd_meta_goods_mult_5
+
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+# EM
+innovation_battlements = {
+	group = culture_group_military
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_fire_pots.dds"
+
+	modifier = {
+		siege_morale_loss = 0.1
+	}
+
+	flag = global_regular
+	flag = early_medieval_era_regular
+}
+
+innovation_demd_defense_in_depth = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_lechfeld.jpg"
+	
+	potential = {
+		this.culture_group = culture_group:central_germanic_group
+	}
+		
+	modifier = {
+		controlled_province_advantage = 5
+		hostile_raid_time = 0.25
+	}
+	custom = doctrine_parameter_demd_meta_manpower_mult_5
+	flag = global_regular
+	flag = early_medieval_era_regular	
+}
+
+innovation_reconquista = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	region = world_europe_west_iberia
+	icon = "gfx/interface/icons/culture_innovations/demd_reconquista.dds"
+
+	custom = cb_discount_piety_10
+	modifier = {
+		monthly_piety_gain_mult = 0.1
+	}
+
+	flag = global_regional
+	flag = early_medieval_era_regional
+}
+
+innovation_ghilman = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	region = world_middle_east_arabia
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+
+	modifier = {
+		men_at_arms_maintenance = -0.1
+	}
+
+	flag = global_regional
+	flag = early_medieval_era_regional
+}

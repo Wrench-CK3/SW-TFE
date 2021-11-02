@@ -1,0 +1,244 @@
+﻿# File Written by "DEMD Regiment Tools" Command Line Executable
+
+###
+camel_rider = {
+	type = heavy_cavalry
+	#DEMD cultural
+
+	damage = 30
+	toughness = 20
+	pursuit = 25
+	screen = 25
+
+
+	counters = {
+		skirmishers = 1
+		archers = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		drylands = { damage = 10 pursuit = 10 screen = 10 }
+		farmlands = { damage = 5 pursuit = 5 screen = 5 }
+		plains = { damage = 5 pursuit = 5 screen = 5 }
+		steppe = { damage = 5 pursuit = 5 screen = 5 }
+		hills = { damage = -5 pursuit = -5 screen = -5 }
+		desert_mountains = { damage = -5 pursuit = -5 screen = -5 }
+		forest = { damage = -5 pursuit = -5 screen = -5 }
+		mountains = { damage = -10 pursuit = -10 screen = -10 }
+		taiga = { damage = -10 pursuit = -10 screen = -10 }
+		wetlands = { damage = -10 pursuit = -10 screen = -10 }
+		jungle = { damage = -10 pursuit = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_med_cavalry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = camel_riders
+
+}
+
+###
+caballero = {
+	type = heavy_cavalry
+	#DEMD cultural
+
+	damage = 27
+	toughness = 25
+	pursuit = 25
+	screen = 20
+
+
+	counters = {
+		skirmishers = 1
+		archers = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		hills = { damage = 5 pursuit = 5 screen = 5 }
+		mountains = { damage = -5 pursuit = -5 screen = -5 }
+		forest = { damage = -5 pursuit = -5 screen = -5 }
+		taiga = { damage = -5 pursuit = -5 screen = -5 }
+		desert_mountains = { damage = -10 pursuit = -10 screen = -10 }
+		wetlands = { damage = -10 pursuit = -10 screen = -10 }
+		jungle = { damage = -10 pursuit = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_med_cavalry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = caballero
+
+}
+
+###
+druzhina = {
+	type = heavy_cavalry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 18
+	pursuit = 40
+	screen = 20
+
+
+	counters = {
+		archers = 1
+		light_cavalry = 1
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+		steppe = { damage = 8 pursuit = 8 screen = 8 }
+		farmlands = { damage = 5 pursuit = 5 screen = 5 }
+		plains = { damage = 5 pursuit = 5 screen = 5 }
+		drylands = { damage = 5 pursuit = 5 screen = 5 }
+		hills = { damage = -5 pursuit = -5 screen = -5 }
+		mountains = { damage = -10 pursuit = -10 screen = -10 }
+		desert_mountains = { damage = -10 pursuit = -10 screen = -10 }
+		wetlands = { damage = -10 pursuit = -10 screen = -10 }
+		jungle = { damage = -10 pursuit = -10 screen = -10 }
+	}
+	winter_bonus = {
+		normal_winter = { damage = 4 toughness = 4 }
+		harsh_winter = { damage = 8 toughness = 8 }
+	}
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_med_cavalry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = druzhina
+
+}
+
+###
+hussar = {
+	type = heavy_cavalry
+
+	damage = 35
+	toughness = 15
+	pursuit = 50
+	screen = 20
+
+
+	counters = {
+		archers = 1
+		light_cavalry = 1
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+		steppe = { damage = 8 pursuit = 8 screen = 8 }
+		farmlands = { damage = 5 pursuit = 5 screen = 5 }
+		plains = { damage = 5 pursuit = 5 screen = 5 }
+		drylands = { damage = 5 pursuit = 5 screen = 5 }
+		hills = { damage = -5 pursuit = -5 screen = -5 }
+		forest = { damage = -5 pursuit = -5 screen = -5 }
+		taiga = { damage = -5 pursuit = -5 screen = -5 }
+		mountains = { damage = -10 pursuit = -10 screen = -10 }
+		desert_mountains = { damage = -10 pursuit = -10 screen = -10 }
+		wetlands = { damage = -10 pursuit = -10 screen = -10 }
+		jungle = { damage = -10 pursuit = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_med_cavalry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = konni
+
+}
+
+###
+sahel_horsemen = {
+	type = heavy_cavalry
+	#DEMD cultural
+
+	damage = 25
+	toughness = 15
+	pursuit = 20
+	screen = 20
+
+
+	counters = {
+		skirmishers = 1
+		archers = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		drylands = { damage = 8 pursuit = 8 screen = 8 }
+		desert = { damage = 8 pursuit = 8 screen = 8 }
+		farmlands = { damage = 5 pursuit = 5 screen = 5 }
+		plains = { damage = 5 pursuit = 5 screen = 5 }
+		steppe = { damage = 5 pursuit = 5 screen = 5 }
+		hills = { damage = -5 pursuit = -5 screen = -5 }
+		forest = { damage = -5 pursuit = -5 screen = -5 }
+		taiga = { damage = -5 pursuit = -5 screen = -5 }
+		jungle = { damage = -5 pursuit = -5 screen = -5 }
+		mountains = { damage = -10 pursuit = -10 screen = -10 }
+		desert_mountains = { damage = -10 pursuit = -10 screen = -10 }
+		wetlands = { damage = -10 pursuit = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_med_cavalry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = sahel_horsemen
+
+}
+

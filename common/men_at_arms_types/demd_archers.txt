@@ -1,0 +1,264 @@
+﻿# File Written by "DEMD Regiment Tools" Command Line Executable
+
+###
+chu_ko_nu = {
+	type = archers
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 42
+	toughness = 14
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		war_beasts = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		hills = { toughness = 5 }
+		mountains = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+		forest = { toughness = 5 }
+		taiga = { toughness = 5 }
+		jungle = { toughness = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_crossbow }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = crossbowmen
+
+}
+
+###
+pavise_crossbowmen = {
+	type = archers
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 32
+	toughness = 26
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		war_beasts = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		hills = { toughness = 5 }
+		mountains = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+		forest = { toughness = 5 }
+		taiga = { toughness = 5 }
+		jungle = { toughness = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_crossbow }
+	holy_order_fallback = yes
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = pavise_crossbowmen
+
+}
+
+###
+streltsy = {
+	type = archers
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 36
+	toughness = 19
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		light_cavalry = 1
+		war_beasts = 1
+	}
+
+	terrain_bonus = {
+		forest = { damage = 5 toughness = 5 }
+		taiga = { damage = 5 toughness = 5 }
+	}
+	winter_bonus = {
+		normal_winter = { damage = 4 toughness = 4 }
+		harsh_winter = { damage = 8 toughness = 8 }
+	}
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_handgun }
+	holy_order_fallback = yes
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = streltsy
+
+}
+
+###
+tercio = {
+	type = archers
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 31
+	toughness = 31
+	pursuit = 0
+	screen = 30
+
+
+	counters = {
+		war_beasts = 1
+		light_cavalry = 1
+		heavy_cavalry = 1
+	}
+
+	terrain_bonus = {
+		forest = { damage = -5 toughness = -5 screen = -5 }
+		taiga = { damage = -5 toughness = -5 screen = -5 }
+		wetlands = { damage = -10 toughness = -10 screen = -10 }
+		jungle = { damage = -10 toughness = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_handgun }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = tercio
+
+}
+
+###
+janissaries = {
+	type = archers
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 40
+	toughness = 20
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		light_cavalry = 1
+		war_beasts = 1
+	}
+
+	terrain_bonus = {
+		forest = { damage = -5 toughness = -5 }
+		taiga = { damage = -5 toughness = -5 }
+		wetlands = { damage = -5 toughness = -5 }
+		jungle = { damage = -5 toughness = -5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_handgun }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = janissaries
+
+}
+
+###
+tabory = {
+	type = archers
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 22
+	toughness = 24
+	pursuit = 0
+	screen = 40
+
+
+	counters = {
+		heavy_cavalry = 1
+		war_beasts = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		hills = { toughness = 10 screen = 10 }
+		mountains = { toughness = 5 screen = 5 }
+		desert_mountains = { toughness = 5 screen = 5 }
+		forest = { toughness = -5 screen = -5 }
+		taiga = { toughness = -5 screen = -5 }
+		jungle = { toughness = -10 screen = -10 }
+		wetlands = { toughness = -15 screen = -15 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_handgun }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = tabory
+
+}
+

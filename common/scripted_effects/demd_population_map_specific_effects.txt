@@ -1,0 +1,1389 @@
+﻿#############################################
+# DEMD Population System
+# by Vertimnus (NaniteSystems)
+# Must be overwritten by patch for other maps!
+#############################################
+
+demd_preprocess_map = {
+	add_to_global_variable_list = { name = culture_list target = culture:Romano_Gallic }
+	add_to_global_variable_list = { name = culture_list target = culture:Heleno-Egyptian }
+	every_province = {
+		if = {
+			limit = { NOT = { has_variable = winter_severity_bias } }
+			set_variable = { name = winter_severity_bias value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_variable = sqrt_pixels } }
+			set_variable = { name = sqrt_pixels value = 1 }
+		}
+	}
+	 
+	every_ruler = { # fix county-less lieges
+		limit = {
+			NOT = { exists = capital_province }
+			any_vassal = {
+				exists = yes
+				exists = capital_province
+			}
+		}
+		random_sub_realm_county = {
+			prev = { get_title = prev }
+		}
+	}
+}
+
+
+##############################################################
+
+demd_assign_special_resources = {
+
+	# gold
+	province:3814 = { set_variable = { name = resource_type value = flag:gold } } # kremnica
+    province:1120 = { set_variable = { name = resource_type value = flag:gold } } # kolar 
+    province:1198 = { set_variable = { name = resource_type value = flag:gold } } # Koppam
+    province:6747 = { set_variable = { name = resource_type value = flag:gold } } # Bambuk
+    province:6739 = { set_variable = { name = resource_type value = flag:gold } } # Boure
+    province:6751 = { set_variable = { name = resource_type value = flag:gold } } # Galam
+    province:8387 = { set_variable = { name = resource_type value = flag:gold } } # Damot
+    province:6400 = { set_variable = { name = resource_type value = flag:gold } } # Senar
+	
+	# silver
+	province:2950 = { set_variable = { name = resource_type value = flag:silver } } # innsbruck
+	province:4161 = { set_variable = { name = resource_type value = flag:silver } } # caslav 
+	province:2918 = { set_variable = { name = resource_type value = flag:silver } } # rammelsberg
+	province:2653 = { set_variable = { name = resource_type value = flag:silver } } # caglieri
+    province:1569 = { set_variable = { name = resource_type value = flag:silver } } # Devon
+	
+	# wine
+	province:2346 = { set_variable = { name = resource_type value = flag:wine } } # auxerre
+	province:2142 = { set_variable = { name = resource_type value = flag:wine } } # bordeaux
+	province:2267 = { set_variable = { name = resource_type value = flag:wine } } # anjou
+	province:2071 = { set_variable = { name = resource_type value = flag:wine } } # bresse
+	province:2237 = { set_variable = { name = resource_type value = flag:wine } } # perigord
+	province:2543 = { set_variable = { name = resource_type value = flag:wine } } # florence
+	province:2560 = { set_variable = { name = resource_type value = flag:wine } } # siena
+	province:2041 = { set_variable = { name = resource_type value = flag:wine } } # turin
+	province:2469 = { set_variable = { name = resource_type value = flag:wine } } # monferrato
+	province:8755 = { set_variable = { name = resource_type value = flag:wine } } # lecce
+	province:2083 = { set_variable = { name = resource_type value = flag:wine } } # trier
+	province:2084 = { set_variable = { name = resource_type value = flag:wine } } # koblenz
+	province:2694 = { set_variable = { name = resource_type value = flag:wine } } # mainz
+	province:2729 = { set_variable = { name = resource_type value = flag:wine } } # kaiserslautern
+	province:2731 = { set_variable = { name = resource_type value = flag:wine } } # worms
+	province:3086 = { set_variable = { name = resource_type value = flag:wine } } # vienna
+	province:3117 = { set_variable = { name = resource_type value = flag:wine } } # graz
+    province:1878 = { set_variable = { name = resource_type value = flag:wine } } # Catalonia
+	province:750 = { set_variable = { name = resource_type value = flag:wine } } # nikaea for balance reason
+	
+	# silk
+    province:496 = { set_variable = { name = resource_type value = flag:silk } } # constantinople
+	
+	# spices
+	province:1114 = { set_variable = { name = resource_type value = flag:spices } } # kerala
+	
+	# amber
+	province:3216 = { set_variable = { name = resource_type value = flag:amber } } # konigsberg
+	
+	# gems
+	province:7912 = { set_variable = { name = resource_type value = flag:gems } } # ellur/kollur
+	
+	# ivory
+	province:2 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
+	province:3 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
+	province:4 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
+	province:5 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
+    province:6689 = { set_variable = { name = resource_type value = flag:ivory } } # Gurma
+    province:6839 = { set_variable = { name = resource_type value = flag:ivory } } # Tumak
+    province:6828 = { set_variable = { name = resource_type value = flag:ivory } } # Kera
+    province:8072 = { set_variable = { name = resource_type value = flag:ivory } } # Benin
+    province:6977 = { set_variable = { name = resource_type value = flag:ivory } } # Kong
+    province:6689 = { set_variable = { name = resource_type value = flag:ivory } } # Gurma
+    province:6919 = { set_variable = { name = resource_type value = flag:ivory } } # Borgu
+    province:8265 = { set_variable = { name = resource_type value = flag:ivory } } # Gabu
+    province:6992 = { set_variable = { name = resource_type value = flag:ivory } } # Toko
+    province:8196 = { set_variable = { name = resource_type value = flag:ivory } } # Kokoli
+    province:8463 = { set_variable = { name = resource_type value = flag:ivory } } # Mogadishu
+    province:8408 = { set_variable = { name = resource_type value = flag:ivory } } # Hargaya
+    province:8488 = { set_variable = { name = resource_type value = flag:ivory } } # Marsabit
+    province:8480 = { set_variable = { name = resource_type value = flag:ivory } } # El Waak
+    province:1234 = { set_variable = { name = resource_type value = flag:ivory } } # Damin
+    province:1242 = { set_variable = { name = resource_type value = flag:ivory } } # Radha
+    province:9640 = { set_variable = { name = resource_type value = flag:ivory } } # Burma
+    province:9643 = { set_variable = { name = resource_type value = flag:ivory } } # Burma
+	
+	# salt
+	province:2977 = { set_variable = { name = resource_type value = flag:salt } } # berchtesgaden
+	province:3135 = { set_variable = { name = resource_type value = flag:salt } } # hallstatt
+	province:2975 = { set_variable = { name = resource_type value = flag:salt } } # salzburg
+	province:3691 = { set_variable = { name = resource_type value = flag:salt } } # aytos
+	province:3510 = { set_variable = { name = resource_type value = flag:salt } } # soli
+	province:8334 = { set_variable = { name = resource_type value = flag:salt } } # danakil
+	province:8332 = { set_variable = { name = resource_type value = flag:salt } } # edd
+	province:8339 = { set_variable = { name = resource_type value = flag:salt } } # afar
+	province:1624 = { set_variable = { name = resource_type value = flag:salt } } # worcester
+	province:1643 = { set_variable = { name = resource_type value = flag:salt } } # cheshire
+	province:2104 = { set_variable = { name = resource_type value = flag:salt } } # cleves
+	province:2745 = { set_variable = { name = resource_type value = flag:salt } } # vaihingen
+	province:9 = { set_variable = { name = resource_type value = flag:salt } } # ailech
+	province:2635 = { set_variable = { name = resource_type value = flag:salt } } # agrigento
+	province:2637 = { set_variable = { name = resource_type value = flag:salt } } # palermo
+	province:889 = { set_variable = { name = resource_type value = flag:salt } } # ural
+    province:527 = { set_variable = { name = resource_type value = flag:salt } } # Krakow
+    province:4900 = { set_variable = { name = resource_type value = flag:salt } } # Poznan
+    province:1192 = { set_variable = { name = resource_type value = flag:salt } } # Khewra
+    province:3924 = { set_variable = { name = resource_type value = flag:salt } } # Turda
+    province:4499 = { set_variable = { name = resource_type value = flag:salt } } # Taghaza
+	
+	# dyes
+	province:1369 = { set_variable = { name = resource_type value = flag:dyes } } # socotra
+	
+	# furs
+	province:5137 = { set_variable = { name = resource_type value = flag:furs } } # novgorod
+
+	
+}
+
+demd_add_special_buildings = {
+
+	province:496 = { # I do as the error log guides
+		set_variable = { name = forbid_crypto_reconversion value = 0 }
+		remove_variable = forbid_crypto_reconversion
+	}
+	
+}
+
+#############################################################################
+demd_set_up_trade_node_network = { 
+    add_to_global_variable_list = { name = trade_nodes target = title:k_ireland }
+	title:k_ireland = {
+        add_to_variable_list = { 
+			name = outlet_nodes target = title:k_scotland 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_britannia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_scotland }
+	title:k_scotland = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_britannia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_britannia }
+	title:k_britannia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_france 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_frisia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_france }
+	title:k_france = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_aquitaine 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_east_francia 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_italy 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_frisia }
+	title:k_frisia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_cheruscia 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_saxony 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_aquitaine }
+	title:k_aquitaine = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_italia_suburbicariae 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_portugal 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_italy }
+	title:k_italy = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_italia_suburbicariae 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_hungary 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_hungary }
+	title:k_hungary = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_bulgaria 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_dacia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_portugal }
+	title:k_portugal = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_africa 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_mauria 
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_africa }
+	title:k_africa = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_italia_suburbicariae 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_anbiya 
+		}
+    }
+	
+    add_to_global_variable_list = { name = trade_nodes target = title:k_italia_suburbicariae }
+
+    add_to_global_variable_list = { name = trade_nodes target = title:k_cheruscia }
+	title:k_cheruscia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_vandalia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_saxony }
+	title:k_saxony = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pomerania 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_denmark 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_east_francia }
+	title:k_east_francia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_vandalia 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_bohemia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_vandalia }
+	title:k_east_francia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_poland 
+		}
+    }
+
+    add_to_global_variable_list = { name = trade_nodes target = title:k_denmark }
+	title:k_denmark = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sweden 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_norway 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_sweden }
+	title:k_denmark = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sapmi 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_norway }
+	title:k_denmark = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sapmi 
+		}
+    }
+
+    add_to_global_variable_list = { name = trade_nodes target = title:k_pomerania }
+	title:k_pomerania = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_prussia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_prussia }
+	title:k_prussia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_lithuania 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_white_rus 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_lithuania }
+	title:k_lithuania = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_livonia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_livonia }
+	title:k_livonia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_esthonia 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_esthonia }
+	title:k_esthonia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_novgorod 
+		}
+    }
+
+    add_to_global_variable_list = { name = trade_nodes target = title:k_novgorod }
+	title:k_novgorod = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_finland 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_bjarmaland 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_finland }
+	title:k_finland = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sapmi 
+		}
+    }
+    add_to_global_variable_list = { name = trade_nodes target = title:k_bjarmaland }
+	title:k_finland = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_opolye 
+		}
+    }
+	
+    add_to_global_variable_list = { name = trade_nodes target = title:k_sapmi }
+
+    add_to_global_variable_list = { name = trade_nodes target = title:k_bohemia }
+	title:k_bohemia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_poland 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_quadia
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_poland }
+	title:k_poland = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_white_rus 
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_galicia-volhynia 
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_quadia }
+	title:k_quadia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_galicia-volhynia 
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_galicia-volhynia }
+	title:k_galicia-volhynia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ruthenia
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_white_rus }
+	title:k_white_rus = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ruthenia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_opolye
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_ruthenia }
+	title:k_ruthenia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ruthenia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_mordvinia
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_opolye }
+	title:k_opolye = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_volga_bulgaria
+		}
+    }
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_bulgaria }
+	title:k_bulgaria = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_thessalonika
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_macedon
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_dacia }
+	title:k_dacia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_moldavia
+		}
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:k_moldavia }
+	title:k_moldavia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pontic_steppe
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_macedon }
+	title:k_macedon = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_egypt
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_thessalonika }
+	title:k_thessalonika = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pontic_steppe
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_pontic_steppe }
+	title:k_pontic_steppe = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_mordvinia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_alania
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_nikaea }
+	title:k_nikaea = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_armenia
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_anatolia }
+	title:k_anatolia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_syria
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_syria }
+	title:k_syria = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_nabatea
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_egypt
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_nabatea }
+	title:k_nabatea = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_arabia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gerrha
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_mordvinia }
+	title:k_mordvinia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_volga_bulgaria
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_caspian_steppe
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_alania }
+	title:k_alania = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_georgia
+		}
+	}
+	
+	add_to_global_variable_list = { name = trade_nodes target = title:k_volga_bulgaria }
+	title:k_volga_bulgaria = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_permia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_bashkiria
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_caspian_steppe }
+	title:k_caspian_steppe = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kimek
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_permia }
+	title:k_permia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_yugra
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_bashkiria }
+	title:k_bashkiria = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_yugra
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_yugra }
+	title:k_yugra = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sibir
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_cuman
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kimek }
+	title:k_kimek = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_oghuz_il
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_cuman
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_cuman }
+	title:k_cuman = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sibir
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kipchak
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_sibir }
+	title:k_sibir = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ob
+		}
+	}
+
+
+
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_mauria }
+	title:k_mauria = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ghana
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_anbiya
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_anbiya }
+	title:k_anbiya = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_takrur
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sahara
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_takrur }
+	title:k_takrur = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ghana
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kaabu
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_ghana }
+	title:k_ghana = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_jenne
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_songhay
+		}
+	}
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kaabu }
+	title:k_kaabu = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_mali
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_mali }
+	title:k_mali = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_jenne
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kong
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_guinea
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_guinea }
+	title:k_guinea = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_akan
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_jenne }
+	title:k_jenne = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gurma
+		}
+	}
+	
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kong }
+	title:k_kong = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gur
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_akan
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_gurma }
+	title:k_gurma = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_songhay
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_songhay }
+	title:k_songhay = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_hausaland
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_gur }
+	title:k_gur = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_borgu
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_akan }
+	title:k_akan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_borgu
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_borgu }
+	title:k_borgu = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_hausaland
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_yorubaland
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_hausaland }
+	title:k_hausaland = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kanem
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_yorubaland }
+	title:k_yorubaland = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_igbo-benue
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_igbo-benue }
+	title:k_igbo-benue = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kanem
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kanem }
+	title:k_kanem = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sahara
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_darfur
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sao
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_sahara }
+	title:k_sahara = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_egypt
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_sao }
+	title:k_sao = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_darfur
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_darfur }
+	title:k_darfur = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_nubia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_egypt }
+	title:k_egypt = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_blemmyia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_nubia }
+	title:k_nubia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_blemmyia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_damot
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_abyssinia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_blemmyia }
+	title:k_blemmyia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_arabia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_abyssinia }
+	title:k_abyssinia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_adal
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_damot }
+	title:k_damot = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_adal
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_outer_ajuraan
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_adal }
+	title:k_adal = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ajuraan
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_outer_ajuraan }
+	title:k_outer_ajuraan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ajuraan
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_ajuraan }
+	title:k_ajuraan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_lanka
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_arabia }
+	title:k_arabia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gerrha
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_yemen
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_yemen }
+	title:k_yemen = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_hadramwt
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_hadramwt }
+	title:k_hadramwt = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_muscat
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_muscat }
+	title:k_muscat = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gerrha
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_gerrha }
+	title:k_gerrha = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pars
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_georgia }
+	title:k_georgia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_armenia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_daylam
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_armenia }
+	title:k_armenia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_jazira
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_jazira }
+	title:k_jazira = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_persia
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_mesopotamia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_oghuz_il }
+	title:k_oghuz_il = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_syr_darya
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_transoxiana
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_syr_darya }
+	title:k_syr_darya = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_khotan
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_transoxiana
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_transoxiana }
+	title:k_transoxiana = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_khorasan
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_daylam
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_daylam }
+	title:k_daylam = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_persia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_khorasan }
+	title:k_khorasan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kabulistan
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_makran
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_persia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kabulistan }
+	title:k_kabulistan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_punjab
+		}
+	}
+	
+	add_to_global_variable_list = { name = trade_nodes target = title:k_mesopotamia }
+	title:k_mesopotamia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pars
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_persia }
+	title:k_persia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pars
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_makran
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_pars }
+	title:k_pars = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_makran
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_makran }
+	title:k_makran = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_sindh
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kashmir }
+	title:k_kashmir = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_punjab
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_punjab }
+	title:k_punjab = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_delhi
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_rajputana
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_sindh }
+	title:k_sindh = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_rajputana
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_delhi }
+	title:k_delhi = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kosala
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_rajputana }
+	title:k_rajputana = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kosala
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_malwa
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gujarat
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kosala }
+	title:k_kosala = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gondwana
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_malwa }
+	title:k_malwa = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_maharastra
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_gujarat }
+	title:k_gujarat = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_maharastra
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_maharastra }
+	title:k_maharastra = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_karnata
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_telingana
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_gondwana }
+	title:k_gondwana = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_orissa
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_telingana }
+	title:k_telingana = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_andhra
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_karnata }
+	title:k_karnata = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_tamilakam
+		}
+	}
+
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_buryatia }
+	title:k_buryatia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_angara
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_mongolia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_angara }
+	title:k_angara = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_khakassia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_khakassia }
+	title:k_khakassia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ob
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_mongolia }
+	title:k_mongolia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_tuva
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_tuva }
+	title:k_tuva = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ob
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_dzungaria }
+	title:k_dzungaria = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_khotan
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_xia
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_ob }
+	title:k_ob = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kipchak
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kipchak }
+	title:k_kipchak = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_zhetysu
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_zhetysu }
+	title:k_zhetysu = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_khotan
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_khotan }
+	title:k_khotan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_maryul
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_guge
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_xia }
+	title:k_xia = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_amdo
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_gyalrong
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_amdo }
+	title:k_amdo = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_u
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_gyalrong }
+	title:k_gyalrong = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kham
+		}
+	}
+	
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kham }
+	title:k_kham = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_lhomon
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_u }
+	title:k_u = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_tsang
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_maryul }
+	title:k_maryul = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_guge
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_guge }
+	title:k_guge = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_tsang
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_himalaya
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_tsang }
+	title:k_tsang = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_lhomon
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_lhomon }
+	title:k_lhomon = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_kamarupa
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_himalaya }
+	title:k_himalaya = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_bihar
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_kamarupa }
+	title:k_kamarupa = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_pagan
+		}
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_bengal
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_pagan }
+	title:k_pagan = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_lanka
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_bihar }
+	title:k_bihar = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_orissa
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_bengal }
+	title:k_bengal = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_orissa
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_orissa }
+	title:k_orissa = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_andhra
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_andhra }
+	title:k_andhra = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_tamilakam
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_tamilakam }
+	title:k_tamilakam = {
+		add_to_variable_list = { 
+			name = outlet_nodes target = title:k_lanka
+		}
+	}
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_lanka }
+	
+	#######################################################
+	# temporary bandaid
+	
+    every_in_global_list = {
+        variable = trade_nodes
+        save_scope_as = home
+        every_in_de_jure_hierarchy = {
+            limit = { 
+				tier = tier_county
+				title_province = { 
+					NOT = { prev = { is_target_in_variable_list = { name = node_counties target = prev } } } 
+				}
+			}
+            title_province = {
+                save_scope_as = prov
+                scope:home = { add_to_variable_list = { name = node_counties target = scope:prov } }
+                set_variable = { name = trade_node value = scope:home }               
+            }
+        }
+    }
+	add_to_global_variable_list = { name = trade_nodes target = title:b_roma }
+	every_in_global_list = {
+		variable = eligible_provinces_all
+		limit = { NOT = { has_variable = trade_node } }
+		set_variable = { name = trade_node value = title:b_roma }
+	}
+	
+}
+#############################################################################
+
+demd_manual_pop_placements = {
+
+	
+}
+
+demd_set_off_map_trade_bonuses = {
+
+}
+
+demd_set_culture_super_groups = {
+    every_in_global_list = {
+        variable = culture_list
+		
+		if = {
+			limit = { 
+				OR = {
+					culture_group = culture_group:east_african_group 
+					culture_group = culture_group:kemet_group
+					culture_group = culture_group:somalian_group
+				}
+			}
+			set_variable = { name = supergroup value = 1 }
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					culture_group = culture_group:dravidian_group 
+					culture_group = culture_group:iranian_group 					
+					culture_group = culture_group:oghur_group 
+					culture_group = culture_group:oghuz_group 
+					culture_group = culture_group:sarmatian_group 
+					culture_group = culture_group:semitic_group
+					culture_group = culture_group:uralic_group
+				}
+			}
+			set_variable = { name = supergroup value = 2 }
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					culture_group = culture_group:celtic_group 
+					culture_group = culture_group:goidelic_group 
+					culture_group = culture_group:latin_group 
+					culture_group = culture_group:baltic_group 					
+					culture_group = culture_group:balto_finnic_group
+					culture_group = culture_group:caucasian_group 
+					culture_group = culture_group:celtiberian_group  	
+					culture_group = culture_group:central_germanic_group 
+					culture_group = culture_group:east_germanic_group 	
+					culture_group = culture_group:frankish_group
+					culture_group = culture_group:hellenistic_group  	
+					culture_group = culture_group:iberian_group 	
+					culture_group = culture_group:north_african_group
+					culture_group = culture_group:north_germanic_group 
+					culture_group = culture_group:slavic_group 
+					culture_group = culture_group:south_slavic_group
+					culture_group = culture_group:west_germanic_group
+				}
+			}
+			set_variable = { name = supergroup value = 3 }
+		}
+		else = {
+			set_variable = { name = supergroup value = 0 }
+		}
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

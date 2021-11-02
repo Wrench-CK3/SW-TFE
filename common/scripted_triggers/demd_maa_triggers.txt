@@ -1,0 +1,212 @@
+﻿###########################################
+# Used in MaA AI weight script values
+# All innovations that add MaA units must be added here on pain of bad AI army comps!
+###########################################
+
+has_any_heavy_cavalry_unit_available = {
+	OR = {
+		has_generic_heavy_cavalry_unit_available = yes
+		has_special_heavy_cavalry_unit_available = yes
+	}
+}
+
+has_generic_heavy_cavalry_unit_available = {
+	has_innovation = innovation_arched_saddle
+}
+
+has_special_heavy_cavalry_unit_available = {
+	OR = {
+		has_innovation = innovation_eastern_heavy_cav
+		has_innovation = innovation_german_heavy_cav
+		has_innovation = innovation_winged_hussars
+		has_innovation = innovation_valets
+		has_innovation = innovation_cataphracts
+	}
+}
+
+###########################################
+
+has_any_med_cavalry_unit_available = {
+	OR = {
+		has_generic_med_cavalry_unit_available = yes
+		has_special_med_cavalry_unit_available = yes
+	}
+}
+
+has_generic_med_cavalry_unit_available = {
+	has_innovation = innovation_mustering_grounds
+}
+
+has_special_med_cavalry_unit_available = {
+	OR = {
+		has_innovation = innovation_war_camels
+		has_innovation = innovation_caballeros
+		has_innovation = innovation_sahel_horsemen
+		has_innovation = innovation_druzhina 
+		has_innovation = innovation_hussar_raids 
+	}
+}
+
+###########################################
+
+has_any_infantry_unit_available = {
+	OR = {
+		has_generic_infantry_unit_available = yes
+		has_special_infantry_unit_available = yes
+	}
+}
+
+has_generic_infantry_unit_available = {
+	has_innovation = innovation_quilted_armor
+}
+
+has_special_infantry_unit_available = {
+	OR = {
+		has_innovation = innovation_gallowglass
+		has_innovation = innovation_royal_army_tradition
+		has_innovation = innovation_khandayat 
+		has_innovation = innovation_desert_mountain_herding
+		has_innovation = innovation_hird
+		has_innovation = innovation_skoutatoi 
+		has_innovation = innovation_futuwaa
+		has_innovation = innovation_alpine_supremacy
+		has_innovation = innovation_sarawit
+		has_innovation = innovation_zbrojnosh
+		
+		# TFE
+		has_innovation = innovation_comitatenses
+		has_innovation = innovation_palatinae
+		has_innovation = innovation_cymbrogi
+		has_innovation = innovation_brythonic_warbands
+		has_innovation = innovation_gaelic_warbands
+		has_innovation = innovation_pictish_warbands
+		has_innovation = innovation_cantabrian_warbands
+	}
+}
+
+###########################################
+
+has_any_skirmisher_unit_available = {
+	OR = {
+		has_generic_skirmisher_unit_available = yes
+		has_special_skirmisher_unit_available = yes
+	}	
+}
+
+has_generic_skirmisher_unit_available = {
+	has_innovation = innovation_bannus
+}
+
+has_special_skirmisher_unit_available = {
+	OR = {
+		has_innovation = innovation_psiloi
+		has_innovation = innovation_vigmen
+		has_innovation = innovation_mountain_skirmishing
+		has_innovation = innovation_upland_skirmishing
+		has_innovation = innovation_longbows
+		has_innovation = innovation_bush_hunting
+		has_innovation = innovation_forest_wardens
+	}
+}
+
+###########################################
+
+has_any_crossbow_unit_available = {
+	OR = {
+		has_generic_crossbow_unit_available = yes
+		has_special_crossbow_unit_available = yes
+	}
+}
+
+has_generic_crossbow_unit_available = {
+	has_innovation = innovation_house_soldiers
+}
+
+has_special_crossbow_unit_available = {
+	OR = {
+		has_innovation = innovation_pavise_crossbowmen
+		has_innovation = innovation_repeating_crossbow
+	}
+}
+
+###########################################
+
+has_any_pike_unit_available = {
+	OR = {
+		has_generic_pike_unit_available = yes
+		has_special_pike_unit_available = yes
+	}
+}
+
+has_generic_pike_unit_available = {
+	has_innovation = innovation_advanced_bowmaking
+}
+
+has_special_pike_unit_available = {
+	OR = {
+		has_innovation = innovation_bondi
+		has_innovation = innovation_billmen
+		has_innovation = innovation_zweihanders
+		has_innovation = innovation_pike_columns
+		has_innovation = innovation_rectilinear_schiltron
+		has_innovation = innovation_zhanmadao
+	}
+}
+
+###########################################
+
+has_any_handgun_unit_available = {
+	OR = {
+		has_generic_handgun_unit_available = yes
+		has_special_handgun_unit_available = yes
+	}
+}
+
+has_generic_handgun_unit_available = {
+	has_innovation = innovation_demd_matchlock
+}
+
+has_special_handgun_unit_available = {
+	OR = {
+		has_innovation = innovation_janissaries
+		has_innovation = innovation_streltsy
+		has_innovation = innovation_tercio
+		has_innovation = innovation_tabory
+	}
+}
+
+###########################################
+
+has_any_artillery_unit_available = {
+	OR = {
+		has_generic_artillery_unit_available = yes
+		has_special_artillery_unit_available = yes
+	}
+}
+
+has_generic_artillery_unit_available = {
+	has_innovation = innovation_bombard
+}
+
+has_special_artillery_unit_available = {
+	always = no
+}
+
+###########################################
+
+has_tier_2_plus_siege_artillery = {
+	always = yes
+}
+
+has_tier_3_plus_siege_artillery = {
+	OR = {
+		has_innovation = innovation_trebuchet
+		has_innovation = innovation_bombard
+	}
+}
+
+has_tier_4_plus_siege_artillery = {
+	has_innovation = innovation_bombard
+}
+
+

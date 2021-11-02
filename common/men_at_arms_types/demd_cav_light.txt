@@ -1,0 +1,94 @@
+﻿# File Written by "DEMD Regiment Tools" Command Line Executable
+
+###
+mubarizun = {
+	type = light_cavalry
+	#DEMD cultural
+
+	damage = 38
+	toughness = 20
+	pursuit = 38
+	screen = 30
+
+
+	counters = {
+		heavy_infantry = 1
+		pikemen = 1
+	}
+
+	terrain_bonus = {
+		drylands = { damage = 10 pursuit = 10 screen = 10 }
+		desert = { damage = 10 pursuit = 10 screen = 10 }
+		farmlands = { damage = 5 pursuit = 5 screen = 5 }
+		plains = { damage = 5 pursuit = 5 screen = 5 }
+		steppe = { damage = 5 pursuit = 5 screen = 5 }
+		hills = { damage = -5 pursuit = -5 screen = -5 }
+		forest = { damage = -5 pursuit = -5 screen = -5 }
+		taiga = { damage = -5 pursuit = -5 screen = -5 }
+		jungle = { damage = -10 pursuit = -10 screen = -10 }
+		mountains = { damage = -15 pursuit = -15 screen = -15 }
+		desert_mountains = { damage = -15 pursuit = -15 screen = -15 }
+		wetlands = { damage = -15 pursuit = -15 screen = -15 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_horse_archers }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = horse_archers
+
+}
+
+###
+hobelar = {
+	type = light_cavalry
+	#DEMD cultural
+
+	damage = 40
+	toughness = 20
+	pursuit = 30
+	screen = 30
+
+
+	counters = {
+		heavy_infantry = 1
+		pikemen = 1
+	}
+
+	terrain_bonus = {
+		hills = { damage = 5 pursuit = 5 screen = 5 }
+		forest = { damage = 5 pursuit = 5 screen = 5 }
+		taiga = { damage = 5 pursuit = 5 screen = 5 }
+		wetlands = { damage = -5 pursuit = -5 screen = -5 }
+		mountains = { damage = -10 pursuit = -10 screen = -10 }
+		desert_mountains = { damage = -10 pursuit = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_horse_archers }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 45
+	
+	icon = horse_archers
+
+}
+

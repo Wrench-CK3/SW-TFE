@@ -1,0 +1,12 @@
+# Sinews of War Config File
+
+landed_titles_folder;path\to\mods\mod\SW-Core\common\landed_titles
+province_terrain_folder;C:\Program Files (x86)\Steam\steamapps\common\Crusader Kings III\game\common\province_terrain
+cultures_folder;C:\Program Files (x86)\Steam\steamapps\common\Crusader Kings III\game\common\culture\cultures
+innovations_folder;path\to\mods\mod\SW-Core\common\culture\innovations
+doctrines_folder;path\to\mods\mod\SW-Core\common\religion\doctrines
+scripted_effects_out_folder;path\to\mods\mod\SW-Core\common\scripted_effects
+map_data_folder;C:\Program Files (x86)\Steam\steamapps\common\Crusader Kings III\game\map_data
+events_folder;path\to\mod\SW-Core\common\events
+on_actions_folder;path\to\mod\SW-Core\common\on_action\yearly_on_actions
+process_map;false

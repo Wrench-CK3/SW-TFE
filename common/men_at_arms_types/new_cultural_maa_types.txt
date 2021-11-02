@@ -1,0 +1,282 @@
+﻿# standard costs
+@maa_buy_cost = 150
+@maa_low_maintenance_cost = 1.0
+@maa_high_maintenance_cost = 5.0
+@cultural_maa_extra_ai_score = 60 # Equivalent to having 6 extra regiments beyond what the code scoring would indicate (see NEGATIVE_SCORE_PER_EXISTING_REGIMENT)
+
+comitatenses = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = comitatenses
+}
+
+cataphracts = {
+	type = heavy_cavalry
+	#DEMD cultural
+	#DEMD advanced
+
+	damage = 45
+	toughness = 30
+	pursuit = 30
+	screen = 30
+
+
+	counters = {
+		skirmishers = 1
+		archers = 1
+	}
+
+	terrain_bonus = {
+		farmlands = { damage = 5 pursuit = 5 screen = 5 }
+		plains = { damage = 5 pursuit = 5 screen = 5 }
+		drylands = { damage = 5 pursuit = 5 screen = 5 }
+		steppe = { damage = 5 pursuit = 5 screen = 5 }
+		hills = { damage = -5 pursuit = -5 screen = -5 }
+		forest = { damage = -5 pursuit = -5 screen = -5 }
+		taiga = { damage = -5 pursuit = -5 screen = -5 }
+		jungle = { damage = -10 pursuit = -10 screen = -10 }
+		mountains = { damage = -15 pursuit = -10 screen = -10 }
+		desert_mountains = { damage = -15 pursuit = -10 screen = -10 }
+		wetlands = { damage = -15 pursuit = -10 screen = -10 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_heavy_cavalry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 30
+	icon = heavy_cavalry
+}
+
+palatinae = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = heavy_infantry
+}
+
+cymbrogi = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = light_footmen
+}
+
+brythonic_warband = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = skirmishers
+}
+
+gaelic_warband = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = skirmishers
+}
+
+pictish_warband = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = skirmishers
+}
+
+cantabrian_warband = {
+	type = heavy_infantry
+	#DEMD cultural
+
+	damage = 28
+	toughness = 28
+	pursuit = 0
+	screen = 28
+
+
+	counters = {
+		skirmishers = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_infantry }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	icon = skirmishers
+}

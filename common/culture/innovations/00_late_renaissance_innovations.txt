@@ -1,0 +1,116 @@
+﻿
+
+# LR
+innovation_noblesse_oblige = {
+	group = culture_group_civic
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_silver.dds"
+	
+	custom = doctrine_parameter_demd_meta_trade_post_max_bonus_1
+
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+
+# LR
+innovation_court_officials = {
+	group = culture_group_civic
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_enclosures.dds"
+	
+	custom = doctrine_parameter_demd_meta_food_mult_2
+	custom = doctrine_parameter_demd_meta_food_districts_mult_3
+
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+
+# LR
+innovation_development_04 = {
+	group = culture_group_civic
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_police.dds"
+	
+	custom = doctrine_parameter_demd_meta_barracks_max_bonus_1
+
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+
+# LR
+innovation_rightful_ownership = {
+	group = culture_group_civic
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_colo.dds"
+	
+	modifier = {
+		monthly_county_control_change_factor = 0.1
+		domain_limit = 1
+	}
+	unlock_casus_belli = de_jure_cb
+	custom = multiple_claim_wars_others
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+#########################################
+
+# LR
+innovation_demd_logistics = {
+	group = culture_group_military
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_logistics.dds"
+	
+	modifier = {
+		movement_speed = 0.10
+		mercenary_count_mult = 0.2
+	}
+	custom = doctrine_parameter_demd_meta_hospital_max_bonus_1
+
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+
+# LR
+innovation_demd_munition_armor = {
+	group = culture_group_military
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_rivet.dds"
+	
+	modifier = {
+		pikemen_toughness_mult = 0.1
+		heavy_infantry_toughness_mult = 0.1
+	}
+	custom = doctrine_parameter_demd_meta_goods_mult_5
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+
+# LR
+innovation_demd_cannons = {
+	group = culture_group_military
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_guns.dds"
+	
+	modifier = {
+		field_artillery_damage_mult = 0.05
+		field_artillery_toughness_mult = 0.05
+	}
+	
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}
+
+# LR
+innovation_demd_pike_and_shot = {
+	group = culture_group_military
+	culture_era = culture_era_late_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_pike_shot.dds"
+	
+	modifier = {
+		pikemen_toughness_mult = 0.05
+		archers_damage_mult = 0.05
+	}
+
+	flag = global_regular
+	flag = late_renaissance_era_regular
+}

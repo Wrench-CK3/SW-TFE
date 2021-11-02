@@ -1,0 +1,69 @@
+Key: Name
+
+Tribal Era
+innovation_gavelkind: Code of Laws
+innovation_plenary_assemblies: Planned Assemblies
+innovation_currency_01: Coinage 
+innovation_development_01: Waterwheel
+
+Early Medieval Era
+innovation_casus_belli: Regal Mandate
+innovation_development_02: Communal Government
+innovation_manorialism: Manorialism
+innovation_city_planning: Land Surveying 
+
+High Medieval Era
+innovation_hereditary_rule: Hereditary Claims
+innovation_guilds: Guilds
+innovation_ledger: Census
+innovation_demd_monastic_order: Monastic Orders
+innovation_crop_rotation: Three Field System
+innovation_demd_hospitals: Hospitals
+
+Late Medieval Era
+innovation_royal_prerogative: Royal Prerogative
+innovation_demd_corvee_labor: Corvee Labor
+innovation_currency_02: Borough Rights
+innovation_baliffs: Bailiffs
+innovation_armilary_sphere: Religious School
+innovation_demd_land_clearance: Land Clearance
+
+Transistional Era
+innovation_primogeniture: Primogeniture
+innovation_cranes: Treadwheel cranes
+innovation_currency_03: Banking
+innovation_scutage: Scutage
+innovation_chronicle_writing: Universities
+innovation_windmills: Windmills
+innovaition_demd_lathe: Lathe
+
+Early Renaissance
+innovation_divine_right: Divine Right
+innovation_demd_valuting: Vaulting
+innovation_ermine_cloaks: Trade Leagues
+innovation_land_grants: Leasehold Tenure
+innovation_heraldry: Humanism
+innovation_demd_cover_crops: Cover Crops
+innovation_demd_horizontal_loom: Horizontal Loom
+innovation_demd_health_statutes: Public Health Statutes 
+
+High Renaissance
+innovation_demd_imperial_dignity: Imperial Dignity
+#placeholder
+innovation_development_03: Free Cities
+innovation_rightful_ownership: Centralized Bureaucracy
+innovation_demd_printing_press: Printing Press
+#placeholder
+innovation_demd_slitting_mills: Slitting Mills
+innovation_court_officials: Placeholder
+
+Late Renaissance
+innovation_state_soverignty: State Sovereignty
+innovation_currency_04: Paved Roads
+innovation_demd_republican_tradition: Republican Tradition
+innovation_demd_parliamentary_bodies: Parliamentary Bodies
+innovation_development_04: Renaissance Thought
+innovation_demd_enclosure: Enclosures
+innovation_demd_stocking_frame: Stocking Frame
+innovation_noblesse_oblige: Pensionary Police
+

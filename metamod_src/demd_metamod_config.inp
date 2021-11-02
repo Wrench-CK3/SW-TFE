@@ -1,0 +1,27 @@
+# Sinews of War Config File
+
+landed_titles_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\common\landed_titles
+
+province_terrain_folder;C:\Program Files (x86)\Steam\steamapps\common\Crusader Kings III\game\common\province_terrain
+
+cultures_folder;C:\Program Files (x86)\Steam\steamapps\common\Crusader Kings III\game\common\culture\cultures
+
+innovations_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\common\culture\innovations
+
+doctrines_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\common\religion\doctrines
+
+scripted_effects_out_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\common\scripted_effects
+
+map_data_folder;C:\Program Files (x86)\Steam\steamapps\common\Crusader Kings III\game\map_data
+
+events_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\events
+
+on_actions_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\common\on_action\yearly_on_actions
+
+metamod_folder;C:\Users\jtgou\OneDrive\Documents\Paradox Interactive\Crusader Kings III\mod\sinews_of_war\metamod
+
+pixel_exponent;2.25
+
+process_map;true
+
+print_events;false

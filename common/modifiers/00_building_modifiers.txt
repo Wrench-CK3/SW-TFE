@@ -1,0 +1,5 @@
+cathedral_of_africa = {
+	icon = piety_positive
+	county_opinion_add = 30
+	monthly_county_control_change_add = 10
+}

@@ -1,0 +1,139 @@
+﻿
+# ER
+innovation_armilary_sphere = {
+	group = culture_group_civic
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_bills.dds"
+	
+	custom = doctrine_parameter_demd_meta_trade_post_max_bonus_1
+	
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+# ER
+innovation_baliffs = {
+	group = culture_group_civic
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_free_cities.dds"
+
+	modifier = {
+		 county_opinion_add = 3
+		 tyranny_gain_mult = 0.1
+	}
+	custom = doctrine_parameter_demd_meta_university_max_bonus_1
+	
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+# ER
+innovation_scutage = {
+	group = culture_group_civic
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_scutage.dds"
+	
+	custom = unlock_scutage_contract
+
+	custom = doctrine_parameter_demd_meta_food_mult_5
+	custom = doctrine_parameter_demd_meta_manpower_multneg_5
+
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+# ER
+innovation_currency_03 = {
+	group = culture_group_civic
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_cover_crops.jpg"
+	
+	custom = doctrine_parameter_demd_meta_food_mult_2
+	custom = doctrine_parameter_demd_meta_food_districts_mult_3
+
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+######################################################
+
+# ER
+innovation_demd_indenture = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_indenture.dds"
+	
+	modifier = {
+		men_at_arms_maintenance = -0.1
+	}
+	custom = doctrine_parameter_demd_meta_manpower_mult_5
+	custom = doctrine_parameter_demd_meta_hospital_max_bonus_1
+
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+# ER
+innovation_plate_armor = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+	
+	modifier = {
+		heavy_infantry_toughness_mult = 0.05
+		pikemen_toughness_mult = 0.05
+		heavy_cavalry_toughness_mult = 0.05
+	}
+
+	custom = doctrine_parameter_demd_meta_goods_mult_5
+
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+# ER
+innovation_bombard = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_bombard.png"
+	
+	unlock_maa = field_guns
+	unlock_maa = bombard
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+# ER
+innovation_sappers = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_longbowmen.png"
+	
+	modifier = { enemy_terrain_advantage = -0.1 siege_phase_time = -0.1 }
+
+	flag = global_regular
+	flag = early_renaissance_era_regular
+}
+
+#############################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

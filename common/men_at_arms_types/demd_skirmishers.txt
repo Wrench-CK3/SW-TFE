@@ -1,0 +1,322 @@
+﻿# File Written by "DEMD Regiment Tools" Command Line Executable
+
+###
+abudrar = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 34
+	toughness = 16
+	pursuit = 10
+	screen = 10
+
+
+	counters = {
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		desert = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = abudrar
+
+}
+
+###
+guinea_warrior = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 25
+	toughness = 10
+	pursuit = 10
+	screen = 10
+
+
+	counters = {
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		forest = { toughness = 5 }
+		jungle = { toughness = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 90
+	
+	icon = skirmishers
+
+}
+
+###
+horn_warrior = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 25
+	toughness = 10
+	pursuit = 10
+	screen = 10
+
+
+	counters = {
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 90
+	
+	icon = horn_warrior
+
+}
+
+###
+longbowmen = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 40
+	toughness = 16
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		war_beasts = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		hills = { toughness = 5 }
+		mountains = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+		forest = { toughness = 5 }
+		taiga = { toughness = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = longbowmen
+
+}
+
+###
+psiloi = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 40
+	toughness = 14
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		light_cavalry = 1
+		war_beasts = 1
+	}
+
+	terrain_bonus = {
+		hills = { toughness = 5 }
+		mountains = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+		forest = { toughness = 5 }
+		taiga = { toughness = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = psiloi
+
+}
+
+###
+metsanvartija = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 34
+	toughness = 12
+	pursuit = 10
+	screen = 0
+
+
+	counters = {
+		war_beasts = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		forest = { damage = 10 toughness = 10 }
+		taiga = { damage = 10 toughness = 10 }
+	}
+	winter_bonus = {
+		normal_winter = { damage = 4 toughness = 4 }
+		harsh_winter = { damage = 8 toughness = 8 }
+	}
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 60
+	
+	icon = metsanvartija
+
+}
+
+###
+bush_hunter = {
+	type = skirmishers
+	#DEMD cultural
+
+	damage = 22
+	toughness = 10
+	pursuit = 10
+	screen = 10
+
+
+	counters = {
+		light_cavalry = 1
+		war_beasts = 1
+	}
+
+	terrain_bonus = {
+		forest = { damage = 5 pursuit = 5 screen = 5 }
+		taiga = { damage = 5 pursuit = 5 screen = 5 }
+	}
+
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = no
+	mercenary_fallback = no
+
+	stack = 90
+	
+	icon = bowmen
+
+}
+
+###
+vigmen = {
+	type = skirmishers
+	
+	damage = 34
+	toughness = 12
+	pursuit = 0
+	screen = 0
+
+
+	counters = {
+		war_beasts = 1
+		light_cavalry = 1
+	}
+
+	terrain_bonus = {
+		hills = { toughness = 5 }
+		mountains = { toughness = 5 }
+		desert_mountains = { toughness = 5 }
+		forest = { toughness = 5 }
+		taiga = { toughness = 5 }
+		jungle = { toughness = 5 }
+	}
+	winter_bonus = {
+		normal_winter = { damage = 4 toughness = 4 }
+		harsh_winter = { damage = 8 toughness = 8 }
+	}
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+
+	ai_quality = { value = demd_special_skirmisher }
+	holy_order_fallback = yes
+	mercenary_fallback = yes
+
+	stack = 60
+	icon = vigmen
+}
+

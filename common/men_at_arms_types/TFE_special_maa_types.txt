@@ -1,0 +1,32 @@
+﻿legions = {
+	icon = heavy_infantry
+	type = heavy_infantry
+	
+	damage = 40
+	toughness = 24
+	pursuit = 2
+	screen = 10
+	
+	terrain_bonus = {
+		jungle = { damage = 5 toughness = 3 }
+		hills = { damage = 8 toughness = 2 }
+		wetlands = { damage = -30 toughness = -5 pursuit = -20 }
+		plains = { damage = 5 }
+		drylands = { damage = 10 }
+		hills = { damage = 2 }
+	}
+	
+	counters = {
+		pikemen = 2
+		light_cavalry = 1
+	}
+	
+	allowed_in_hired_troops = no
+	can_recruit = no
+
+	buy_cost = { gold = 1500 }
+	low_maintenance_cost = { gold = demd_unraised_maa_maintenance }
+	high_maintenance_cost = { gold = demd_raised_maa_maintenance }
+	
+	stack = 100
+}

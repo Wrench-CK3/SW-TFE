@@ -1,0 +1,66 @@
+﻿#############################################
+# DEMD Population System
+# by Vertimnus (NaniteSystems)
+# This file was compiled by a machine from jomini metascript source code.
+# It should never be manually edited.
+#############################################
+
+monthlyPulse = {
+	every_in_global_list = {
+		variable = $list$
+        if = {
+    		limit = { has_variable = building_in_progress }
+    		change_variable = { 
+    			name = building_progress 
+    			add = monthly_building_progress
+    		}
+    		if = {
+    			limit = { var:building_progress = { compare_value > demd_building_max } }
+            	if = {
+            		limit = { var:which_building = flag:barracks }
+            		change_variable = { name = barracks_level add = 1 }
+            	}
+            	else_if = {
+            		limit = { var:which_building = flag:sewer }
+            		change_variable = { name = sewer_level add = 1 }
+            	}
+            	else_if = {
+            		limit = { var:which_building = flag:walls }
+            		change_variable = { name = walls_level add = 1 }
+            	}
+            	else_if = {
+            		limit = { var:which_building = flag:theater }
+            		change_variable = { name = theater_level add = 1 }
+            	}
+            	else_if = {
+            		limit = { var:which_building = flag:temple }
+            		change_variable = { name = temple_level add = 1 }
+            	}
+            	else_if = {
+            		limit = { var:which_building = flag:trade_post }
+            		change_variable = { name = trade_post_level add = 1 }
+            	}
+            	else_if = {
+            		limit = { var:which_building = flag:hospital }
+            		change_variable = { name = hospital_level add = 1 }
+            	}		
+            	else = { 
+            		change_variable = { name = university_level add = 1 }
+            	}
+            	set_variable = { name = building_progress value = demd_building_max }
+            	set_variable = { name = which_building value = flag:none }
+            	remove_variable = building_in_progress	
+    		}
+    	}
+		if = {
+			limit = {
+				county = { county_control > prev.var:control_limit }
+			}
+			county = {
+				change_county_control = -100
+				change_county_control = prev.var:control_limit
+			}
+		}
+	}
+}
+
