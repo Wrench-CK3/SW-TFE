@@ -4,7 +4,6 @@ tags={
 	"Warfare"
 	"Utilities"
 }
-name="Sinews of War - The Fallen Eagle Compatibility Patch"
+name="Sinews of War - The Fallen Eagle Compatibility Patch (Git)"
 picture="thumbnail.png"
 supported_version="1.4.4"
-remote_file_id="2573241979"
