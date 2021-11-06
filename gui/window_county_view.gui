@@ -779,7 +779,11 @@ window = {
 				size = { 300 65 }
 				text = "CREATE_NEW_HOLDING"
 				onclick = "[HoldingView.OnConstructHoldingClick]"
-				tooltip = DEMD_CONSTRUCT_HOLDING
+				tooltipwidget = { 
+					base_food_districts_breakdown_widget = { 
+					
+					} 
+				}
 				enabled = "[And(HoldingView.CanNewHoldingBeConstructed, Not(HoldingView.IsSelectingHoldingType))]"
 			}
 			
@@ -1396,6 +1400,10 @@ window = {
 										size = { 25 25 }
 										tooltip = "[Province.GetCountyCapitalProvince.GetHolding.GetTaxTooltip]"
 									}
+                                    background = {
+                                        visible = "[Holding.LevyAndTaxIsAffectedByFixableSituation]"
+                                        using = Status_Bad
+                                    }
 									text_single = {
 										text = "[Province.GetHolding.GetIncome|2]"
 										default_format = "#V"
@@ -1412,6 +1420,10 @@ window = {
                                         manpower_breakdown_widget = { 
                                         
                                         } 
+                                    }
+                                    background = {
+                                        visible = "[Holding.LevyAndTaxIsAffectedByFixableSituation]"
+                                        using = Status_Bad
                                     }
 									icon = {
 										name = "icon_demd_supply"

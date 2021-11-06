@@ -178,7 +178,7 @@ window = {
 
 							vbox = {
 								name = "fervor_container"
-								tooltip = "FERVOR_TT"
+								
 								spacing = -6
 
 								# Fervor # DEMD corrected fervor target value and tooltip
@@ -197,13 +197,29 @@ window = {
 									}
 									text_single = {
 										text = "#help  ([Faith.MakeScope.ScriptValue('fervor_target')|0]%)#!"
-										tooltip = "FERVOR_TARGET_TOOLTIP"
+										tooltipwidget = { 
+											fervor_target_breakdown_widget = { 
+											
+											} 
+										}
 										default_format = "#high"
 										align = nobaseline
 									}
 								}
+								hbox = {
+									layoutpolicy_horizontal = expanding
+									margin_right = 1
+									expand = {}
 
-								
+									text_single = {
+										name = "fervor_trend"
+										text = "[Faith.GetMonthlyFervorChange|=+2]"
+										max_width = 110
+										default_format = "#low"
+										fontsize = 13
+										size = { 0 12 }
+									}
+								}
 							}
 
 							button_sidepanel_right = {
@@ -273,16 +289,6 @@ window = {
 				onclick = "[GetVariableSystem.Set( 'faith_view_tabs', 'holy_sites' )]"
 				down = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'holy_sites' )]"
 				text = "FAITH_HOLY_SITES"
-				default_format = "#low"
-
-				using = tooltip_below
-			}
-
-			button_tab = {
-				layoutpolicy_horizontal = expanding
-				onclick = "[GetVariableSystem.Set( 'faith_view_tabs', 'deities' )]"
-				down = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'deities' )]"
-				text = "Deities"
 				default_format = "#low"
 
 				using = tooltip_below
@@ -1096,302 +1102,6 @@ window = {
 				}
 			}
 		}
-
-		#DEITIES
-		scrollbox = {
-			name = "tab_deities"
-			visible = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'deities' )]"
-			layoutpolicy_horizontal = expanding
-			layoutpolicy_vertical = expanding
-
-			blockoverride "scrollbox_background" {}
-			blockoverride "scrollbox_background_fade" {}
-
-			state = {
-				name = _show
-				using = Animation_FadeIn_Quick
-			}
-
-			state = {
-				name = _hide
-				alpha = 0
-			}
-
-			background = {
-				texture = "[Illustration.GetTextureForFaith( FaithWindow.GetFaith )]"
-				alpha = 0.5
-				fittype = end
-
-				modify_texture = {
-					texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-					blend_mode = alphamultiply
-				}
-			}
-
-			blockoverride "scrollbox_content"
-			{
-				vbox = {
-					divider_light = {
-						layoutpolicy_horizontal = expanding
-					}
-					visible = "[And( EqualTo_string(FaithWindow.GetFaith.GetReligion.GetNameNoTooltip, Localize('druidism_religion')), EqualTo_string(GetPlayer.GetFaith.GetReligion.GetNameNoTooltip, Localize('druidism_religion')))]"
-					widget = {
-						size = {550 150}
-						button_standard = {
-							position = {0 10}
-							size = { 130 130 }
-							enabled = "[Not( EqualTo_string(GetPlayer.MakeScope.Var( 'deity' ).GetFlagName, 'high') )]"
-							icon = {
-								name = "faith_icon"
-								texture = "gfx/interface/icons/Taranis.dds"
-								size = { 130 130 }
-							}
-							onclick = "[GetScriptedGui('high_god').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
-						}
-						text_label_left = {
-							text = "Taranis"
-							default_format = "#high"
-							using = Font_Size_Big
-							position = {160 20}
-						}
-						text_single = {
-							text = "Learning:"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 50}
-						}
-						text_single = {
-							text = "                +2"
-							default_format = "#P"
-							using = Font_Size_Small
-							position = {205 50}
-						}
-						text_single = {
-							text = "Monthly Piety:        +20%"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 70}
-						}
-						icon = {
-							name = "piety_icon"
-							size = { 25 25 }
-							position = {255 70}
-							texture = "[GetPlayer.GetPietyLevelTexture]"
-						}
-						icon = {
-							name = "learning_icon"
-							size = { 25 25 }
-							position = {222 50}
-							texture = "gfx/interface/icons/message_feed/learning.dds"
-						}
-					}
-					divider_light = {
-						layoutpolicy_horizontal = expanding
-					}
-					widget = {
-						size = {550 150}
-						button_standard = {
-							position = {0 10}
-							size = { 130 130 }
-							icon = {
-								name = "faith_icon"
-								texture = "gfx/interface/icons/Epona.dds"
-								size = { 130 130 }
-							}
-							onclick = "[GetScriptedGui('health_god').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
-							enabled = "[Not( EqualTo_string(GetPlayer.MakeScope.Var( 'deity' ).GetFlagName, 'health') )]"
-						}
-						text_label_left = {
-							text = "Epona "
-							default_format = "#high"
-							using = Font_Size_Big
-							position = {160 20}
-						}
-						text_single = {
-							text = "Learning:"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 50}
-						}
-						text_single = {
-							text = "                +1"
-							default_format = "#P"
-							using = Font_Size_Small
-							position = {205 50}
-						}
-						text_single = {
-							text = "Medium Health Boost"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 70}
-						}
-						icon = {
-							name = "learning_icon"
-							size = { 25 25 }
-							position = {222 50}
-							texture = "gfx/interface/icons/message_feed/learning.dds"
-						}
-
-					}
-					divider_light = {
-						layoutpolicy_horizontal = expanding
-					}
-					widget = {
-						size = {550 150}
-						button_standard = {
-							position = {0 10}
-							size = { 130 130 }
-							icon = {
-								name = "faith_icon"
-								texture = "gfx/interface/icons/Cernunnos.dds"
-								size = { 130 130 }
-							}
-							enabled = "[Not( EqualTo_string(GetPlayer.MakeScope.Var( 'deity' ).GetFlagName, 'wealth') )]"
-							onclick = "[GetScriptedGui('wealth_god').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
-						}
-						text_label_left = {
-							text = "Cernunnos "
-							default_format = "#high"
-							using = Font_Size_Big
-							position = {160 20}
-						}
-						text_single = {
-							text = "Stewardship:"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 50}
-						}
-						text_single = {
-							text = "              +2"
-							default_format = "#P"
-							using = Font_Size_Small
-							position = {230 50}
-						}
-						icon = {
-							name = "stewardship_icon"
-							size = { 25 25 }
-							position = {242 50}
-							texture = "gfx/interface/icons/message_feed/stewardship.dds"
-						}
-						icon = {
-							name = "gold_icon"
-							size = { 25 25 }
-							texture = "gfx/interface/icons/icon_gold.dds"
-							position = {271 70}
-						}
-						text_single = {
-							text = "Monthly Income:        +5%"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 70}
-						}
-
-					}
-					divider_light = {
-						layoutpolicy_horizontal = expanding
-					}
-					widget = {
-						size = {550 150}
-						button_standard = {
-							position = {0 10}
-							size = { 130 130 }
-							icon = {
-								name = "faith_icon"
-								texture = "gfx/interface/icons/Brigid.dds"
-								size = { 130 130 }
-							}
-							enabled = "[Not( EqualTo_string(GetPlayer.MakeScope.Var( 'deity' ).GetFlagName, 'knowledge') )]"
-							onclick = "[GetScriptedGui('knowledge_god').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
-						}
-						text_label_left = {
-							text = "Brigid"
-							default_format = "#high"
-							using = Font_Size_Big
-							position = {160 20}
-						}
-						text_single = {
-							text = "Learning:"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 50}
-						}
-						text_single = {
-							text = "              +2"
-							default_format = "#P"
-							using = Font_Size_Small
-							position = {210 50}
-						}
-						icon = {
-							name = "learning_icon"
-							size = { 25 25 }
-							position = {222 50}
-							texture = "gfx/interface/icons/message_feed/learning.dds"
-						}
-						text_single = {
-							text = "Lifestyle Expereince: +25%"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 70}
-						}
-					}
-					divider_light = {
-						layoutpolicy_horizontal = expanding
-					}
-					widget = {
-						size = {550 150}
-						button_standard = {
-							position = {0 10}
-							size = { 130 130 }
-							icon = {
-								name = "faith_icon"
-								texture = "gfx/interface/icons/lugh_spear.dds"
-								size = { 130 130 }
-							}
-							enabled = "[Not( EqualTo_string(GetPlayer.MakeScope.Var( 'deity' ).GetFlagName, 'war') )]"
-							onclick = "[GetScriptedGui('war_god').Execute( GuiScope.SetRoot( GetPlayer.MakeScope ).End)]"
-						}
-						text_label_left = {
-							text = "Lugh"
-							default_format = "#high"
-							using = Font_Size_Big
-							position = {160 20}
-						}
-						text_single = {
-							text = "Martial:"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 50}
-						}
-						text_single = {
-							text = "              +2"
-							default_format = "#P"
-							using = Font_Size_Small
-							position = {195 50}
-						}
-						icon = {
-							name = "martial_icon"
-							size = { 25 25 }
-							position = {210 50}
-							texture = "gfx/interface/icons/message_feed/martial.dds"
-						}
-						text_single = {
-							text = "Enemy Fatal Casualties: +15%"
-							default_format = "#low"
-							using = Font_Size_Small
-							position = {160 70}
-						}
-					}
-				}
-				text_single = {
-					visible = "[Not( EqualTo_string(FaithWindow.GetFaith.GetReligion.GetNameNoTooltip, Localize('druidism_religion')) )]"
-					text = "Patronage for other religions will come in later updates."
-				}
-				text_single = {
-					visible = "[And( Not( EqualTo_string(GetPlayer.GetFaith.GetReligion.GetNameNoTooltip, Localize('druidism_religion')) ), EqualTo_string(FaithWindow.GetFaith.GetReligion.GetNameNoTooltip, Localize('druidism_religion')) )]"
-					text = "Only available for druidic rulers."
-				}
-			}
-		}
 	}
 }
 
@@ -1480,11 +1190,7 @@ window = {
 
 				button_checkbox = {
 					onclick = "[ReligionWindow.OnShowOnlyReligionFaiths]"
-
-					blockoverride "checkbox"
-					{
-						checked = "[ReligionWindow.ShowOnlyReligionFaiths]"
-					}
+					checked = "[ReligionWindow.ShowOnlyReligionFaiths]"
 				}
 
 				text_multi = {
