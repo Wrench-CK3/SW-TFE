@@ -70,7 +70,6 @@
 		}
 
 		parameters = {
-			demd_meta_research_mult_20 = yes
 		}
 
 		character_modifier = {
@@ -412,7 +411,6 @@
 		parameters = {
 			hostility_override_tenet_gnosticism = 0
 			granting_titles_gives_stress = yes
-			demd_meta_research_mult_20 = yes
 		}
 
 		character_modifier = {
@@ -516,7 +514,6 @@
 
 		parameters = {
 			take_vows_active = yes
-			demd_meta_research_mult_10 = yes
 		}
 		traits = {
 			virtues = { temperate }
@@ -883,7 +880,6 @@
 
 		parameters = {
 			tenet_esotericism_mystic_education = yes
-			demd_meta_research_mult_20 = yes
 		}
 
 	}
@@ -1558,7 +1554,6 @@
 
 		parameters = {
 			divine_the_stars_active = yes
-			demd_meta_research_mult_10 = yes
 		}
 
 		character_modifier = {
@@ -1962,6 +1957,7 @@
 			great_holy_wars_active_if_reformed = yes
 			clergy_can_fight = yes
 			demd_meta_manpower_mult_10 = yes
+			demd_can_raze = yes
 		}
 		
 		character_modifier = {

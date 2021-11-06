@@ -1,1 +1,691 @@
 ﻿
+
+innovation_billmen = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_billmen.dds"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:brythonic_group
+			this.culture_group = culture_group:west_germanic_group
+		}
+	}
+	
+	unlock_maa = billmen
+		
+	flag = global_maa
+}
+
+innovation_zweihanders = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_landsknecht.dds"
+
+	potential = {
+		this.culture_group = culture_group:central_germanic_group
+	}
+
+	unlock_maa = landsknecht
+
+	flag = global_maa
+}
+
+innovation_pike_columns = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_reislaufer.dds"
+
+	potential = {
+		this.culture_group = culture_group:latin_group
+	}
+
+	unlock_maa = picchieri
+
+	flag = global_maa
+}
+
+innovation_rectilinear_schiltron = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_schiltron.dds"
+
+	potential = {
+		OR = {
+			this = culture:gaelic
+			this = culture:scottish
+		}
+	}
+	
+	unlock_maa = schiltron
+
+	flag = global_maa
+}
+
+innovation_zhanmadao = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_zhanmadao.dds"
+	
+	potential = {
+		this.culture_group = culture_group:chinese_group
+	}
+	
+	unlock_maa = zhanmadao
+	
+	flag = global_maa
+}
+
+####################################################################################
+
+innovation_psiloi = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_psiloi.png"
+
+	potential = {
+		this.culture_group = culture_group:byzantine_group
+	}
+
+	unlock_maa = psiloi
+
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
+innovation_viking_tradition = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @hird
+
+	potential = {
+		has_fp1_dlc_trigger = yes
+		OR = {
+			# North Germanic
+			this.culture_group = culture_group:north_germanic_group
+
+			# Frankish
+			this = culture:norman
+		}
+	}
+
+	unlock_maa = bondi
+	unlock_maa = vigmen
+
+	flag = global_maa
+}
+
+innovation_mountain_skirmishing = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_horn.png"
+
+	potential = {
+		this.culture_group = culture_group:somalian_group
+	}
+
+	unlock_maa = horn_warrior
+	
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
+innovation_upland_skirmishing = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_horn.png"
+	
+	potential = { this.culture_group = culture_group:west_african_group }
+	
+	unlock_maa = guinea_warrior
+	
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
+innovation_longbows = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_longbowmen.png"
+	
+	potential = {
+		OR = {
+			AND = {
+				this.culture_group = culture_group:west_germanic_group
+				NOT = {
+					this = culture:scottish
+				}
+			}
+			this.culture_group = culture_group:brythonic_group
+		}
+	}
+	
+	unlock_maa = longbowmen
+	
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
+innovation_bush_hunting = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_horn.png"
+
+	potential = {
+		OR = {
+			this.culture_group = culture_group:akan_group
+			this.culture_group = culture_group:yoruba_group
+		}
+	}
+
+	unlock_maa = bush_hunter
+
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
+innovation_forest_wardens = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_metsa.png"
+
+	potential = {
+		OR = {
+			this.culture_group = culture_group:balto_finnic_group
+			this.culture_group = culture_group:volga_finnic_group
+			this.culture_group = culture_group:ugro_permian_group
+			this.culture_group = culture_group:baltic_group			
+		}
+	}
+
+	unlock_maa = metsanvartija
+
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
+####################################################################################
+
+innovation_gallowglass = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_gallowglass.dds"
+	
+	potential = {
+		this.culture_group = culture_group:goidelic_group
+	}
+	
+	unlock_maa = gallowglass
+
+	flag = global_maa
+}
+
+innovation_royal_army_tradition = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_palace_guard.png"
+	
+	potential = {
+		this.culture_group = culture_group:burman_group
+	}
+	
+	unlock_maa = palace_guards
+	
+	flag = global_maa
+}
+
+innovation_khandayats = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_khandayat.png"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:indo_aryan_group
+			this.culture_group = culture_group:dravidian_group	
+		}
+	}
+	
+	unlock_maa = khandayat
+	
+	flag = global_maa
+}
+
+
+innovation_desert_mountain_herding = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_abudrar.png"
+	
+	potential = {
+		this.culture_group = culture_group:arabic_group
+	}
+	
+	unlock_maa = abudrar
+	
+	flag = global_maa
+}
+
+innovation_hird = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_huskarls.png"
+
+	potential = { 
+		OR = {
+			this.culture_group = culture_group:north_germanic_group
+			this.culture_group = culture_group:west_germanic_group
+			this = culture:norman
+		}
+	}
+
+	unlock_maa = huscarl
+	
+	flag = global_maa
+}
+
+innovation_skoutatoi = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_skoutatoi.dds"
+
+	potential = { 
+		this.culture_group = culture_group:byzantine_group
+	}
+
+	unlock_maa = skoutatoi
+
+	flag = global_maa
+}
+
+innovation_futuwaa = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+
+	potential = { 
+		this.culture_group = culture_group:iranian_group
+	}
+
+	unlock_maa = ayyar
+
+	flag = global_maa
+}
+
+innovation_alpine_supremacy = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+
+	potential = { 
+		OR = {
+			this.culture_group = culture_group:tibetan_group
+			this.culture_group = culture_group:qiangic_group
+		}
+	}
+	unlock_maa = mountaineer
+
+	flag = global_maa
+}
+
+innovation_sarawit = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+	
+	potential = { 
+		OR = {
+			this.culture_group = culture_group:east_african_group
+			this.culture_group = culture_group:somalian_group
+		}
+	}
+		
+	unlock_maa = sarawit
+	
+	flag = global_maa
+}
+
+innovation_zbrojnosh = { 
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_zbrojni.png"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:west_slavic_group
+			this.culture_group = culture_group:south_slavic_group
+			this.culture_group = culture_group:east_slavic_group
+		}
+	}
+	
+	unlock_maa = zbrojni
+	
+	flag = global_maa
+}
+
+###########################################################################################
+
+innovation_caballeros = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_caballero.dds"
+
+	potential = { 
+		this.culture_group = culture_group:iberian_group
+	}
+
+	unlock_maa = caballero
+
+	flag = global_maa
+}
+
+innovation_sahel_horsemen = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+
+	potential = { 
+		OR = {
+			#Sahel Cultures
+			this.culture_group = culture_group:sahelian_group
+			this.culture_group = culture_group:senegambian_group
+			this.culture_group = culture_group:central_african_group
+			this.culture_group = culture_group:east_african_group
+			this.culture_group = culture_group:somalian_group
+		}
+	}
+
+	unlock_maa = sahel_horsemen
+
+	flag = global_maa
+}
+
+innovation_druzhina = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_druzhina.png"
+
+	potential = { 
+		this.culture_group = culture_group:east_slavic_group
+	}
+
+	unlock_maa = druzhina
+
+	flag = global_maa
+}
+
+innovation_hussar_raids = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_konni.dds"
+
+	potential = { 
+		OR = {
+			this.culture_group = culture_group:south_slavic_group
+			this.culture_group = culture_group:magyar_group
+		}		
+	}
+
+	unlock_maa = hussar
+
+	flag = global_maa
+}
+
+innovation_mubarizuns = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @chasseur
+
+	potential = { 
+		OR = {
+			this.culture_group = culture_group:arabic_group
+			this.culture_group = culture_group:berber_group
+		}
+	}
+	
+	unlock_maa = mubarizun
+
+	flag = global_maa
+}
+
+###########################################################################################
+
+
+
+innovation_hobbies = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+
+	potential = {
+		this.culture_group = culture_group:goidelic_group
+	}
+
+	unlock_maa = hobelar
+
+	flag = global_maa
+	flag = tribal_era_regional
+}
+
+innovation_war_camels = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:arabic_group
+			this.culture_group = culture_group:berber_group
+		}
+	}
+	
+	unlock_maa = camel_rider
+
+	flag = global_maa
+}
+
+innovation_elephantry = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	region = world_innovation_elephants
+	icon = "gfx/interface/icons/culture_innovations/demd_elephant.dds"
+
+	unlock_maa = war_elephant
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_compound_bows = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+
+	potential = {
+		OR = {
+			this.culture_group = culture_group:mongolic_group
+			this.culture_group = culture_group:turkic_group
+			this.culture_group = culture_group:magyar_group
+			this.culture_group = culture_group:tibetan_group
+			this.culture_group = culture_group:qiangic_group
+		}
+	}
+
+	unlock_maa = horse_archers
+
+	flag = global_maa
+}
+
+###########################################################################################
+
+innovation_valets = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_gendarme.dds"
+
+	potential = {
+		this.culture_group = culture_group:frankish_group
+	}
+
+	unlock_maa = gendarme
+
+	flag = global_maa
+}
+
+innovation_cataphracts = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_cataphract.png"
+
+	potential = {
+		this.culture_group = culture_group:byzantine_group
+	}
+
+	unlock_maa = cataphract
+
+	flag = global_maa
+}
+
+innovation_eastern_heavy_cav = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_eastern_heavy_cav.dds"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:magyar_group
+			this.culture_group = culture_group:turkic_group
+			this.culture_group = culture_group:mongolic_group
+			this.culture_group = culture_group:iranian_group
+		}
+	}
+	
+	unlock_maa = eastern_heavy_cav
+	
+	flag = global_maa
+}
+
+innovation_german_heavy_cav = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_german_cav.dds"
+	
+	potential = {
+		this.culture_group = culture_group:central_germanic_group
+	}
+	
+	unlock_maa = german_heavy_cav
+	
+	flag = global_maa
+}
+
+innovation_winged_hussars = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_winged_hussars.dds"
+	
+	potential = {
+		OR = {
+			this.culture_group = culture_group:west_slavic_group
+			this.culture_group = culture_group:baltic_group
+		}
+	}
+	
+	unlock_maa = winged_hussars
+	
+	flag = global_maa
+}
+
+###########################################################################################
+
+innovation_pavise_crossbowmen = {
+	group = culture_group_regional
+	culture_era = culture_era_high_medieval
+	icon = "gfx/interface/icons/culture_innovations/demd_pavise.dds"
+
+	potential = {
+		OR = {
+			this.culture_group = culture_group:central_germanic_group
+			this.culture_group = culture_group:latin_group			
+		}
+	}
+
+	unlock_maa = pavise_crossbowmen
+
+	flag = global_maa
+}
+
+innovation_repeating_crossbow = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = "gfx/interface/icons/culture_innovations/demd_mail.dds"
+	
+	potential = {
+		this.culture_group = culture_group:chinese_group
+	}
+	
+	unlock_maa = chu_ko_nu
+	
+	flag = global_maa
+}
+
+###########################################################################################
+
+innovation_janissaries = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_janissaries.dds"
+	
+	potential = {
+		this = culture:turkish
+	}
+	
+	unlock_maa = janissaries
+	
+	flag = global_maa
+}
+
+innovation_streltsy = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_streltsy.dds"
+	
+	potential = {
+		this.culture_group = culture_group:east_slavic_group
+	}
+	
+	unlock_maa = streltsy
+	
+	flag = global_maa
+}
+
+innovation_tercio = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_tercio.dds"
+	
+	potential = {
+		this.culture_group = culture_group:iberian_group
+	}
+	
+	unlock_maa = tercio
+	
+	flag = global_maa
+}
+
+innovation_tabory = {
+	group = culture_group_military
+	culture_era = culture_era_early_renaissance
+	icon = "gfx/interface/icons/culture_innovations/demd_tabory.dds"
+	
+	potential = { 
+		this.culture_group = culture_group:west_slavic_group
+	}
+	
+	unlock_maa = tabory
+	
+	flag = global_maa
+}
+
+
+

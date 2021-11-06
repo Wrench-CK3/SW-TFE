@@ -1,4 +1,29 @@
-﻿
+﻿###
+onager = {
+	type = siege_weapon
+	fights_in_main_phase = no
+	
+	damage = 0
+	toughness = 20
+	
+	siege_tier = 2
+	siege_value = 0.3
+	
+	buy_cost = { gold = demd_maa_recruitment }	
+	low_maintenance_cost = { 
+		gold = demd_unraised_maa_maintenance
+	}
+	high_maintenance_cost = { 
+		gold = demd_raised_maa_maintenance
+	}
+	
+	stack = 10
+	
+	ai_quality = { value = demd_siege_tier_1 }
+	
+	allowed_in_hired_troops = no
+}
+
 ###
 mangonel = {
 	type = siege_weapon
@@ -8,7 +33,7 @@ mangonel = {
 	toughness = 20
 	
 	siege_tier = 3
-	siege_value = 0.3
+	siege_value = 0.4
 	
 	buy_cost = { gold = demd_maa_recruitment }	
 	low_maintenance_cost = { 
@@ -33,8 +58,8 @@ trebuchet = {
 	damage = 0
 	toughness = 25
 	
-	siege_tier = 5
-	siege_value = 0.4
+	siege_tier = 4
+	siege_value = 0.5
 	
 	buy_cost = { gold = demd_maa_recruitment }	
 	low_maintenance_cost = { 
@@ -60,8 +85,8 @@ bombard = {
 	damage = 0
 	toughness = 30
 	
-	siege_tier = 8
-	siege_value = 0.8
+	siege_tier = 6
+	siege_value = 1
 	
 	buy_cost = { gold = demd_maa_recruitment }	
 	low_maintenance_cost = { 

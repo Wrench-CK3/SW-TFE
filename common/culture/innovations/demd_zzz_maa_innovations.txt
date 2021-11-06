@@ -183,27 +183,6 @@
 # Vanilla Overwrites to remove techs from game
 ######################################################
 
-
-innovation_mubarizuns = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	icon = @chasseur
-
-	potential = { always = no }
-
-	flag = global_maa
-}
-
-innovation_khandayats = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	icon = @chasseur
-
-	potential = { always = no }
-
-	flag = global_maa
-}
-
 innovation_desert_tactics = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal

@@ -11,7 +11,8 @@
 		parameters = {
 			number_of_spouses = 1
 			marriage_event = yes
-			demd_meta_public_order_mult_10 = yes
+			demd_meta_public_order_mult_5 = yes
+			demd_meta_birth_rate_mult_3 = yes
 		}
 	}
 
@@ -26,7 +27,6 @@
 		parameters = {
 			number_of_spouses = 4
 			spouse_piety_loss = yes
-			demd_meta_birth_rate_mult_10 = yes
 		}
 	}
 
@@ -41,8 +41,6 @@
 		parameters = {
 			number_of_spouses = 1
 			number_of_consorts = 3
-			demd_meta_birth_rate_mult_5 = yes
-			demd_meta_birth_rate_mult_5 = yes
 		}
 	}
 }
@@ -499,6 +497,66 @@ doctrine_witchcraft = {
 	}
 }
 
+doctrine_slavery = {
+	group = "crimes"
+	doctrine_slavery_faith = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_slavery_faith }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			slavery_faith = yes
+		}
+	}
+	doctrine_slavery_accepted = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_slavery_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_slavery_crime }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = {
+			slavery_accepted = yes
+		}
+	}
+	doctrine_slavery_heritage = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_slavery_heritage }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			slavery_heritage = yes
+		}
+	}	
+	doctrine_slavery_crime = {
+		piety_cost = {
+			value = faith_doctrine_cost_low
+			if = {
+				limit = { has_doctrine = doctrine_slavery_crime }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_slavery_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = {
+			slavery_illegal = yes
+		}
+	}
+}
+
 
 doctrine_gender = {
 	group = "main_group"
@@ -542,10 +600,10 @@ doctrine_gender = {
 		parameters = {
 			gender_equal_law = yes
 			combatant_can_be_either_gender = yes
-			demd_meta_birth_rate_multneg_30 = yes
-			demd_meta_manpower_mult_10 = yes
-			demd_meta_food_mult_10 = yes
-			demd_meta_goods_mult_10 = yes
+			demd_meta_birth_rate_multneg_10 = yes
+			demd_meta_manpower_mult_5 = yes
+			demd_meta_food_mult_5 = yes
+			demd_meta_goods_mult_5 = yes
 		}
 	}
 	doctrine_gender_female_dominated = {
@@ -570,10 +628,10 @@ doctrine_gender = {
 			men_cannot_be_granted_titles = yes
 			combatant_must_be_female = yes
 			female_dominated_council = yes
-			demd_meta_birth_rate_multneg_60 = yes
-			demd_meta_manpower_mult_20 = yes
-			demd_meta_food_mult_20 = yes
-			demd_meta_goods_mult_20 = yes
+			demd_meta_birth_rate_multneg_20 = yes
+			demd_meta_manpower_mult_10 = yes
+			demd_meta_food_mult_10 = yes
+			demd_meta_goods_mult_10 = yes
 		}
 		character_modifier = {
 			name = male_ruler_female_dominant
@@ -640,7 +698,7 @@ doctrine_consanguinity = {
 			consanguinity_aunt_nephew_and_uncle_niece_incest = yes
 			allows_cousin_marriage = yes
 			allows_aunt_nephew_and_uncle_niece_marriage = yes
-			demd_meta_birth_rate_multneg_5 = yes
+			demd_meta_birth_rate_multneg_2 = yes
 		}
 	}
 	doctrine_consanguinity_unrestricted = {
@@ -665,7 +723,7 @@ doctrine_consanguinity = {
 			allows_cousin_marriage = yes
 			allows_aunt_nephew_and_uncle_niece_marriage = yes
 			allows_unrestricted_marriage = yes
-			demd_meta_birth_rate_multneg_20 = yes
+			demd_meta_birth_rate_multneg_5 = yes
 		}
 	}
 }
@@ -687,7 +745,7 @@ doctrine_pluralism = {
 		}
 		parameters = {
 			hostility_towards_us_mult = 2
-			
+			demd_meta_fervor_mult_1000 = yes # Fervor is denominated in raw numbers so +1000% is really 10%
 			pluralism_fundamentalist_proselytization_bonus = yes
 			pluralism_fundamentalist_faction_join_chance = yes
 			pluralism_fundamentalist_vulnerable_to_heresy = yes
@@ -730,6 +788,7 @@ doctrine_pluralism = {
 
 		parameters = {
 			hostility_towards_us_mult = 0.5
+			demd_meta_fervor_multneg_1000 = yes
 			pluralism_pluralistic_proselytization_penalty = yes
 			pluralism_pluralistic_faction_join_chance = yes
 			pluralism_pluralistic_resistant_to_heresy = yes
@@ -979,7 +1038,6 @@ doctrine_clerical_marriage = {
 
 		parameters = {
 			clergy_can_marry = no
-			demd_meta_birth_rate_multneg_5 = yes
 		}
 	}
 }

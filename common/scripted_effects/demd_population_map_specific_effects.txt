@@ -32,123 +32,20 @@ demd_preprocess_map = {
 	}
 }
 
+demd_postprocess_map = {
+
+}
+
+##############################################################
+
+demd_node_food_districts_scale_factors = {
+}
 
 ##############################################################
 
 demd_assign_special_resources = {
 
-	# gold
-	province:3814 = { set_variable = { name = resource_type value = flag:gold } } # kremnica
-    province:1120 = { set_variable = { name = resource_type value = flag:gold } } # kolar 
-    province:1198 = { set_variable = { name = resource_type value = flag:gold } } # Koppam
-    province:6747 = { set_variable = { name = resource_type value = flag:gold } } # Bambuk
-    province:6739 = { set_variable = { name = resource_type value = flag:gold } } # Boure
-    province:6751 = { set_variable = { name = resource_type value = flag:gold } } # Galam
-    province:8387 = { set_variable = { name = resource_type value = flag:gold } } # Damot
-    province:6400 = { set_variable = { name = resource_type value = flag:gold } } # Senar
-	
-	# silver
-	province:2950 = { set_variable = { name = resource_type value = flag:silver } } # innsbruck
-	province:4161 = { set_variable = { name = resource_type value = flag:silver } } # caslav 
-	province:2918 = { set_variable = { name = resource_type value = flag:silver } } # rammelsberg
-	province:2653 = { set_variable = { name = resource_type value = flag:silver } } # caglieri
-    province:1569 = { set_variable = { name = resource_type value = flag:silver } } # Devon
-	
-	# wine
-	province:2346 = { set_variable = { name = resource_type value = flag:wine } } # auxerre
-	province:2142 = { set_variable = { name = resource_type value = flag:wine } } # bordeaux
-	province:2267 = { set_variable = { name = resource_type value = flag:wine } } # anjou
-	province:2071 = { set_variable = { name = resource_type value = flag:wine } } # bresse
-	province:2237 = { set_variable = { name = resource_type value = flag:wine } } # perigord
-	province:2543 = { set_variable = { name = resource_type value = flag:wine } } # florence
-	province:2560 = { set_variable = { name = resource_type value = flag:wine } } # siena
-	province:2041 = { set_variable = { name = resource_type value = flag:wine } } # turin
-	province:2469 = { set_variable = { name = resource_type value = flag:wine } } # monferrato
-	province:8755 = { set_variable = { name = resource_type value = flag:wine } } # lecce
-	province:2083 = { set_variable = { name = resource_type value = flag:wine } } # trier
-	province:2084 = { set_variable = { name = resource_type value = flag:wine } } # koblenz
-	province:2694 = { set_variable = { name = resource_type value = flag:wine } } # mainz
-	province:2729 = { set_variable = { name = resource_type value = flag:wine } } # kaiserslautern
-	province:2731 = { set_variable = { name = resource_type value = flag:wine } } # worms
-	province:3086 = { set_variable = { name = resource_type value = flag:wine } } # vienna
-	province:3117 = { set_variable = { name = resource_type value = flag:wine } } # graz
-    province:1878 = { set_variable = { name = resource_type value = flag:wine } } # Catalonia
-	province:750 = { set_variable = { name = resource_type value = flag:wine } } # nikaea for balance reason
-	
-	# silk
-    province:496 = { set_variable = { name = resource_type value = flag:silk } } # constantinople
-	
-	# spices
-	province:1114 = { set_variable = { name = resource_type value = flag:spices } } # kerala
-	
-	# amber
-	province:3216 = { set_variable = { name = resource_type value = flag:amber } } # konigsberg
-	
-	# gems
-	province:7912 = { set_variable = { name = resource_type value = flag:gems } } # ellur/kollur
-	
-	# ivory
-	province:2 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
-	province:3 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
-	province:4 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
-	province:5 = { set_variable = { name = resource_type value = flag:ivory } } # iceland
-    province:6689 = { set_variable = { name = resource_type value = flag:ivory } } # Gurma
-    province:6839 = { set_variable = { name = resource_type value = flag:ivory } } # Tumak
-    province:6828 = { set_variable = { name = resource_type value = flag:ivory } } # Kera
-    province:8072 = { set_variable = { name = resource_type value = flag:ivory } } # Benin
-    province:6977 = { set_variable = { name = resource_type value = flag:ivory } } # Kong
-    province:6689 = { set_variable = { name = resource_type value = flag:ivory } } # Gurma
-    province:6919 = { set_variable = { name = resource_type value = flag:ivory } } # Borgu
-    province:8265 = { set_variable = { name = resource_type value = flag:ivory } } # Gabu
-    province:6992 = { set_variable = { name = resource_type value = flag:ivory } } # Toko
-    province:8196 = { set_variable = { name = resource_type value = flag:ivory } } # Kokoli
-    province:8463 = { set_variable = { name = resource_type value = flag:ivory } } # Mogadishu
-    province:8408 = { set_variable = { name = resource_type value = flag:ivory } } # Hargaya
-    province:8488 = { set_variable = { name = resource_type value = flag:ivory } } # Marsabit
-    province:8480 = { set_variable = { name = resource_type value = flag:ivory } } # El Waak
-    province:1234 = { set_variable = { name = resource_type value = flag:ivory } } # Damin
-    province:1242 = { set_variable = { name = resource_type value = flag:ivory } } # Radha
-    province:9640 = { set_variable = { name = resource_type value = flag:ivory } } # Burma
-    province:9643 = { set_variable = { name = resource_type value = flag:ivory } } # Burma
-	
-	# salt
-	province:2977 = { set_variable = { name = resource_type value = flag:salt } } # berchtesgaden
-	province:3135 = { set_variable = { name = resource_type value = flag:salt } } # hallstatt
-	province:2975 = { set_variable = { name = resource_type value = flag:salt } } # salzburg
-	province:3691 = { set_variable = { name = resource_type value = flag:salt } } # aytos
-	province:3510 = { set_variable = { name = resource_type value = flag:salt } } # soli
-	province:8334 = { set_variable = { name = resource_type value = flag:salt } } # danakil
-	province:8332 = { set_variable = { name = resource_type value = flag:salt } } # edd
-	province:8339 = { set_variable = { name = resource_type value = flag:salt } } # afar
-	province:1624 = { set_variable = { name = resource_type value = flag:salt } } # worcester
-	province:1643 = { set_variable = { name = resource_type value = flag:salt } } # cheshire
-	province:2104 = { set_variable = { name = resource_type value = flag:salt } } # cleves
-	province:2745 = { set_variable = { name = resource_type value = flag:salt } } # vaihingen
-	province:9 = { set_variable = { name = resource_type value = flag:salt } } # ailech
-	province:2635 = { set_variable = { name = resource_type value = flag:salt } } # agrigento
-	province:2637 = { set_variable = { name = resource_type value = flag:salt } } # palermo
-	province:889 = { set_variable = { name = resource_type value = flag:salt } } # ural
-    province:527 = { set_variable = { name = resource_type value = flag:salt } } # Krakow
-    province:4900 = { set_variable = { name = resource_type value = flag:salt } } # Poznan
-    province:1192 = { set_variable = { name = resource_type value = flag:salt } } # Khewra
-    province:3924 = { set_variable = { name = resource_type value = flag:salt } } # Turda
-    province:4499 = { set_variable = { name = resource_type value = flag:salt } } # Taghaza
-	
-	# dyes
-	province:1369 = { set_variable = { name = resource_type value = flag:dyes } } # socotra
-	
-	# furs
-	province:5137 = { set_variable = { name = resource_type value = flag:furs } } # novgorod
-
-	
-}
-
-demd_add_special_buildings = {
-
-	province:496 = { # I do as the error log guides
-		set_variable = { name = forbid_crypto_reconversion value = 0 }
-		remove_variable = forbid_crypto_reconversion
-	}
+	# currently unused
 	
 }
 
@@ -1302,14 +1199,11 @@ demd_set_up_trade_node_network = {
 }
 #############################################################################
 
-demd_manual_pop_placements = {
-
-	
-}
-
 demd_set_off_map_trade_bonuses = {
 
 }
+
+#############################################################################
 
 demd_set_culture_super_groups = {
     every_in_global_list = {
@@ -1369,9 +1263,44 @@ demd_set_culture_super_groups = {
 	}	
 }
 
+#############################################################################
 
+demd_manual_pop_placements = {
 
+}
 
+demd_fill_with_holdings = {
+	title:$TITLE$ = {
+		every_in_de_jure_hierarchy = {
+			limit = { tier = tier_county }
+			every_in_list = { variable = county_provinces
+				limit = { 
+					NOR = { 
+						county.title_province = this 
+						county.title_province = { has_holding_type = tribal_holding }
+					}					
+				}
+				random_list = {
+					0 = {
+						modifier = {
+							always = yes
+							add = $PERCENT$
+						}
+						demd_build_minor_holding = yes
+					}
+					100 = {
+						modifier = {
+							always = yes
+							add = -$PERCENT$
+						}
+						# do nothing
+					}
+				}
+				
+			}
+		}
+	}
+}
 
 
 
