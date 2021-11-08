@@ -1,0 +1,983 @@
+﻿#############################################
+# DEMD Population System
+# by Vertimnus
+# Do not edit without making corresponding edits to the metascript source code. Bad things will happen!
+#############################################
+
+task_conversion = {
+	position = councillor_court_chaplain
+
+	task_type = task_type_county
+	county_target = realm
+	ai_county_target = realm
+	task_progress = task_progress_percentage
+	highlight_own_realm = yes
+
+	effect_desc = {
+		desc = task_conversion_effect_desc
+		desc = {
+			desc = council_task_possible_side_effects
+			triggered_desc = {
+				trigger = {
+					learning > mediocre_skill_rating
+				}
+				desc = task_conversion_opinion_gain
+			}
+			triggered_desc = {
+				trigger = {
+					learning > mediocre_skill_rating
+				}
+				desc = task_conversion_development_gain
+			}
+			triggered_desc = {
+				trigger = {
+					learning > mediocre_skill_rating
+				}
+				desc = task_conversion_levy_gain
+			}
+			triggered_desc = {
+				trigger = {
+					learning < high_skill_rating
+				}
+				desc = task_conversion_resistance_to_conversion
+			}
+			triggered_desc = {
+				trigger = {
+					learning < high_skill_rating
+				}
+				desc = task_conversion_opinion_loss
+			}
+		}
+	}
+
+	on_start_task = {
+		liege = {
+			add_character_flag = {
+				flag = no_court_chaplain_side_effects_first_month
+				days = 30
+			}
+		}
+	}
+
+	on_monthly_county = {
+		scope:councillor_liege = {
+			if = {
+				limit = {
+					has_character_flag = no_court_chaplain_side_effects_first_month
+				}
+				remove_character_flag = no_court_chaplain_side_effects_first_month
+			}
+			else = {
+				trigger_event = {
+					on_action = task_convert_side_effects
+					days = { 1 30 }
+				}				
+			}
+		}
+	}
+	
+	on_start_task_county = {
+		scope:county = { remove_variable = faith_conversion_in_progress }
+	}
+	on_cancel_task_county = { 
+		scope:county = { remove_variable = faith_conversion_in_progress }
+	}
+	on_finish_task_county = {
+		scope:county = {
+			set_county_faith = scope:councillor.faith
+			remove_variable = faith_conversion_in_progress 
+		}
+		if = {
+			limit = {
+				scope:councillor = {
+					has_council_position = councillor_court_chaplain
+				}
+			}
+			scope:councillor = {
+				start_default_task = yes
+			}
+		}
+	}
+	
+	county_modifier = {
+		name = faith_conversion_in_progress
+		county_opinion_add = -25
+		# scale = marshal_increase_control_total
+	}
+	
+	progress = {
+		value = 0
+		if = {
+			limit = { 
+				exists = scope:county 
+				exists = scope:councillor
+			}
+			
+			# Councillor Skill
+			add = {
+				value = court_chaplain_skill
+				desc = SCALED_COUNCILLOR_LEARNING_VALUE
+			}
+			
+			if = {
+				limit = { scope:councillor_liege = { has_perk = religious_icon_perk } }
+				add = scope:councillor_liege.progress_from_religious_icon
+			}
+			
+			###################
+			# Pop Factors 
+
+			add = {
+				value = scope:county.progress_from_county_faith_population
+				desc = COURT_CHAPLAIN_CONVERSION_FERVOR_COUNTY
+			}
+			
+			# Neighboring Councillor Faith Population
+			add = {
+				value = scope:county.progress_from_neighboring_councillor_faith_population
+				desc = COURT_CHAPLAIN_CONVERSION_FERVOR_NEIGHBORS_POS
+			}
+			
+			# Neighboring County Faith Population
+			add = {
+				value = scope:county.progress_from_neighboring_county_faith_population
+				desc = COURT_CHAPLAIN_CONVERSION_FERVOR_NEIGHBORS_NEG
+			}
+
+			# From Terrain
+			if = {
+				limit = { scope:county.var:terrain_conversion_defense_bonus > 0 }
+				add = {
+					value = scope:councillor.court_chaplain_conversion_terrain_malus
+					desc = COURT_CHAPLAIN_CONVERSION_TERRAIN_MALUS
+				}
+			}
+			
+			# liege capital
+			if = {
+				limit = { scope:councillor_liege.capital_county = scope:county }
+				add = {
+					value = court_chaplain_conversion_capital_bonus
+					desc = COURT_CHAPLAIN_CONVERSION_CAPITAL_BONUS
+				}
+			}			
+						
+			#################
+			#Perk Bonuses
+			
+			if = {
+				limit = { scope:councillor_liege = { has_perk = zealous_proselytizer_perk } }
+				add = {
+					value = scope:councillor.court_chaplain_conversion_monthly_increase_perk_bonus
+					desc = CONVERSION_PERK_BONUS_VALUE
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor_liege = {
+						exists = dynasty
+						dynasty = { has_dynasty_perk = erudition_legacy_5 }
+					}
+				}
+				add = {
+					value = scope:councillor.court_chaplain_conversion_monthly_increase_dynasty_perk_bonus
+					desc = CONVERSION_DYNASTY_PERK_BONUS_VALUE
+				}
+			}
+			
+			#################
+			# Relation Bonuseses
+			
+			if = { # Friend
+				limit = {
+					scope:councillor_liege = {
+						has_relation_friend = scope:councillor
+						NOT = { has_relation_best_friend = scope:councillor }
+					}
+				}
+				add = {
+					value = scope:councillor.court_chaplain_conversion_monthly_increase_friend_bonus
+					desc = COUNCILLOR_IS_YOUR_FRIEND
+				}
+			}
+			if = { # Best Friend
+				limit = { scope:councillor_liege = { has_relation_best_friend = scope:councillor } }
+				add = {
+					value = scope:councillor.court_chaplain_conversion_monthly_increase_best_friend_bonus
+					desc = COUNCILLOR_IS_YOUR_BEST_FRIEND
+				}
+			}
+			if = { # Rival
+				limit = {
+					scope:councillor_liege = {
+						has_relation_rival = scope:councillor
+						NOT = { has_relation_nemesis = scope:councillor }
+					}
+				}
+				add = {
+					value = scope:councillor.court_chaplain_conversion_monthly_increase_rival_bonus
+					desc = COUNCILLOR_IS_YOUR_RIVAL
+				}
+			}
+			if = { # Nemesis
+				limit = { scope:councillor_liege = { has_relation_nemesis = scope:councillor } }
+				add = {
+					value = scope:councillor.court_chaplain_conversion_monthly_increase_nemesis_bonus
+					desc = COUNCILLOR_IS_YOUR_NEMESIS
+				}
+			}
+			
+			#################
+			#Conversion penalties for County Faith Tenets
+			
+			if = {
+				limit = { scope:county.faith = { has_doctrine = tenet_false_conversion_sanction } }
+				add = {
+					value = scope:councillor.conversion_false_conversion_sanction_resistance
+					desc = COURT_CHAPLAIN_CONVERSION_FALSE_CONVERSION_MODIFIER
+				}
+			}
+			if = {
+				limit = { scope:county.faith = { has_doctrine = tenet_reincarnation } }
+				add = {
+					value = scope:councillor.conversion_reincarnation_resistance
+					desc = COURT_CHAPLAIN_CONVERSION_REINCARNATION_MODIFIER
+				}
+			}
+			if = {
+				limit = { scope:county.faith = { has_doctrine = tenet_dharmic_pacifism } }
+				add = {
+					value = scope:councillor.conversion_dharmic_pacifism_resistance
+					desc = COURT_CHAPLAIN_CONVERSION_DHARMIC_PACIFISM_MODIFIER
+				}
+			}
+			if = {
+				limit = { scope:county.faith = { has_doctrine_parameter = tenet_adaptive_conversion_resistance } }
+				add = {
+					value = scope:councillor.conversion_adaptive_resistance
+					desc = COURT_CHAPLAIN_CONVERSION_ADAPTIVE_MODIFIER
+				}
+			}
+			if = {
+				limit = { scope:county.faith = { has_doctrine = tenet_pastoral_isolation } }
+				add = {
+					value = scope:councillor.conversion_pastoral_isolation_resistance
+					desc = COURT_CHAPLAIN_CONVERSION_PASTORAL_ISOLATION_MODIFIER
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor.liege.faith = { has_doctrine = tenet_communal_identity }
+					NOT = { scope:county.culture = scope:councillor.liege.culture }
+				}
+				add = {
+					value = scope:councillor.conversion_communal_identity_resistance
+					desc = COURT_CHAPLAIN_CONVERSION_COMMUNAL_IDENTITY_PENALTY_MODIFIER
+				}
+			}
+			
+			#################
+			#Conversion bonuses for Character Faith Tenets
+			
+			if = {
+				limit = { scope:councillor.faith = { has_doctrine_parameter = mendicant_preachers_conversion_active } }
+				add = {
+					value = scope:councillor.conversion_mendicant_preachers_bonus
+					desc = COURT_CHAPLAIN_CONVERSION_MENDICANT_PREACHERS_MODIFIER
+				}
+			}
+			if = {
+				limit = { 
+					scope:councillor.faith = { has_doctrine_parameter = same_culture_conversion_bonus_active }
+					scope:county.culture = scope:councillor.liege.culture
+				}
+				add = {
+					value = scope:councillor.conversion_communal_identity_bonus
+					desc = COURT_CHAPLAIN_CONVERSION_COMMUNAL_IDENTITY_BONUS_MODIFIER
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor.faith = {
+						has_doctrine_parameter = ghw_no_hof_conversion_buffs_active
+						OR = {
+							has_doctrine_parameter = no_head_of_faith
+							NOT = { exists = religious_head }
+						}
+						holy_sites_controlled >= 1
+					}
+				}
+				add = {
+					value = scope:councillor.conversion_ghw_tenet_no_hof_bonus
+					desc = COURT_CHAPLAIN_CONVERSION_GHW_TENET_NO_HOF_MODIFIER
+				}
+			}
+			
+			#################
+			#Maluses for syncretic faiths
+			
+			if = {
+				limit = {
+					scope:councillor.faith = { has_doctrine_parameter = unreformed_syncretic_actor_opinion_active }
+					scope:county.faith = { has_doctrine = unreformed_faith_doctrine}
+				}
+				add = {
+					value = scope:councillor.conversion_syncretic_with_religion_malus
+					desc = COURT_CHAPLAIN_CONVERSION_SYNCRETIC_WITH_RELIGION_MODIFIER
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor.faith = { has_doctrine_parameter = christian_syncretic_actor_opinion_active }
+					scope:county.faith = { religion_tag = christianity_religion }
+				}
+				add = {
+					value = scope:councillor.conversion_syncretic_with_religion_malus
+					desc = COURT_CHAPLAIN_CONVERSION_SYNCRETIC_WITH_RELIGION_MODIFIER
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor.faith = { has_doctrine_parameter = islamic_syncretic_actor_opinion_active }
+					scope:county.faith = { religion_tag = islam_religion }
+				}
+				add = {
+					value = scope:councillor.conversion_syncretic_with_religion_malus
+					desc = COURT_CHAPLAIN_CONVERSION_SYNCRETIC_WITH_RELIGION_MODIFIER
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor.faith = { has_doctrine_parameter = jewish_syncretic_actor_opinion_active }
+					scope:county.faith = { religion_tag = judaism_religion }
+				}
+				add = {
+					value = scope:councillor.conversion_syncretic_with_religion_malus
+					desc = COURT_CHAPLAIN_CONVERSION_SYNCRETIC_WITH_RELIGION_MODIFIER
+				}
+			}
+			
+			#################
+			#Various Modifier Penalties
+			if = {
+				limit = { scope:county = { has_county_modifier = governance_1074_local_faith_respected_modifier } }
+				add = {
+					value = scope:councillor.local_faith_respected_modifier_value
+					desc = COURT_CHAPLAIN_CONVERSION_LOCAL_COUNTY_MODIFIERS
+				}
+			}
+
+			if = {
+				limit = { scope:county = { has_county_modifier = governance_1074_population_fled_persecution_modifier } }
+				add = {
+					value = scope:councillor.population_fled_persecution_modifier_value
+					desc = COURT_CHAPLAIN_CONVERSION_LOCAL_COUNTY_MODIFIERS
+				}
+			}
+			if = {
+				limit = {
+					scope:councillor.liege = {
+						OR = {
+							has_character_modifier = defiant_high_king_conversion_boost_modifier
+							has_character_modifier = defiant_high_queen_conversion_boost_modifier
+						}
+						religion = religion:germanic_religion
+					}
+					scope:county.faith = {
+						NOT = { has_doctrine = unreformed_faith_doctrine }
+					}
+				}
+				add = {
+					value = scope:councillor.defiant_high_monarch_conversion_boost_value
+					desc = COURT_CHAPLAIN_CONVERSION_LIEGE_IS_DEFIANT_HIGH_MONARCH
+				}
+			}
+			if = {
+				limit = { scope:county = { has_variable = learning_encouraged_conversion } }
+				add = {
+					value = scope:councillor.conversion_learning_theology
+					desc = COURT_CHAPLAIN_CONVERSION_LEARNING_THEOLOGY
+				}
+			}
+			
+			#################
+			#Conversion bonuses from Holy Sites.
+			if = {
+				limit = { scope:county.title_province.barony = { is_holy_site_of = scope:county.faith } }
+				add = {
+					value = scope:councillor.conversion_holy_site_of_converted
+					desc = COURT_CHAPLAIN_CONVERSION_HOLY_SITE_OF_CONVERTED
+				}
+			}
+			if = {
+				limit = { scope:county.title_province.barony = { is_holy_site_of = scope:councillor.faith } }
+				add = {
+					value = scope:councillor.conversion_holy_site_of_converter
+					desc = COURT_CHAPLAIN_CONVERSION_HOLY_SITE_OF_CONVERTER
+				}
+			}
+			
+			#################
+			# Traits
+			if = {
+				limit = { scope:councillor.liege = { has_trait = savior } }
+				add = {
+					value = scope:councillor.conversion_savior_liege
+					desc = COURT_CHAPLAIN_CONVERSION_LIEGE_IS_SAVIOR
+				}
+			}
+			if = {
+				limit = { scope:councillor.liege = { has_trait = divine_blood } }
+				add = {
+					value = scope:councillor.conversion_divine_blood_liege
+					desc = COURT_CHAPLAIN_CONVERSION_LIEGE_IS_DIVINE_BLOOD
+				}
+			}
+			
+			#################
+			# Unreformed
+			if = {
+				limit = { scope:councillor.faith = { has_doctrine_parameter = unreformed } }
+				add = {
+					value = conversion_unreformed_faith_penalty
+					desc = COURT_CHAPLAIN_CONVERSION_UNREFORMED_FAITH_PENALTY
+				}
+			}
+			
+		# Conversion speed game rules
+		if = {
+			limit = {
+				has_game_rule = slower_faith_conversion_speed
+			}
+			multiply = {
+				value = slower_game_rule_value
+				desc = GAME_RULE_SLOWER_REASON
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = significantly_slower_faith_conversion_speed
+			}
+			multiply = {
+				value = significantly_slower_game_rule_value
+				desc = GAME_RULE_SIGNIFICANTLY_SLOWER_REASON
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = faster_faith_conversion_speed
+			}
+			multiply = {
+				value = faster_game_rule_value
+				desc = GAME_RULE_FASTER_REASON
+			}
+		}
+		if = {
+			limit = {
+				has_game_rule = significantly_faster_faith_conversion_speed
+			}
+			multiply = {
+				value = significantly_faster_game_rule_value
+				desc = GAME_RULE_SIGNIFICANTLY_FASTER_REASON
+			}
+		}
+		if = {
+			limit = {
+				scope:councillor_liege = {
+					vassal_contract_has_flag = eranshar_special_contracts_religious_enforcment
+				}
+			}
+			add = {
+				value = 30
+			}
+		}			
+		}	
+	}
+
+	potential_county = {
+		scope:county = {
+			NOT = { faith = scope:councillor.faith }
+			custom_description = {
+				text = "is_protected_via_contract_self_or_liege"
+				subject = holder
+				NAND = { # Vassal Contract forbids meddling by liege
+					exists = holder.liege
+					holder = {
+						OR = {
+							AND = {
+								liege = scope:councillor_liege
+								is_ruler = yes
+								has_government = feudal_government 
+								is_independent_ruler = no
+								vassal_contract_has_flag = religiously_protected
+							}
+							any_liege_or_above = {
+								exists = liege
+								liege = scope:councillor_liege
+								is_ruler = yes
+								has_government = feudal_government 
+								is_independent_ruler = no
+								vassal_contract_has_flag = religiously_protected
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	ai_target_score = {
+		value = 0
+		add = court_chaplain_conversion_ai_weight
+	}
+
+	ai_will_do = {
+		value = 1000 # Always convert if possible
+
+		if = {	#Unless you're a crypto-religionist.
+			limit = {
+				scope:councillor_liege = { has_variable = false_convert }
+			}
+			add = -1000
+		}
+	}
+}
+
+task_fabricate_claim = {
+	position = councillor_court_chaplain
+
+	task_type = task_type_county
+	county_target = all
+	ai_county_target = neighbor_land
+	task_progress = task_progress_percentage
+	restart_on_finish = yes
+
+	effect_desc = {
+		desc = task_fabricate_claim_effect_desc
+
+		desc = {
+			desc = council_task_possible_side_effects
+			triggered_desc = {
+				trigger = {
+					always = yes
+				}
+				desc = task_fabricate_claim_loss_of_prestige
+			}
+			triggered_desc = {
+				trigger = {
+					always = yes
+				}
+				desc = task_fabricate_claim_loss_of_prestige_level
+			}
+			triggered_desc = {
+				trigger = {
+					learning > mediocre_skill_rating
+				}
+				desc = task_fabricate_claim_duchy_claim
+			}
+			triggered_desc = {
+				trigger = {
+					learning < high_skill_rating
+				}
+				desc = task_fabricate_claim_vassal_opinion_loss
+			}
+			triggered_desc = {
+				trigger = {
+					learning < high_skill_rating
+				}
+				desc = task_fabricate_claim_piety_loss
+			}
+			triggered_desc = {
+				trigger = {
+					learning < high_skill_rating
+				}
+				desc = task_fabricate_claim_upset_target
+			}
+		}
+	}
+
+	progress = {
+		value = 0
+		add = {
+			value = court_chaplain_fabricate_claim_base
+			desc = COURT_CHAPLAIN_PROGRESS_BASE
+		}
+		add = {
+			value = scope:councillor.court_chaplain_fabricate_claim_monthly_increase_base
+			desc = SCALED_COUNCILLOR_LEARNING_VALUE
+		}
+		# Relation Bonuses/Penalties
+		if = { # Friend
+			limit = {
+				scope:councillor_liege = {
+					has_relation_friend = scope:councillor
+					NOT = { has_relation_best_friend = scope:councillor }
+				}
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_monthly_increase_friend_bonus
+				desc = COUNCILLOR_IS_YOUR_FRIEND
+			}
+		}
+		if = { # Best Friend
+			limit = {
+				scope:councillor_liege = {
+					has_relation_best_friend = scope:councillor
+				}
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_monthly_increase_best_friend_bonus
+				desc = COUNCILLOR_IS_YOUR_BEST_FRIEND
+			}
+		}
+		if = { # Rival
+			limit = {
+				scope:councillor_liege = {
+					has_relation_rival = scope:councillor
+					NOT = { has_relation_nemesis = scope:councillor }
+				}
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_monthly_increase_rival_bonus
+				desc = COUNCILLOR_IS_YOUR_RIVAL
+			}
+		}
+		if = { # Nemesis
+			limit = {
+				scope:councillor_liege = {
+					has_relation_nemesis = scope:councillor
+				}
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_monthly_increase_nemesis_bonus
+				desc = COUNCILLOR_IS_YOUR_NEMESIS
+			}
+		}
+		# Perk Bonuses
+		if = {
+			limit = {
+				scope:councillor_liege = { has_perk = accomplished_forger_perk }
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_perk_bonus_monthly_increase
+				desc = FABRICATE_CLAIM_PERK_BONUS_VALUE
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:councillor_liege.dynasty
+				scope:councillor_liege.dynasty = { has_dynasty_perk = erudition_legacy_5 }
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_dynasty_perk_bonus
+				desc = FABRICATE_CLAIM_DYNASTY_PERK_BONUS_VALUE
+			}
+		}
+
+		# Innovation Bonuses
+		if = {
+			limit = {
+				scope:councillor.liege = {
+					culture = {
+						has_innovation = innovation_land_grants
+					}
+				}
+			}
+			add = {
+				value = scope:councillor.court_chaplain_fabricate_claim_innovation_bonus_land_grants
+				desc = COURT_CHAPLAIN_FABRICATE_CLAIM_INNOVATION_BONUS_LAND_GRANTS
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:county
+				NOT = {
+					scope:county.holder.faith = scope:councillor.liege.faith
+				}
+			}
+			multiply = {
+				value = scope:councillor.court_chaplain_heretic_bonus
+				desc = "COURT_CHAPLAIN_FABRICATE_CLAIM_HERETIC_BONUS"
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:county
+				NOT = {
+					scope:county = {
+						is_neighbor_to_realm = scope:councillor_liege
+					}
+				}
+			}
+			multiply = {
+				value = scope:councillor.court_chaplain_fabricate_claim_not_adjacent_penalty
+				desc = "COURT_CHAPLAIN_FABRICATE_CLAIM_NOT_ADJACENT"
+			}
+		}
+		if = { #Progress penalty when fabricating on vassals
+			limit = {
+					exists = scope:county
+					scope:county.holder = {
+						target_is_liege_or_above = scope:councillor.liege 
+				}
+			}
+			multiply = {
+				value = scope:councillor.court_chaplain_fabricate_claim_vassal_penalty
+				desc = "COURT_CHAPLAIN_FABRICATE_CLAIM_VASSAL_COUNTY"
+			}
+		}
+	}
+
+	potential_county = {
+		scope:county.holder.top_liege = {
+			in_diplomatic_range = scope:councillor_liege
+		}
+		scope:county = {
+			NOR = {
+				holder = scope:councillor_liege
+				scope:councillor_liege = {
+					has_claim_on = scope:county
+				}
+			}
+		}
+	}
+
+	on_finish_task_county = {
+		scope:county = {
+			holder = {
+				save_scope_as = county_holder
+			}
+		}
+		scope:councillor_liege = {
+			trigger_event = {
+				on_action = task_fabricate_claim_success_effect
+			}
+		}
+	}
+
+	on_start_task = {
+		liege = {
+			add_character_flag = {
+				flag = no_court_chaplain_side_effects_first_month
+				days = 30
+			}
+		}
+	}
+
+	on_monthly_county = {
+		scope:councillor_liege = {
+			if = {
+				limit = {
+					has_character_flag = no_court_chaplain_side_effects_first_month
+				}
+			}
+			else = {
+				trigger_event = {
+					on_action = task_fabricate_claim_side_effects
+					days = { 1 30 }
+				}
+			}
+		}
+	}
+
+	ai_target_score = {
+		value = 1000
+		
+		add = {
+			value = 1
+			subtract = rough_pass_off_forgery_potential_success_chance
+			multiply = -1000
+		}
+		
+		if = {
+			limit = { # Vassals in the same realm
+				scope:councillor_liege = {
+					is_independent_ruler = no
+				}
+				scope:county.holder = {
+					is_independent_ruler = no
+				}
+				scope:county.holder.top_liege = scope:councillor_liege.top_liege
+			}
+			
+			if = {
+				limit = {
+					exists = scope:county.holder.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege
+						}
+					}
+					scope:county.holder.max_military_strength > {
+						value = scope:councillor_liege.max_military_strength
+						multiply = 1.2
+					}
+				}
+				subtract = 10000
+			}
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege
+						}
+					}
+				}
+				multiply = {
+					value = scope:councillor_liege.max_military_strength
+					divide = { value = scope:county.holder.max_military_strength min = 1 }
+				}
+			}
+			
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege.liege
+						}
+					}
+					scope:county.holder.liege.max_military_strength > {
+						value = scope:councillor_liege.max_military_strength
+						multiply = 1.2
+					}
+				}
+				subtract = 10000
+			}
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege.liege
+						}
+					}
+				}
+				multiply = {
+					value = scope:councillor_liege.max_military_strength
+					divide = { value = scope:county.holder.liege.max_military_strength min = 1 }
+				}
+			}
+			
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege.liege.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege.liege.liege
+						}
+					}
+					scope:county.holder.liege.liege.max_military_strength > {
+						value = scope:councillor_liege.max_military_strength
+						multiply = 1.2
+					}
+				}
+				subtract = 10000
+			}
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege.liege.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege.liege.liege
+						}
+					}
+				}
+				multiply = {
+					value = scope:councillor_liege.max_military_strength
+					divide = { value = scope:county.holder.liege.liege.max_military_strength min = 1 }
+				}
+			}
+			
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege.liege.liege.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege.liege.liege.liege
+						}
+					}
+					scope:county.holder.liege.liege.liege.max_military_strength > {
+						value = scope:councillor_liege.max_military_strength
+						multiply = 1.2
+					}
+				}
+				subtract = 10000
+			}
+			else_if = {
+				limit = {
+					exists = scope:county.holder.liege.liege.liege.liege
+					scope:councillor_liege = {
+						any_liege_or_above = {
+							this = scope:county.holder.liege.liege.liege.liege
+						}
+					}
+				}
+				multiply = {
+					value = scope:councillor_liege.max_military_strength
+					divide = { value = scope:county.holder.liege.liege.liege.max_military_strength min = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				scope:county.holder.top_liege.max_military_strength > {
+					value = scope:councillor_liege.max_military_strength
+					multiply = 1.2
+				}
+			}
+			subtract = 10000
+		}
+		else = {	
+			multiply = {
+				value = scope:councillor_liege.max_military_strength
+				divide = { value = scope:county.holder.top_liege.max_military_strength min = 1 }
+			}
+		}
+	}
+
+	ai_will_do = {
+		value = 0
+		if = {
+			limit = {
+				scope:councillor = {
+					is_performing_council_task = task_fabricate_claim
+				}
+			}
+			add = 10000 # Always keep going if this is already chosen
+		}
+		else_if = {
+			limit = {
+				OR = {
+					ai_greed <= ai_honor
+					ai_greed <= 0
+					is_at_war = yes
+					gold < 100
+				}
+			}
+			subtract = 1000
+		}
+		else_if = { # If AI has good war, don't fabricate
+			limit = {
+				any_neighboring_and_across_water_top_liege_realm_owner = {
+					scope:councillor_liege = {
+						tier_difference = {
+							target = prev
+							value >= -1
+						}
+						NOR = {
+							is_allied_to = prev
+							has_truce = prev
+						}
+						has_any_cb_on = prev
+					}			
+				}
+			}
+			subtract = 1000
+		}
+		else = {
+			add = 100
+		}
+	}
+} 
