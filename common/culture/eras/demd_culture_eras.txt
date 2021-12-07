@@ -18,12 +18,6 @@ culture_era_late_medieval = {
 	invalid_for_government = tribal_government
 }
 
-culture_era_transitional = {
-	year = 1100
-	invalid_for_government = tribal_government
-
-}
-
 culture_era_early_renaissance = {
 	year = 1150
 	invalid_for_government = tribal_government
