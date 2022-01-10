@@ -1,0 +1,34 @@
+﻿#############################################
+# DEMD Population System
+# by Vertimnus (NaniteSystems)
+# Do not edit without making corresponding edits to the metascript source code. Bad things will happen!
+#############################################
+
+total_county_levies = {
+	if = {
+		limit = { title_province = { has_variable = manpower } }
+		
+		value = title_province.var:manpower
+	}
+	else = {
+		value = 0
+	}
+}
+
+county_levies_to_raise = {
+	if = {
+		limit = { title_province = { has_variable = manpower } }
+		
+		value = title_province.var:manpower
+	}
+	else = {
+		value = 0
+	}
+
+	# Will summon between 75% and 175% of total county levy strength, depending on how much they hate you (most commonly will be 95-110% though, scores between -20 and -35 are the most common)
+	multiply = {
+		value = county_opinion
+		multiply = -0.01
+		add = 1.0
+	}
+}

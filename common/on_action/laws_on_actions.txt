@@ -88,7 +88,7 @@ on_yearly_mil_laws = {
 							has_title = title:e_western_roman_empire
 							has_title = title:e_roman_empire
 						}
-						max_military_strength < 3000
+						max_military_strength < 5000
 					}
 					set_variable = {
 						name = temp_max_mil

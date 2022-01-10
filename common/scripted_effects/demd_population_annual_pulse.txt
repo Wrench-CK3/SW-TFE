@@ -1,6 +1,6 @@
 ﻿#############################################
 # DEMD Population System
-# by Vertimnus (NaniteSystems)
+# by Vertimnus
 # This file was compiled by a machine from jomini metascript source code.
 # It should never be manually edited.
 #############################################
@@ -9,6 +9,7 @@ annualPulse = {
 	every_in_global_list = {
 		variable = $list$
     	change_variable = { name = county_weather_fertility_mult add = county_weather_fertility_mult_delta }
+    	set_variable = { name = anticipated_county_weather_fertility_mult value = var:county_weather_fertility_mult }
         random_list = { 
             100 = {
             }
@@ -31,152 +32,20 @@ annualPulse = {
                 change_variable = { name = county_weather_fertility_mult add = -0.04 }
             }
         }
-    	every_in_list = { variable = county_provinces
-    		limit = { combined_building_level > 0 }
-            set_variable = { name = food_districts_max value = food_districts_max }
-        	set_variable = {
-        		name = food_producers_max
-        		value = {
-        			value = var:food_districts_count
-        			multiply = demd_jobs_per_district
-        		}		
-        	}
-        	set_variable = {
-        		name = knight_capacity_producers_max
-        		value = {
-        			value = var:food_producers_max
-        			multiply = demd_farmer_to_noble_ratio
-        		}		
-        	}
-        	set_variable = { name = food_producers_count value = 0 }
-        	set_variable = { name = knight_capacity_producers_count value = 0 }
-        	set_variable = { name = unemployed_count value = var:population }
-            set_variable = {
-                name = temp
-                value = {
-                    value = var:knight_capacity_producers_max
-                    subtract = var:knight_capacity_producers_count
-                }
-            }
-            clamp_variable = { name = temp max = var:unemployed_count min = 0 }
-            if = {
-                limit = {
-                    var:temp = { compare_value > prev.var:knight_capacity_producers_max }
-                }
-                change_variable = { name = knight_capacity_producers_count add = var:knight_capacity_producers_max }
-                change_variable = { name = unemployed_count subtract = var:knight_capacity_producers_max }
-            }
-            else = {
-                change_variable = { name = knight_capacity_producers_count add = var:temp }
-                change_variable = { name = unemployed_count subtract = var:temp }
-            }
-            set_variable = {
-                name = temp
-                value = {
-                    value = var:food_producers_max
-                    subtract = var:food_producers_count
-                }
-            }
-            clamp_variable = { name = temp max = var:unemployed_count min = 0 }
-            if = {
-                limit = {
-                    var:temp = { compare_value > prev.var:food_producers_max }
-                }
-                change_variable = { name = food_producers_count add = var:food_producers_max }
-                change_variable = { name = unemployed_count subtract = var:food_producers_max }
-            }
-            else = {
-                change_variable = { name = food_producers_count add = var:temp }
-                change_variable = { name = unemployed_count subtract = var:temp }
-            }
-        	set_variable = {
-                name = knight_capacity_produced
-                value = {
-                    value = knight_capacity_produced_per_capita
-                    multiply = var:knight_capacity_producers_count
-                }
-            }
-        	set_variable = { name = food_produced_per_capita value = food_produced_per_capita }
-        	set_variable = {
-        		name = food_produced
-        		value = {
-        			value = var:food_produced_per_capita
-        			multiply = var:food_producers_count
-        		}
-        	}
-        	set_variable = { name = prov_construction_capacity value = prov_construction_capacity }
-        	set_variable = { name = prov_districts_to_build value = prov_districts_to_build }
-        	set_variable = { name = prov_unused_construction_capacity value = prov_unused_construction_capacity }
-            change_variable = { name = food_districts_count add = prov_districts_to_build }
-            set_variable = {
-                name = food_depreciation
-                value = {
-                    value = var:food_stockpile
-                    multiply = food_depreciation_rate
-                }
-            }
-            change_variable = { name = food_stockpile subtract = var:food_depreciation }
-            change_variable = { name = food_stockpile add = var:food_produced }
-        	set_variable = { name = food_taxed value = food_taxed }
-        	change_variable = { name = food_stockpile subtract = var:food_taxed }
-        	set_variable = { name = food_taxed_to_gold value = var:food_taxed }
-        	if = {
-        		limit = { NOT = { county.holder.capital_county = county } }
-        		set_variable = { 
-        			name = food_taxed_to_capital
-        			value = {
-        				value = var:food_taxed_to_gold 
-        				multiply = 0.25
-        			}
-        		}
-        		change_variable = { name = food_taxed_to_gold subtract = var:food_taxed_to_capital }
-        		county.holder.capital_county = { 
-        			change_variable = { name = food_imported_from_demesne add = prev.var:food_taxed_to_capital }
-        		}
-        	}
-        	else = {
-        		set_variable = { name = food_taxed_to_capital value = 0 }
-        	}
-        	if = {
-        		limit = { county.holder = { is_independent_ruler = no } }
-        		set_variable = { name = food_taxed_to_liege value = food_to_liege }		
-        		change_variable = { name = food_taxed subtract = var:food_taxed_to_liege }
-        		county.holder.liege.capital_county = { 
-        			change_variable = { name = food_imported_from_vassals add = prev.var:food_taxed_to_liege } 
-        		}
-        	}
-        	else = {
-        		set_variable = { name = food_taxed_to_liege value = 0 }
-        	}
-        	set_variable = { name = food_exported value = food_exported }
-        	change_variable = { name = food_stockpile subtract = var:food_exported }
-        	county = { change_variable = { name = food_imported_from_baronies add = prev.var:food_exported } }
-        	set_variable = { name = food_demanded value = food_demanded }
-        	set_variable = { name = food_consumed value = food_stockpile_excess }
-            change_variable = { name = food_stockpile subtract = var:food_consumed }
-        	set_variable = {
-        		name = food_ratio
-        		value = {
-                    value = {
-                        value = var:food_consumed
-                        divide = var:food_demanded
-                    }
-        		}
-        	}
-            set_variable = {
-                name = goods_depreciation
-                value = {
-                    value = var:goods_stockpile
-                    multiply = goods_depreciation_rate
-                }
-            }
-            change_variable = { name = goods_stockpile subtract = var:goods_depreciation }
-            change_variable = { name = goods_stockpile add = var:goods_imported }
-        	set_variable = { name = capital_production_multiplier value = capital_production_multiplier }
-    	}
+        set_variable = { name = food_districts_max value = county_food_districts }
+    	set_variable = {
+    		name = food_producers_max
+    		value = {
+    			value = var:food_districts_count
+    			multiply = demd_jobs_per_district
+    		}		
+    	}			
+    	set_variable = { name = food_demanded value = food_demanded }
+        set_variable = { name = food_stockpile_target value = food_stockpile_target }
+    	set_variable = { name = food_producers_target value = food_producers_target }
     	random_list = {
     		1 = {
-    			trigger_event = { id = demd_pop_fire.1001 days = { 0 365 } }
+    			county = { trigger_event = { id = demd_pop_fire.1001 days = { 0 365 } } }
     		}
     		1500 = {
     		}
@@ -186,12 +55,12 @@ annualPulse = {
     			OR = {
     				has_variable = isOnMinorRiver
     				has_variable = isOnMajorRiver
-    				is_coastal_county = yes
+    				is_coastal = yes
     			}
     		}
     		random_list = {
     			1 = {
-    				trigger_event = { id = demd_pop_flood.1001 days = { 0 365 } }
+    				county = { trigger_event = { id = demd_pop_flood.1001 days = { 0 365 } } }
     			}
     			500 = {
     			}
@@ -199,15 +68,14 @@ annualPulse = {
     	}
     	if = { 
     		limit = {
-    			always = no 
-    			has_variable = avalanche_eligible
+    			terrain = mountains
     		}
     		random_list = {
     			2 = {
-    				trigger_event = { id = demd_pop_avalanche.1001 days = { 0 90 } }
+    				county = { trigger_event = { id = demd_pop_avalanche.1001 days = { 0 90 } } }
     			}
     			1 = {
-    				trigger_event = { id = demd_pop_avalanche.1001 days = { 330 365 } }
+    				county = { trigger_event = { id = demd_pop_avalanche.1001 days = { 330 365 } } }
     			}
     			1000 = {
     			}
@@ -215,7 +83,7 @@ annualPulse = {
     	}	
         save_temporary_scope_as = home
     	every_in_list = {
-    		variable = county_neighbors
+    		variable = prov_neighbors
     		if = {
     			limit = {
     				prev.var:id = { compare_value < prev.var:id }
@@ -255,79 +123,67 @@ annualPulse = {
     		add = var:internal_growth 
     	}
     	clamp_variable = { name = population min = 0.1 max = 1000000 }
-    	every_in_list = { variable = county_provinces
-    		limit = { combined_building_level > 0 }
-        	set_variable = { name = natural_birth_rate value = natural_birth_rate }
-            set_variable = { name = total_death_rate value = total_death_rate }
-        	set_variable = {
-        		name = growth_rate
-        		value = {
-        			value = var:natural_birth_rate
-        			subtract = var:total_death_rate
-        		}
-        	}
-        	clamp_variable = { name = growth_rate min = demd_population_min_growth_rate max = 1 }
-            set_variable = { 
-        		name = internal_growth 
-        		value = {
-        			value = var:growth_rate 
-        			multiply = var:population 
-        		}
-        	}
-            change_variable = { 
-        		name = population 
-        		add = var:internal_growth 
-        	}
-        	clamp_variable = { name = population min = 0.1 max = 1000000 }
-    	}
-    	every_in_list = { variable = county_provinces
-    		limit = { combined_building_level > 0 }
-    		change_variable = { name = migration_pull add = migration_pull_delta }
-    	}
-    	set_variable = {
-    		name = maxInternalPairwise
-    		value = {
-    			value = var:population
-    			multiply = var:max_internal_migration_percent
+        if = {
+    		limit = {
+    			NOT = {
+    				county = {
+    					has_county_modifier = plague_immunity
+    				}
+    			}
     		}
-    	}
-    	every_in_list = { variable = county_provinces
-    		limit = { combined_building_level > 0 }
-    		set_variable = { name = internal_migration_growth value = internal_migration_pairwise }
-    		set_variable = {
-    			name = internal_migration_growth_percent
-    			value = {
-    				value = var:internal_migration_growth
-    				divide = var:population
+    		random_list = {
+    			0 = { 
+    				modifier = {
+    					always = yes
+    					add = outbreak_risk
+    				}
+    				county = {
+    					trigger_event = { id = demd_pop_disease.1001 days = { 1 30 } }
+    				}
+    			}
+    			5000 = {
     			}
     		}
     	}
-    	set_variable = { name = internal_migration_growth value = county_internal_migration_growth_sum }
-    	set_variable = {
-    		name = internal_migration_growth_percent
-    		value = {
-    			value = var:internal_migration_growth
-    			divide = var:population
-    		}
-    	}
-    	every_in_list = { variable = county_provinces
-    		limit = { combined_building_level > 0 }		
-            change_variable = { name = population add = var:internal_migration_growth }	
-    	}
-    	change_variable = { name = population add = var:internal_migration_growth }
-    	set_variable = { name = county_population value = county_population }
-    	set_variable = { name = effective_tax_rate value = effective_tax_rate }
-    	set_variable = { name = food_to_liege_rate value = holder.food_to_liege_rate }
-        change_variable = {
-            name = public_order
-            add = public_order_delta
+        if = {
+    		limit = { county = { has_county_modifier = plague_present } }
+            every_in_list = {
+                variable = prov_neighbors
+                limit = { NOT = { county = { has_county_modifier = plague_immunity } } }
+    			random_list = {
+    				50 = {
+    					modifier = {
+    						county = { NOT = { has_county_modifier = quarantine } }
+    						add = 50
+    					}
+    					county = {
+    						add_county_modifier = { modifier = plague_present years = plague_years }
+    						add_county_modifier = { modifier = plague_immunity years = plague_immune_years }
+    						remove_county_modifier = quarantine
+    					}
+    				}
+    				500 = {
+    				}
+    			}
+            }
         }
-    	clamp_variable = { name = public_order min = 0 max = 1 }
+    	set_variable = { name = effective_tax_rate value = effective_tax_rate }
+    	set_variable = { name = steward_production_bonus_value value = steward_production_bonus_value }
+    	set_variable = { name = province_owner_production_bonus value = province_owner_production_bonus }
+    	set_variable = { name = food_to_liege_rate value = province_owner.food_to_liege_rate }
+        set_variable = { name = feature_upkeep value = feature_upkeep }
+    	set_variable = { name = sanitation_target value = sanitation_target }
         change_variable = {
             name = sanitation
             add = sanitation_delta
         }
     	clamp_variable = { name = sanitation min = 0 max = 1 }
+    	set_variable = { name = public_order_target value = public_order_target }
+        change_variable = {
+            name = public_order
+            add = public_order_delta
+        }
+    	clamp_variable = { name = public_order min = 0 max = 1 }
         set_variable = {
     		name = goods_producers_max
     		value = {
@@ -336,8 +192,65 @@ annualPulse = {
     		}
     	}
     	clamp_variable = { name = goods_producers_max min = 0 max = 1000000 }
-    	set_variable = { name = goods_producers_count value = 0 }
-    	set_variable = { name = unemployed_count value = var:population }
+        set_variable = {
+            name = knight_capacity_producers_max
+            value = {
+                value = var:food_producers_max
+                multiply = demd_farmer_to_noble_ratio
+            }
+        }
+    	clamp_variable = { name = knight_capacity_producers_max min = 0 max = 1000000 }
+    	set_variable = {
+    		name = capital_production_multiplier
+    		value = {
+    			value = var:goods_stockpile
+    			divide = var:population
+    			multiply = 0.03
+    		}
+    	}
+    	clamp_variable = { name = capital_production_multiplier min = 0 max = 1 }
+       set_variable = { name = food_producers_count value = 0 }
+       set_variable = { name = goods_producers_count value = 0 }
+       set_variable = { name = knight_capacity_producers_count value = 0 }
+       set_variable = { name = unemployed_count value = var:population }
+        set_variable = {
+            name = temp
+            value = {
+                value = var:food_producers_max
+                subtract = var:food_producers_count
+            }
+        }
+        clamp_variable = { name = temp max = var:unemployed_count min = 0 }
+        if = {
+            limit = {
+                var:temp = { compare_value > prev.var:food_producers_target }
+            }
+            change_variable = { name = food_producers_count add = var:food_producers_target }
+            change_variable = { name = unemployed_count subtract = var:food_producers_target }
+        }
+        else = {
+            change_variable = { name = food_producers_count add = var:temp }
+            change_variable = { name = unemployed_count subtract = var:temp }
+        }
+        set_variable = {
+            name = temp
+            value = {
+                value = var:knight_capacity_producers_max
+                subtract = var:knight_capacity_producers_count
+            }
+        }
+        clamp_variable = { name = temp max = var:unemployed_count min = 0 }
+        if = {
+            limit = {
+                var:temp = { compare_value > prev.var:knight_capacity_producers_max }
+            }
+            change_variable = { name = knight_capacity_producers_count add = var:knight_capacity_producers_max }
+            change_variable = { name = unemployed_count subtract = var:knight_capacity_producers_max }
+        }
+        else = {
+            change_variable = { name = knight_capacity_producers_count add = var:temp }
+            change_variable = { name = unemployed_count subtract = var:temp }
+        }
         set_variable = {
             name = temp
             value = {
@@ -357,13 +270,49 @@ annualPulse = {
             change_variable = { name = goods_producers_count add = var:temp }
             change_variable = { name = unemployed_count subtract = var:temp }
         }
-    	set_variable = { name = goods_produced_per_capita value = goods_produced_per_capita }
+        set_variable = {
+            name = temp
+            value = {
+                value = var:food_producers_max
+                subtract = var:food_producers_count
+            }
+        }
+        clamp_variable = { name = temp max = var:unemployed_count min = 0 }
+        if = {
+            limit = {
+                var:temp = { compare_value > prev.var:food_producers_max }
+            }
+            change_variable = { name = food_producers_count add = var:food_producers_max }
+            change_variable = { name = unemployed_count subtract = var:food_producers_max }
+        }
+        else = {
+            change_variable = { name = food_producers_count add = var:temp }
+            change_variable = { name = unemployed_count subtract = var:temp }
+        }
         set_variable = {
             name = goods_produced
             value = {
-                value = var:goods_produced_per_capita
+                value = goods_produced_per_capita
                 multiply = var:goods_producers_count
             }
+        }
+    	set_variable = {
+            name = knight_capacity_produced
+            value = {
+                value = knight_capacity_produced_per_capita
+                multiply = var:knight_capacity_producers_count
+            }
+        }
+    	set_variable = {
+    		name = food_produced
+    		value = {
+    			value = food_produced_per_capita
+    			multiply = var:food_producers_count
+    		}
+    	}	
+        set_variable = {
+    		name = manpower
+    		value = manpower
         }
         set_variable = { name = produced_trade_value value = produced_trade_value }
         set_variable = { name = trade_power value = trade_power }
@@ -374,6 +323,18 @@ annualPulse = {
                 add = var:collected_trade_value 
             }
         }
+    	province_owner.liege = { 
+    		if = {
+    			limit = { NOT = { has_variable = food_stockpile } }
+    			set_variable = { name = food_stockpile value = 0 } 
+    		}
+    	}
+    	province_owner = { 
+    		if = {
+    			limit = { NOT = { has_variable = food_stockpile } }
+    			set_variable = { name = food_stockpile value = 0 } 
+    		}
+    	}
         set_variable = {
             name = food_depreciation
             value = {
@@ -382,23 +343,67 @@ annualPulse = {
             }
         }
         change_variable = { name = food_stockpile subtract = var:food_depreciation }
-    	set_variable = {
-    		name = food_imported
-    		value = {
-    			value = var:food_imported_from_baronies
-    			add = var:food_imported_from_demesne
-    			add = var:food_imported_from_vassals
-    		}
-    	}
-    	change_variable = { name = food_stockpile add = var:food_imported }
-    	set_variable = { name = food_imported_from_baronies_display value = var:food_imported_from_baronies }
+        change_variable = { name = food_stockpile add = var:food_produced }
+    	change_variable = { name = food_stockpile add = var:food_imported_from_demesne }
+    	change_variable = { name = food_stockpile add = var:food_imported_from_vassals }
     	set_variable = { name = food_imported_from_demesne_display value = var:food_imported_from_demesne }
     	set_variable = { name = food_imported_from_vassals_display value = var:food_imported_from_vassals }
-    	set_variable = { name = food_imported_from_baronies value = 0 }
     	set_variable = { name = food_imported_from_demesne value = 0 }
     	set_variable = { name = food_imported_from_vassals value = 0 }
-    	set_variable = { name = food_demanded value = food_demanded }
-    	set_variable = { name = food_consumed value = food_stockpile_excess }
+    	if = {
+    		limit = { NOT = { province_owner.capital_province = this } }
+    		set_variable = {
+    			name = food_taxed_to_gold
+    			value = {
+    				value = var:food_produced
+    				multiply = var:effective_tax_rate
+    				divide = 2
+    			}
+    		}
+    		set_variable = { name = food_taxed_to_food value = var:food_taxed_to_gold }
+    		change_variable = { name = food_stockpile subtract = var:food_taxed_to_gold }	
+    		change_variable = { name = food_stockpile subtract = var:food_taxed_to_food }
+    		province_owner.capital_province = { 
+    			change_variable = { 
+    				name = food_imported_from_demesne 
+    				add = {
+    					value = prev.var:food_taxed_to_food
+    					divide = 2 
+    				} 
+    			}
+    		}
+    	}
+    	else = {
+    		set_variable = { 
+    			name = food_taxed_to_gold
+    			value = {
+    				value = var:food_produced
+    				multiply = var:effective_tax_rate
+    				divide = 2
+    			}
+    		}
+    		set_variable = { name = food_taxed_to_food value = 0 }
+    		change_variable = { name = food_stockpile subtract = var:food_taxed_to_gold }
+    	}
+    	if = {
+    		limit = { province_owner = { is_independent_ruler = no } }
+    		set_variable = {
+    			name = food_to_liege
+    			value = {
+    				value = var:food_produced
+    				multiply = var:food_to_liege_rate
+    			}
+    		}
+    		change_variable = { name = food_stockpile subtract = var:food_to_liege }
+    		province_owner.liege.capital_province = { 
+    			change_variable = { name = food_imported_from_vassals add = prev.var:food_to_liege } 
+    		}
+    	}
+    	else = {
+    		set_variable = { name = food_to_liege value = 0 }
+    	}
+    	set_variable = { name = food_consumed value = var:food_demanded }
+    	clamp_variable = { name = food_consumed min = 0 max = var:food_stockpile }
         change_variable = { name = food_stockpile subtract = var:food_consumed }
     	set_variable = {
     		name = food_ratio
@@ -418,7 +423,6 @@ annualPulse = {
         }
         change_variable = { name = goods_stockpile subtract = var:goods_depreciation }
         change_variable = { name = goods_stockpile add = var:goods_produced }
-    	change_variable = { name = goods_stockpile add = trade_value_to_goods }
         set_variable = {
             name = goods_taxed
             value = {
@@ -426,56 +430,1051 @@ annualPulse = {
                 multiply = var:effective_tax_rate
             }
         }
-    	change_variable = { name = goods_stockpile subtract = var:goods_taxed }
-    	set_variable = { name = goods_exported value = goods_exported }
-    	every_in_list = { variable = county_provinces 
-    		limit = { has_variable = food_exported }
-    		set_variable = { name = goods_imported value = goods_imported }
-    	}
-    	change_variable = { name = goods_stockpile subtract = var:goods_exported }
-    	set_variable = { name = capital_production_multiplier value = capital_production_multiplier }
-    	set_variable = { name = county_construction_capacity value = county_construction_capacity }
-    	set_variable = { name = county_districts_to_build value = county_districts_to_build }
-    	set_variable = { name = county_unused_construction_capacity value = county_unused_construction_capacity }
-        change_variable = { name = goods_districts_count add = county_districts_to_build }
-        if = {
-    		limit = {
-    			NOT = { has_county_modifier = plague_immunity }
-    		}
-    		random_list = {
-    			0 = { 
-    				modifier = {
-    					always = yes
-    					add = outbreak_risk
-    				}
-    				trigger_event = { id = demd_pop_disease.1001 days = { 1 360 } }
-    			}
-    			5000 = {
-    			}
-    		}
-    	}
-        if = {
-    		limit = { has_county_modifier = plague_present }
-            every_in_list = {
-                variable = county_neighbors
-                limit = { NOT = { has_county_modifier = plague_immunity } }
-    			random_list = {
-    				50 = {
-    					modifier = {
-    						NOT = { prev = { has_county_modifier = quarantine } }
-    						add = no_quarantine_spread_chance_addition
-    					}
-    					trigger_event = { id = demd_pop_disease.1001 days = { 1 360 } }
-    				}
-    				400 = {
-    				}
-    			}           
+    	change_variable = { name = goods_stockpile subtract = var:goods_taxed }	
+        set_variable = {
+            name = expected_population
+            value = expected_population
+        }
+        set_variable = {
+            name = total_districts_needed
+            value = {
+                value = var:expected_population
+                divide = demd_jobs_per_district
             }
         }
+    	set_variable = { name = construction_capacity value = construction_capacity }
+        set_variable = {
+            name = food_districts_needed
+            value = {
+                value = var:food_producers_target
+                divide = demd_jobs_per_district
+    			multiply = demd_district_overbuild_ratio			
+            }
+        }
+    	clamp_variable = { name = food_districts_needed min = 0 max = var:food_districts_max }
+    	change_variable = { name = food_districts_needed subtract = var:food_districts_count }
+    	clamp_variable = { name = food_districts_needed min = 0 max = var:construction_capacity }
+        change_variable = { name = food_districts_count add = var:food_districts_needed }
+    	change_variable = { name = construction_capacity subtract = var:food_districts_needed }
+    	set_variable = {
+    		name = temp
+    		value = {
+    			value = var:food_producers_target
+    			divide = demd_jobs_per_district
+    		}
+    	}
+    	clamp_variable = { name = temp min = 0 max = var:food_districts_max } 
+        set_variable = {
+            name = goods_districts_needed
+            value = {
+                value = var:total_districts_needed
+                subtract = var:temp
+    			subtract = var:goods_districts_count
+    			multiply = demd_district_overbuild_ratio
+            }
+        }			
+        clamp_variable = { name = goods_districts_needed min = 0 max = var:construction_capacity }
+        change_variable = { name = goods_districts_count add = var:goods_districts_needed }
+    	change_variable = { name = construction_capacity subtract = var:goods_districts_needed }
+        set_variable = {
+            name = urbanization
+            value = {
+                value = var:goods_producers_count
+                divide = var:population
+            }
+        }
+    	set_variable = { name = gross_tax value = gross_tax }
+        set_variable = {
+            name = tax
+            value = {
+                value = var:gross_tax
+    			subtract = var:feature_upkeep
+            }
+        }
+    	clamp_variable = { name = food_districts_count min = 0 max = var:food_districts_max }
+        set_variable = { name = control_limit value = control_limit }	
+    	change_variable = { name = faith_strength_attack add = faith_strength_attack_delta }	
+    	change_variable = { name = faith_strength_defense add = faith_strength_defense_delta }	
         if = {
             limit = {
-                holder = { is_ai = yes }
+    			demd_repress_faith = yes
             }
+            county = { add_county_modifier = { modifier = repressing_local_faith } }
+        }
+        else = {
+            county = { remove_county_modifier = repressing_local_faith }
+        }
+    	if = {
+    		limit = { 
+    			demd_repress_faith_conversion = yes
+    		}
+    		county = { add_county_modifier = repressing_faith_conversion }
+    	}
+    	else = {
+    		county = { remove_county_modifier = repressing_faith_conversion }
+    	}
+    	if = {
+    		limit = { county = { has_county_modifier = faith_conversion_in_progress } }
+    		change_variable = { 
+    			name = faith_conversion_progress 
+    			add = yearly_faith_conversion_progress 
+    		}
+    		if = {
+    			limit = { 					
+    				OR = {
+    					var:faith_conversion_progress < 0 
+    					AND = {
+    						var:faith_conversion_type = flag:regular
+    						NOT = { var:converting_faith = var:faith_converting_county.faith }
+    					}
+    					faith = var:converting_faith
+    				}
+    			}
+            	set_variable = { name = faith_conversion_progress value = 100 }
+            	set_variable = { name = faith_conversion_max value = 100 }
+            	set_variable = { name = converting_faith value = faith }
+            	set_variable = { name = faith_converting_county value = this }
+            	county = { remove_county_modifier = faith_conversion_in_progress }
+            	set_variable = { name = faith_conversion_type value = flag:none }
+    		}
+    		else_if = {
+    			limit = { var:faith_conversion_progress = { compare_value > prev.var:faith_conversion_max } }
+            	county = { save_scope_as = county }
+            	if = {
+            		limit = { province_owner.faith = var:converting_faith }
+            		province_owner = {
+            			send_interface_message = {
+            				type = event_court_chaplain_task_good
+            				title = demd_faith_conversion_good
+            				desc = demd_faith_conversion_good_desc
+            				right_icon = prev.county
+            				tooltip = demd_faith_conversion_good_tooltip
+            			}
+            		}
+            	}
+            	else = {
+            		province_owner = {
+            			send_interface_message = {
+            				type = event_court_chaplain_task_bad
+            				title = demd_faith_conversion_bad
+            				desc = demd_faith_conversion_bad_desc
+            				right_icon = prev.county
+            				tooltip = demd_faith_conversion_bad_tooltip
+            			}
+            		}
+            	}
+            	county = {
+            		set_county_faith = prev.var:converting_faith
+            	}
+            	set_variable = { name = faith_conversion_progress value = 100 }
+            	set_variable = { name = faith_conversion_max value = 100 }
+            	set_variable = { name = converting_faith value = faith }
+            	set_variable = { name = faith_converting_county value = this }
+            	county = { remove_county_modifier = faith_conversion_in_progress }
+            	set_variable = { name = faith_conversion_type value = flag:none }
+    		}
+    		else = {
+    			random_list = {
+    				100 = { }
+    				10 = {
+    					county = {
+    						trigger_event = { id = demd_pop_religious_conversion.0001 months = { 0 12 } }
+    					}
+    				}
+    			}
+    		}
+    	}
+    	else = { 
+    		set_variable = { name = converting_faith value = faith }
+    		set_variable = { name = temp value = var:faith_strength_defense }
+    		set_variable = { name = faith_converting_county value = this }
+    		save_scope_as = home
+    		every_in_list = {
+    			variable = prov_neighbors
+    			limit = { 
+    				NOT = { faith = prev.faith } 
+    				var:faith_strength_attack = { compare_value > scope:home.var:temp }
+    			}
+    			prev = {
+    				set_variable = { name = converting_faith value = prev.faith }
+    				set_variable = { name = faith_converting_county value = prev }
+    				set_variable = { name = temp value = prev.var:faith_strength_attack }
+    			}
+    		}
+    		if = {
+    			limit = { NOT = { var:faith_converting_county = this } }
+    			county = { add_county_modifier = { modifier = faith_conversion_in_progress } }
+    			set_variable = {
+    				name = faith_conversion_progress
+    				value = {
+    					value = yearly_faith_conversion_progress
+    					multiply = 3
+    				}
+    			}
+    			set_variable = { name = faith_conversion_max value = faith_conversion_max }
+    			set_variable = { name = faith_conversion_type value = flag:regular }
+    		}
+    	}   
+    	change_variable = { name = culture_strength_attack add = culture_strength_attack_delta }
+    	change_variable = { name = culture_strength_defense add = culture_strength_defense_delta }	
+        if = {
+            limit = {
+    			demd_repress_culture = yes
+            }
+            county = { add_county_modifier = { modifier = repressing_local_culture } }
+        }
+        else = {
+            county = { remove_county_modifier = repressing_local_culture }
+        }
+    	if = {
+    		limit = { 
+    			demd_repress_culture_conversion = yes
+    		}
+    		county = { add_county_modifier = repressing_culture_conversion }
+    	}
+    	else = {
+    		county = { remove_county_modifier = repressing_culture_conversion }
+    	}
+    	if = {
+    		limit = { county = { has_county_modifier = culture_conversion_in_progress } }
+    		change_variable = { 
+    			name = culture_conversion_progress 
+    			add = yearly_culture_conversion_progress
+    		}
+    		if = {
+    			limit = { 
+    				OR = {
+    					var:culture_conversion_progress < 0 
+    					NOT = { var:converting_culture = var:culture_converting_county.culture }
+    					culture = var:converting_culture
+    				}
+    			}				
+            	set_variable = { name = culture_conversion_progress value = 100 }
+            	set_variable = { name = culture_conversion_max value = 100 }
+            	set_variable = { name = converting_culture value = culture }
+            	set_variable = { name = culture_converting_county value = this }
+            	county = { remove_county_modifier = culture_conversion_in_progress }
+    		}
+    		else_if = {
+    			limit = { var:culture_conversion_progress = { compare_value > prev.var:culture_conversion_max } }
+            	county = { save_scope_as = county }
+            	if = {
+            		limit = { province_owner.culture = var:converting_culture }		
+            		province_owner = {
+            			send_interface_message = {
+            				type = event_court_chaplain_task_good
+            				title = demd_culture_conversion_good
+            				desc = demd_culture_conversion_good_desc
+            				right_icon = prev.county
+            				tooltip = demd_culture_conversion_good_tooltip
+            			}
+            		}
+            	}
+            	else = {
+            		province_owner = {
+            			send_interface_message = {
+            				type = event_court_chaplain_task_bad
+            				title = demd_culture_conversion_bad
+            				desc = demd_culture_conversion_bad_desc
+            				right_icon = prev.county
+            				tooltip = demd_culture_conversion_bad_tooltip
+            			}
+            		}
+            	}
+            	county = {
+            		set_county_culture = prev.var:converting_culture
+            	}	
+            	set_variable = { name = culture_conversion_progress value = 100 }
+            	set_variable = { name = culture_conversion_max value = 100 }
+            	set_variable = { name = converting_culture value = culture }
+            	set_variable = { name = culture_converting_county value = this }
+            	county = { remove_county_modifier = culture_conversion_in_progress }
+    		}
+    		else = {			
+    			random_list = {
+    				100 = { }
+    				10 = {
+    					county = {
+    						trigger_event = { id = demd_pop_culture_conversion.0001 months = { 0 12 } }
+    					}
+    				}
+    			}
+    		}
+    	}
+    	else = {
+    		set_variable = { name = converting_culture value = culture }
+    		set_variable = { name = temp value = var:culture_strength_defense }
+    		set_variable = { name = culture_converting_county value = this }
+    		save_scope_as = home
+    		every_in_list = {
+    			variable = prov_neighbors
+    			limit = { 
+    				NOT = { culture = scope:home.culture } 
+    				var:culture_strength_attack = { compare_value > scope:home.var:temp }
+    			}
+    			save_scope_as = target
+    			scope:home = {
+    				set_variable = { name = converting_culture value = scope:target.culture }
+    				set_variable = { name = culture_converting_county value = scope:target }
+    				set_variable = { name = temp value = scope:target.var:culture_strength_attack }
+    			}
+    		}
+    		if = {
+    			limit = { NOT = { culture = var:converting_culture  } }
+    			county = { add_county_modifier = { modifier = culture_conversion_in_progress } }
+    			set_variable = {
+    				name = culture_conversion_progress
+    				value = {
+    					value = yearly_culture_conversion_progress
+    					multiply = 3 
+    				}
+    			}
+    			set_variable = { name = culture_conversion_max value = culture_conversion_max }
+    		}
+    	}
+    	if = {
+    		limit = {
+    			var:faith_strength_defense < 0.4 
+    			county = { NOT = { has_county_modifier = faith_conversion_in_progress } }
+    		}
+    		save_scope_as = home
+    		random_list = {
+    			1 = { 
+                    faith = {
+                        religion = {
+                            every_faith = {
+                                add_to_list = potential_heresies
+                            }
+                        }
+                    }
+                    random_in_list = {
+                        list = potential_heresies
+                        limit = {
+                            has_variable = player_created_faith
+                            num_county_followers > 0
+                            is_valid_heresy = {
+                                ORIGIN_FAITH = scope:home.faith
+                                HERETICAL_FAITH = this
+                            }
+                            any_in_list = {
+                				list = neaby_same_religion_counties
+                				faith = prev
+                			}
+                        }
+                        alternative_limit = {
+                            num_county_followers > 0
+                            is_preferred_heresy = {
+                                ORIGIN_FAITH = scope:home.faith
+                                HERETICAL_FAITH = this
+                            }
+                            any_in_list = {
+                				list = neaby_same_religion_counties
+                				faith = prev
+                			}
+                        }
+                        alternative_limit = {
+                            has_game_rule = strict_regional_heresy
+                            is_preferred_heresy = {
+                                ORIGIN_FAITH = scope:home.faith
+                                HERETICAL_FAITH = this
+                            }
+                        }
+                        alternative_limit = {
+                            is_valid_heresy = {
+                                ORIGIN_FAITH = scope:home.faith
+                                HERETICAL_FAITH = this
+                            }
+                        }
+                        alternative_limit = {
+                            always = yes
+                        }
+                        weight = {
+                            base = 50
+                            modifier = {
+                                factor = 5
+                                is_preferred_heresy = {
+                                    ORIGIN_FAITH = scope:home.faith
+                                    HERETICAL_FAITH = this
+                                }
+                            }
+                            modifier = {
+                                factor = 3
+                                num_county_followers = 0
+                            }
+                            modifier = {
+                                has_game_rule = strict_regional_heresy
+                                NOT = {
+                                    is_preferred_heresy = {
+                                        ORIGIN_FAITH = scope:home.faith
+                                        HERETICAL_FAITH = this
+                                    }
+                                }
+                                factor = 0
+                            }           
+                        }
+                        save_scope_as = heretic_faith
+                    }
+    				set_variable = { name = faith_conversion_type value = flag:heresy }
+    				county = { add_county_modifier = { modifier = faith_conversion_in_progress } }
+    				set_variable = {
+    					name = yearly_faith_conversion_progress
+    					value = {
+    						value = 0.4
+    						subtract = var:faith_strength_defense
+    						multiply = 100 
+    					}
+    				}
+    				set_variable = { name = converting_faith value = scope:heretic_faith }
+    				set_variable = {
+    					name = faith_conversion_progress
+    					value = {
+    						value = var:yearly_faith_conversion_progress
+    						multiply = 2 
+    					}
+    				}
+    				set_variable = { name = faith_conversion_max value = 100 }
+    				county = { save_scope_as = county }
+    				province_owner = {
+    					send_interface_message = {
+    						type = event_court_chaplain_task_bad
+    						title = demd_heresy_emerges_bad
+    						desc = demd_heresy_emerges_bad_desc
+    						left_icon = scope:heretic_faith
+    						right_icon = prev.county
+    					}
+    				}
+    			}
+    			10 = {
+    				modifier = {
+    					has_variable = faith_strength_defense
+    					add = {
+    						value = var:faith_strength_defense
+    						multiply = 2
+    					}
+    				}
+    			}
+    		}
+    	}	
+        if = {
+            limit = {
+                province_owner = { is_ai = yes }
+            }
+    		change_variable = {
+    			name = development_fund
+    			add = {
+    				value = var:tax
+    				multiply = 0.35
+    			}
+    		}
+        	set_variable = {
+        		name = feature_upkeep_target
+        		value = {
+        			value = var:gross_tax
+        			multiply = 0.4 
+        		}
+        	}
+        	set_variable = {
+        		name = feature_upkeep_max
+        		value = {
+        			value = var:gross_tax
+        			multiply = 0.6 
+        		}
+        	}
+        	if = {  
+        		limit = {
+        			var:feature_upkeep = { compare_value < prev.var:feature_upkeep_target } 
+        			var:development_fund > demd_building_tier_cost 
+        			NOT = { has_variable = building_in_progress } 
+        		} 
+        		save_scope_as = home
+                random_list = {
+                    0 = {
+                        modifier = {
+                            var:hospital_level = { compare_value < prev.culture.var:hospital_max }
+                            add = 50
+                        }
+                    	if = {
+                    		limit = { var:hospital_level = { compare_value < prev.culture.var:hospital_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:hospital }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+                    0 = {
+                        modifier = {
+                            var:barracks_level = { compare_value < prev.culture.var:barracks_max }
+                            add = 50
+                        }
+            			modifier = {
+                            var:barracks_level = { compare_value < prev.culture.var:barracks_max }
+                            var:public_order_target < 0.75
+                            add = 500
+                        }
+                    	if = {
+                    		limit = { var:barracks_level = { compare_value < prev.culture.var:barracks_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:barracks }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+                    0 = {
+                        modifier = {
+                            var:university_level = { compare_value < prev.culture.var:university_max }
+                            add = {
+            					value = var:research_produced
+            					multiply = 3
+            				}
+                        }
+                    	if = {
+                    		limit = { var:university_level = { compare_value < prev.culture.var:university_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:university }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+            		0 = {
+                        modifier = {
+                            var:trade_post_level = { compare_value < prev.culture.var:trade_post_max }
+                            add = 50
+                        }
+                    	if = {
+                    		limit = { var:trade_post_level = { compare_value < prev.culture.var:trade_post_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:trade_post }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+            		0 = {
+                        modifier = {
+                            var:sewer_level = { compare_value < prev.culture.var:sewer_max }
+                            add = 50
+                        }
+            			modifier = {
+                            var:sewer_level = { compare_value < prev.culture.var:sewer_max }
+                            var:sanitation_target < 0.75
+                            add = 500
+                        }
+                    	if = {
+                    		limit = { var:sewer_level = { compare_value < prev.culture.var:sewer_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:sewer }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+                    0 = {
+                        modifier = {
+                            var:temple_level = { compare_value < prev.culture.var:temple_max }
+                            add = 25
+                        }
+                        modifier = {
+                            var:temple_level = { compare_value < prev.culture.var:temple_max }
+                            any_in_list = {
+                                variable = prov_neighbors
+                                faith = {
+                                    faith_hostility_level = {
+                                        target = scope:home.faith
+                                        value > 1
+                                    }
+                                }
+                                var:faith_strength_defense = { compare_value > scope:home.var:faith_strength_defense }
+                            }
+                            add = 25
+                        }
+                    	if = {
+                    		limit = { var:temple_level = { compare_value < prev.culture.var:temple_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:temple }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+                    0 = {
+                        modifier = {
+                            var:walls_level = { compare_value < prev.culture.var:walls_max }
+                            add = 75
+                        }
+                    	if = {
+                    		limit = { var:walls_level = { compare_value < prev.culture.var:walls_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:walls }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+                    0 = {
+                        modifier = {
+                            var:theater_level = { compare_value < prev.culture.var:theater_max }
+                            add = 25
+                        }
+                        modifier = {
+                            var:theater_level = { compare_value < prev.culture.var:theater_max }
+                            any_in_list = {
+                                variable = prov_neighbors
+                                culture = {
+                                    NOT = { this.culture_group = scope:home.culture_group }
+                                }
+                                var:culture_strength_attack = { compare_value > scope:home.var:culture_strength_defense }
+                            }
+                            add = 25
+                        }
+                    	if = {
+                    		limit = { var:theater_level = { compare_value < prev.culture.var:theater_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:theater }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                    }
+            		1 = {
+            		}
+                }
+        	}
+        	else_if = { 
+        		limit = {
+        			var:feature_upkeep = { compare_value > prev.var:feature_upkeep_max }
+        		}
+                set_variable = {
+                    name = temp
+                    value = {
+                        value = var:university_level
+                        add = var:hospital_level
+                        add = var:theater_level
+                        add = var:temple_level
+                        add = var:barracks_level
+            			add = var:sewer_level
+            			add = var:walls_level
+            			add = var:trade_post_level
+                    }
+                }
+                while = {
+                    limit = {
+                        var:feature_upkeep = { compare_value > prev.var:feature_upkeep_max }
+                        var:temp > 0
+                    }
+                    random_list = {
+                        0 = {
+                            modifier = {
+                                var:university_level > 0
+                                add = {
+                                    value = var:university_level
+                                    multiply = 10
+                                }
+                            }
+                        	if = {
+                        		limit = { var:university_level > 0 }
+                        		change_variable = { name = university_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+                            change_variable = { name = temp subtract = 1 }
+                        }
+                        0 = {
+                            modifier = {
+                                var:theater_level > 0
+                                add = {
+                                    value = var:theater_level
+                                    multiply = 10
+                                }
+                            }
+                        	if = {
+                        		limit = { var:theater_level > 0 }
+                        		change_variable = { name = theater_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+                            change_variable = { name = temp subtract = 1 }
+                        }
+                        0 = {
+                            modifier = {
+                                var:temple_level > 0
+                                add = {
+                                    value = var:temple_level
+                                    multiply = 10
+                                }
+                            }
+                        	if = {
+                        		limit = { var:temple_level > 0 }
+                        		change_variable = { name = temple_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+                            change_variable = { name = temp subtract = 1 }
+                        }
+                        0 = {
+                            modifier = {
+                                var:hospital_level > 0
+                                add = {
+                                    value = var:hospital_level
+                                    multiply = 10
+                                }
+                            }
+                        	if = {
+                        		limit = { var:hospital_level > 0 }
+                        		change_variable = { name = hospital_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+                            change_variable = { name = temp subtract = 1 }
+                        }
+                        0 = {
+                            modifier = {
+                                var:barracks_level > 0
+                                add = {
+                                    value = var:barracks_level
+                                    multiply = 10
+                                }
+                            }
+            				modifier = {
+            					var:barracks_level > 0
+            					var:public_order_target > 1
+            					add = 1000
+            				}
+                        	if = {
+                        		limit = { var:barracks_level > 0 }
+                        		change_variable = { name = barracks_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+                            change_variable = { name = temp subtract = 1 }
+                        }
+            			0 = {
+                            modifier = {
+                                var:sewer_level > 0
+                                add = {
+                                    value = var:sewer_level
+                                    multiply = 2 
+                                }
+                            }
+            				modifier = {
+            					var:sewer_level > 0
+            					var:sanitation_target > 1
+            					add = 1000
+            				}
+                        	if = {
+                        		limit = { var:sewer_level > 0 }
+                        		change_variable = { name = sewer_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+            				change_variable = { name = temp subtract = 1 }
+                        }
+            			0 = {
+                            modifier = {
+                                var:trade_post_level > 0
+                                add = {
+                                    value = var:trade_post_level
+                                    multiply = 10
+                                }
+                            }
+                        	if = {
+                        		limit = { var:trade_post_level > 0 }
+                        		change_variable = { name = trade_post_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+            				change_variable = { name = temp subtract = 1 }
+                        }
+            			0 = {
+                            modifier = {
+                                var:walls_level > 0
+                                add = {
+                                    value = var:walls_level
+                                    multiply = 2 
+                                }
+                            }
+                        	if = {
+                        		limit = { var:walls_level > 0 }
+                        		change_variable = { name = walls_level subtract = 1 }
+                        		change_variable = { name = tax add = demd_building_tier_upkeep }
+                        		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                        	}
+            				change_variable = { name = temp subtract = 1 }
+                        }
+                    }
+                }
+        	}  
+        	else_if = { 
+        		limit = {
+        			var:development_fund > demd_building_tier_cost 
+        			NOT = { has_variable = building_in_progress } 
+        			var:feature_upkeep = { compare_value > prev.var:feature_upkeep_target } 
+        		}
+        		if = {
+        			limit = { var:sanitation_target < 0.75 }
+                	set_variable = {
+                        name = temp
+                        value = {
+                            value = var:university_level
+                            add = var:hospital_level
+                            add = var:theater_level
+                            add = var:temple_level
+                			add = var:walls_level
+                			add = var:trade_post_level
+                        }
+                    }
+                	if = {
+                		limit = { var:temp > 0 }
+                    	if = {
+                    		limit = { var:sewer_level = { compare_value < prev.culture.var:sewer_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:sewer }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                		random_list = {
+                			0 = {
+                				modifier = {
+                					var:university_level > 0
+                					add = {
+                						value = var:university_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:university_level > 0 }
+                            		change_variable = { name = university_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:theater_level > 0
+                					add = {
+                						value = var:theater_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:theater_level > 0 }
+                            		change_variable = { name = theater_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:temple_level > 0
+                					add = {
+                						value = var:temple_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:temple_level > 0 }
+                            		change_variable = { name = temple_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:hospital_level > 0
+                					add = {
+                						value = var:hospital_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:hospital_level > 0 }
+                            		change_variable = { name = hospital_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:trade_post_level > 0
+                					add = {
+                						value = var:trade_post_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:trade_post_level > 0 }
+                            		change_variable = { name = trade_post_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:walls_level > 0
+                					add = {
+                						value = var:walls_level
+                						multiply = 2 
+                					}
+                				}
+                            	if = {
+                            		limit = { var:walls_level > 0 }
+                            		change_variable = { name = walls_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			1 = { } 
+                		}
+                	}
+        		}
+        		else_if = {
+        			limit = { var:public_order_target < 0.75 }
+                	set_variable = {
+                        name = temp
+                        value = {
+                            value = var:university_level
+                            add = var:hospital_level
+                            add = var:theater_level
+                            add = var:temple_level
+                			add = var:walls_level
+                			add = var:trade_post_level
+                        }
+                    }
+                	if = {
+                		limit = { var:temp > 0 }
+                    	if = {
+                    		limit = { var:barracks_level = { compare_value < prev.culture.var:barracks_max } }
+                    		change_variable = { name = development_fund subtract = demd_building_tier_cost }
+                    		set_variable = { name = which_building value = flag:barracks }
+                    		set_variable = { name = building_progress value = monthly_building_progress }
+                    		set_variable = { name = building_in_progress value = 1 }
+                    	}
+                		random_list = {
+                			0 = {
+                				modifier = {
+                					var:university_level > 0
+                					add = {
+                						value = var:university_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:university_level > 0 }
+                            		change_variable = { name = university_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:theater_level > 0
+                					add = {
+                						value = var:theater_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:theater_level > 0 }
+                            		change_variable = { name = theater_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:temple_level > 0
+                					add = {
+                						value = var:temple_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:temple_level > 0 }
+                            		change_variable = { name = temple_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:hospital_level > 0
+                					add = {
+                						value = var:hospital_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:hospital_level > 0 }
+                            		change_variable = { name = hospital_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:trade_post_level > 0
+                					add = {
+                						value = var:trade_post_level
+                						multiply = 10
+                					}
+                				}
+                            	if = {
+                            		limit = { var:trade_post_level > 0 }
+                            		change_variable = { name = trade_post_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			0 = {
+                				modifier = {
+                					var:walls_level > 0
+                					add = {
+                						value = var:walls_level
+                						multiply = 2 
+                					}
+                				}
+                            	if = {
+                            		limit = { var:walls_level > 0 }
+                            		change_variable = { name = walls_level subtract = 1 }
+                            		change_variable = { name = tax add = demd_building_tier_upkeep }
+                            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+                            	}
+                				change_variable = { name = temp subtract = 1 }
+                			}
+                			1 = { } 
+                		}
+                	}
+        		}
+        	}
+        	if = {
+        		limit = { 
+        			var:sanitation_target > 1.3 
+        			var:sewer_level > 0
+        		}
+            	if = {
+            		limit = { var:sewer_level > 0 }
+            		change_variable = { name = sewer_level subtract = 1 }
+            		change_variable = { name = tax add = demd_building_tier_upkeep }
+            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+            	}
+        	}
+        	if = {
+        		limit = { 
+        			var:public_order_target > 1.3 
+        			var:barracks_level > 0
+        		}
+            	if = {
+            		limit = { var:barracks_level > 0 }
+            		change_variable = { name = barracks_level subtract = 1 }
+            		change_variable = { name = tax add = demd_building_tier_upkeep }
+            		change_variable = { name = feature_upkeep subtract = demd_building_tier_upkeep }
+            	}
+        	}		
         	if = {
         		limit = { 
         			county.county_opinion < -15	
@@ -487,7 +1486,7 @@ annualPulse = {
         	else_if = {
         		limit = { 
         			county.county_opinion > 15	
-        			var:manpower_rate = { compare_value >= prev.var:tax_rate }
+        			var:manpower_rate = { compare_value > prev.var:tax_rate }
         			NOT = { has_variable = tax_rate_changed }
         		}
         		demd_increment_tax_rate = yes
@@ -508,203 +1507,422 @@ annualPulse = {
         		}
         		demd_increment_manpower_rate = yes
         	}
+        	if = {
+        		limit = {
+        			county.county_opinion > 10	
+        			var:manpower_rate >= tax_manpower_edict_max
+        			var:tax_rate >= tax_manpower_edict_max
+        		}		
+        		demd_decrement_city_rights = yes
+        	}
+        	else_if = {
+        		limit = {
+        			county.county_opinion < 0
+        			var:manpower_rate < tax_manpower_edict_max 
+        			var:tax_rate < tax_manpower_edict_max 
+        		}		
+        		demd_increment_city_rights = yes
+        	}
+            if = {
+        		limit = { 
+        			NOR = { 
+        				has_variable = religious_tolerance_changed 
+        				var:religious_tolerance = 1 				
+        			}
+        			province_owner = { ai_zeal > very_low_negative_ai_value }
+        		}
+        		demd_set_religious_tolerance = { LEVEL = 1 }
+        	}
+        	else_if = {
+        		limit = { 
+        			NOR = { 
+        				has_variable = religious_tolerance_changed 
+        				var:religious_tolerance = 2				
+        			}
+        			province_owner = { ai_zeal < very_low_negative_ai_value }
+        		}
+        		demd_set_religious_tolerance = { LEVEL = 2 }	
+        	}
+        	if = {
+        		limit = { 
+        			NOT = { has_variable = cultural_tolerance_changed } 
+        		}
+        		set_variable = {
+        			name = temp	
+        			value = {
+        				value = var:population
+        				multiply = 0.75
+        			}
+        		}
+        		save_scope_as = home
+        		if = {
+        			limit = {
+        				NOT = { var:cultural_tolerance = 1 }
+        				NOT = { culture.var:supergroup = province_owner.culture.var:supergroup }
+        				any_in_list = {
+        					variable = prov_neighbors
+        					culture = prev.province_owner.culture
+        					var:population = { compare_value > scope:home.var:temp }
+        				}
+        			}
+        			demd_set_cultural_tolerance = { LEVEL = 1 }
+        		}
+        		else_if = {
+        			limit = {
+        				NOT = { var:cultural_tolerance = 2 }
+        			}
+        			demd_set_cultural_tolerance = { LEVEL = 2 }
+        		}
+        	}
+        	if = {
+        		limit = { 
+        			NOT = { culture = province_owner.culture }
+        			NOT = { county = { has_county_modifier = culture_conversion_in_progress } }
+        			province_owner.capital_province.culture = province_owner.culture
+        			province_owner.capital_province.var:culture_strength_attack = { compare_value > prev.var:culture_strength_defense }
+        		}
+        		demd_start_settler_conversion = yes
+        	}
+        	if = {
+        		limit = { 
+        			NOT = { faith = province_owner.faith }
+        			NOT = { county = { has_county_modifier = faith_conversion_in_progress } }
+        			province_owner.capital_province.faith = province_owner.faith
+        			province_owner.capital_province.var:faith_strength_attack = { compare_value > prev.var:faith_strength_defense }
+        		}
+        		demd_start_missionary_conversion = yes
+        	}
     	}	
-    	set_variable = { name = manpower_total_percent value = manpower_total_percent }
-    	every_in_list = { 
-    		variable = county_provinces
+    	change_variable = { name = noble_influence add = noble_influence_delta }
+    	change_variable = { name = burgher_influence add = burgher_influence_delta }
+    	change_variable = { name = clergy_influence add = clergy_influence_delta }
+    	random_list = {
+    		1 = {
+    			county = {
+    				trigger_event = { id = demd_pop_influence.0001 months = { 0 12 } }
+    			}
+    		}
+    		50 = {
+    		}
+    	}
+    	if = {
+    		limit = { 
+    			county = { 
+    				county_opinion < 0
+    			} 
+    		}		
     		if = {
-    			limit = { county.title_province = this }
-            	set_variable = {
-            		name = manpower
-            		value = {
-            			value = var:population
-            			add = county.var:population
-            			multiply = county.var:manpower_total_percent
-            			multiply = 1000	
-            		}
-            	}
-            	set_variable = { 
-            		name = garrison 
-            		value = {
-            			value = var:manpower
-            			multiply = garrison_manpower_percent
-            		}
-            	} 
-            	set_variable = { 
-            		name = levy 
-            		value = {
-            			value = var:manpower
-            			multiply = {
-            				value = 1
-            				subtract = garrison_manpower_percent
-            			}
-            			multiply = { 
-            				value = var:population
-            				divide = {
-            					value = var:population
-            					add = county.var:population
-            				}
-            			}
-            		}
-            	} 
-            	set_variable = { 
-            		name = free_manpower 
-            		value = {
-            			value = var:manpower
-            			subtract = var:garrison
-            			subtract = var:levy
-            		}
-            	}
+    			limit = { var:noble_influence > 0.5 }
+    			random_list = {
+    				1 = {
+    				}
+    				20 = {
+    				}
+    			}
     		}
-    		else = {
-            	set_variable = {
-            		name = manpower
-            		value = {
-            			value = var:population
-            			multiply = county.var:manpower_total_percent
-            			multiply = 1000	
-            		}
-            	}
-            	set_variable = { 
-            		name = garrison 
-            		value = {
-            			value = var:manpower
-            			multiply = garrison_manpower_percent
-            		}
-            	} 
-            	set_variable = { 
-            		name = levy 
-            		value = {
-            			value = var:manpower
-            			subtract = var:garrison
-            		}
-            	} 
+    		else_if = {
+    			limit = { var:clergy_influence > 0.5 }
+    			random_list = {
+    				1 = {
+    				}
+    				20 = {
+    				}
+    			}
     		}
-        	set_variable = { name = temp value = var:garrison }
-            remove_all_province_modifier_instances = demd_prov_garrison_modifier_huge
-            remove_all_province_modifier_instances = demd_prov_garrison_modifier_big
-            remove_all_province_modifier_instances = demd_prov_garrison_modifier_medium
-            remove_all_province_modifier_instances = demd_prov_garrison_modifier_small
-            while = {
-                limit = { var:temp > 6250 }
-                add_province_modifier = demd_prov_garrison_modifier_huge
-                change_variable = { name = temp subtract = 6250 }
-            }
-            while = {
-                limit = { var:temp > 1250 }
-                add_province_modifier = demd_prov_garrison_modifier_big
-                change_variable = { name = temp subtract = 1250 }
-            }
-            while = {
-                limit = { var:temp > 250 }
-                add_province_modifier = demd_prov_garrison_modifier_medium
-                change_variable = { name = temp subtract = 250 }
-            }
-            while = {
-                limit = { var:temp > 50 } 
-                add_province_modifier = demd_prov_garrison_modifier_small
-                change_variable = { name = temp subtract = 50 }
-            }
-        	set_variable = { name = temp value = var:levy }
-            remove_all_province_modifier_instances = demd_prov_levy_modifier_huge
-            remove_all_province_modifier_instances = demd_prov_levy_modifier_big
-            remove_all_province_modifier_instances = demd_prov_levy_modifier_medium
-            remove_all_province_modifier_instances = demd_prov_levy_modifier_small
-            while = {
-                limit = { var:temp > 6250 }
-                add_province_modifier = demd_prov_levy_modifier_huge
-                change_variable = { name = temp subtract = 6250 }
-            }
-            while = {
-                limit = { var:temp > 1250 }
-                add_province_modifier = demd_prov_levy_modifier_big
-                change_variable = { name = temp subtract = 1250 }
-            }
-            while = {
-                limit = { var:temp > 250 }
-                add_province_modifier = demd_prov_levy_modifier_medium
-                change_variable = { name = temp subtract = 250 }
-            }
-            while = {
-                limit = { var:temp > 50 } 
-                add_province_modifier = demd_prov_levy_modifier_small
-                change_variable = { name = temp subtract = 50 }
-            }
-            set_variable = { name = temp value = supply_limit }
-            remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_huge
-        	remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_big
-        	remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_medium
-        	remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_small
-            while = {
-                limit = { var:temp > 12500 }
-                add_province_modifier = demd_prov_supply_limit_modifier_huge
-                change_variable = { name = temp subtract = 12500 }
-            }
-            while = {
-                limit = { var:temp > 2500 }
-                add_province_modifier = demd_prov_supply_limit_modifier_big
-                change_variable = { name = temp subtract = 2500 }
-            }
-            while = {
-                limit = { var:temp > 500 }
-                add_province_modifier = demd_prov_supply_limit_modifier_medium
-                change_variable = { name = temp subtract = 500 }
-            }
-            while = {
-                limit = { var:temp > 100 }
-                add_province_modifier = demd_prov_supply_limit_modifier_small
-                change_variable = { name = temp subtract = 100 }
-            }
-            set_variable = {
-                name = temp
-                value = {
-                    value = population_tax
-                }
-            }
-            remove_all_province_modifier_instances = demd_prov_tax_modifier_huge
-            remove_all_province_modifier_instances = demd_prov_tax_modifier_big
-            remove_all_province_modifier_instances = demd_prov_tax_modifier_medium
-            remove_all_province_modifier_instances = demd_prov_tax_modifier_small
-            while = {
-                limit = { var:temp > 100 }
-                add_province_modifier = demd_prov_tax_modifier_huge
-                change_variable = { name = temp subtract = 100 }
-            }
-            while = {
-                limit = { var:temp > 10 }
-                add_province_modifier = demd_prov_tax_modifier_big
-                change_variable = { name = temp subtract = 10 }
-            }
-            while = {
-                limit = { var:temp > 1 }
-                add_province_modifier = demd_prov_tax_modifier_medium
-                change_variable = { name = temp subtract = 1 }
-            }
-            while = {
-                limit = { var:temp > 0 }
-                add_province_modifier = demd_prov_tax_modifier_small
-                change_variable = { name = temp subtract = 0.1 }
-            }
+    		else_if = { 
+    			limit = { var:burgher_influence > 0.5 }
+    			random_list = {
+    				1 = {
+    				}
+    				20 = {
+    				}
+    			}			
+    		}		
     	}
-    	set_variable = { name = temp value = development_progress_from_unused_construction_capacity }
-    	remove_all_county_modifier_instances = demd_prov_development_modifier_big
-    	remove_all_county_modifier_instances = demd_prov_development_modifier_medium
-    	remove_all_county_modifier_instances = demd_prov_development_modifier_small
+        set_variable = {
+            name = temp
+            value = {
+                value = var:tax
+            }
+        }
+        remove_all_province_modifier_instances = demd_prov_tax_modifier_huge
+        remove_all_province_modifier_instances = demd_prov_tax_modifier_big
+        remove_all_province_modifier_instances = demd_prov_tax_modifier_medium
+        remove_all_province_modifier_instances = demd_prov_tax_modifier_small
+        while = {
+            limit = { var:temp > 100 }
+            add_province_modifier = demd_prov_tax_modifier_huge
+            change_variable = { name = temp subtract = 100 }
+        }
+        while = {
+            limit = { var:temp > 10 }
+            add_province_modifier = demd_prov_tax_modifier_big
+            change_variable = { name = temp subtract = 10 }
+        }
+        while = {
+            limit = { var:temp > 1 }
+            add_province_modifier = demd_prov_tax_modifier_medium
+            change_variable = { name = temp subtract = 1 }
+        }
+        while = {
+            limit = { var:temp > 0 }
+            add_province_modifier = demd_prov_tax_modifier_small
+            change_variable = { name = temp subtract = 0.1 }
+        }
+        set_variable = { name = temp value = garrison }
+        remove_all_province_modifier_instances = demd_prov_garrison_modifier_huge
+        remove_all_province_modifier_instances = demd_prov_garrison_modifier_big
+        remove_all_province_modifier_instances = demd_prov_garrison_modifier_medium
+        remove_all_province_modifier_instances = demd_prov_garrison_modifier_small
+        while = {
+            limit = { var:temp > 6250 }
+            add_province_modifier = demd_prov_garrison_modifier_huge
+            change_variable = { name = temp subtract = 6250 }
+        }
+        while = {
+            limit = { var:temp > 1250 }
+            add_province_modifier = demd_prov_garrison_modifier_big
+            change_variable = { name = temp subtract = 1250 }
+        }
+        while = {
+            limit = { var:temp > 250 }
+            add_province_modifier = demd_prov_garrison_modifier_medium
+            change_variable = { name = temp subtract = 250 }
+        }
+        while = {
+            limit = { var:temp > 100 } 
+            add_province_modifier = demd_prov_garrison_modifier_small
+            change_variable = { name = temp subtract = 50 }
+        }
+        set_variable = { name = temp value = county_fort_level }
+    	remove_all_province_modifier_instances = demd_prov_fort_level_modifier_huge
+        remove_all_province_modifier_instances = demd_prov_fort_level_modifier_big
+        remove_all_province_modifier_instances = demd_prov_fort_level_modifier_medium
+        remove_all_province_modifier_instances = demd_prov_fort_level_modifier_small
     	while = {
-    		limit = { var:temp > 1 }
-    		add_county_modifier = demd_prov_development_modifier_big 
-    		change_variable = { name = temp subtract = 1 }
+            limit = { var:temp > 8 }
+            add_province_modifier = demd_prov_fort_level_modifier_huge
+            change_variable = { name = temp subtract = 8 }
+        }
+        while = {
+            limit = { var:temp > 4 }
+            add_province_modifier = demd_prov_fort_level_modifier_big
+            change_variable = { name = temp subtract = 4 }
+        }
+        while = {
+            limit = { var:temp > 2 }
+            add_province_modifier = demd_prov_fort_level_modifier_medium
+            change_variable = { name = temp subtract = 2 }
+        }
+        while = {
+            limit = { var:temp > 1 }
+            add_province_modifier = demd_prov_fort_level_modifier_small
+            change_variable = { name = temp subtract = 1 }
+        }
+        set_variable = { name = temp value = county_advantage }
+    	remove_all_province_modifier_instances = demd_prov_advantage_modifier_huge
+        remove_all_province_modifier_instances = demd_prov_advantage_modifier_big
+        remove_all_province_modifier_instances = demd_prov_advantage_modifier_medium
+        remove_all_province_modifier_instances = demd_prov_advantage_modifier_small
+    	every_in_list = {
+    		variable = prov_in_same_county
+    		remove_all_province_modifier_instances = demd_prov_advantage_modifier_huge
+    		remove_all_province_modifier_instances = demd_prov_advantage_modifier_big
+    		remove_all_province_modifier_instances = demd_prov_advantage_modifier_medium
+    		remove_all_province_modifier_instances = demd_prov_advantage_modifier_small
     	}
     	while = {
-    		limit = { var:temp > 0.25 }
-    		add_county_modifier = demd_prov_development_modifier_medium 
-    		change_variable = { name = temp subtract = 0.25 }
+            limit = { var:temp > 8 }
+            add_province_modifier = demd_prov_advantage_modifier_huge
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_advantage_modifier_huge
+    		}
+            change_variable = { name = temp subtract = 8 }
+        }
+        while = {
+            limit = { var:temp > 4 }
+            add_province_modifier = demd_prov_advantage_modifier_big
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_advantage_modifier_big
+    		}
+            change_variable = { name = temp subtract = 4 }
+        }
+        while = {
+            limit = { var:temp > 2 }
+            add_province_modifier = demd_prov_advantage_modifier_medium
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_advantage_modifier_medium
+    		}
+            change_variable = { name = temp subtract = 2 }
+        }
+        while = {
+            limit = { var:temp > 1 }
+            add_province_modifier = demd_prov_advantage_modifier_small
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_advantage_modifier_small
+    		}
+            change_variable = { name = temp subtract = 1 }
+        }
+        set_variable = { name = temp value = levy }
+        remove_all_province_modifier_instances = demd_prov_levy_modifier_huge
+        remove_all_province_modifier_instances = demd_prov_levy_modifier_big
+        remove_all_province_modifier_instances = demd_prov_levy_modifier_medium
+        remove_all_province_modifier_instances = demd_prov_levy_modifier_small
+        while = {
+            limit = { var:temp > 6250 }
+            add_province_modifier = demd_prov_levy_modifier_huge
+            change_variable = { name = temp subtract = 6250 }
+        }
+        while = {
+            limit = { var:temp > 1250 }
+            add_province_modifier = demd_prov_levy_modifier_big
+            change_variable = { name = temp subtract = 1250 }
+        }
+        while = {
+            limit = { var:temp > 250 }
+            add_province_modifier = demd_prov_levy_modifier_medium
+            change_variable = { name = temp subtract = 250 }
+        }
+        while = {
+            limit = { var:temp > 100 } 
+            add_province_modifier = demd_prov_levy_modifier_small
+            change_variable = { name = temp subtract = 50 }
+        }
+        set_variable = { name = temp value = supply_limit }
+        remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_huge
+    	remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_big
+    	remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_medium
+    	remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_small
+    	every_in_list = {
+    		variable = prov_in_same_county
+    		remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_huge
+    		remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_big
+    		remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_medium
+    		remove_all_province_modifier_instances = demd_prov_supply_limit_modifier_small
+    	}
+        while = {
+            limit = { var:temp > 12500 }
+            add_province_modifier = demd_prov_supply_limit_modifier_huge
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_supply_limit_modifier_huge
+    		}
+            change_variable = { name = temp subtract = 12500 }
+        }
+        while = {
+            limit = { var:temp > 2500 }
+            add_province_modifier = demd_prov_supply_limit_modifier_big
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_supply_limit_modifier_big
+    		}
+            change_variable = { name = temp subtract = 2500 }
+        }
+        while = {
+            limit = { var:temp > 500 }
+            add_province_modifier = demd_prov_supply_limit_modifier_medium
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_supply_limit_modifier_medium
+    		}
+            change_variable = { name = temp subtract = 500 }
+        }
+        while = {
+            limit = { var:temp > 100 }
+            add_province_modifier = demd_prov_supply_limit_modifier_small
+    		every_in_list = {
+    			variable = prov_in_same_county
+    			add_province_modifier = demd_prov_supply_limit_modifier_small
+    		}
+            change_variable = { name = temp subtract = 100 }
+        }
+        set_variable = { name = temp value = temple_piety_bonus }
+    	remove_all_province_modifier_instances = demd_prov_piety_modifier_big
+    	remove_all_province_modifier_instances = demd_prov_piety_modifier_medium
+    	remove_all_province_modifier_instances = demd_prov_piety_modifier_small
+    	while = {
+            limit = { var:temp > 0.4 }
+            add_province_modifier = demd_prov_piety_modifier_big
+    		change_variable = { name = temp subtract = 0.4 }
     	}
     	while = {
-    		limit = { var:temp > 0.05 }
-    		add_county_modifier = demd_prov_development_modifier_small
-    		change_variable = { name = temp subtract = 0.05 }
+            limit = { var:temp > 0.2 }
+            add_province_modifier = demd_prov_piety_modifier_medium
+    		change_variable = { name = temp subtract = 0.2 }
     	}
+    	while = {
+            limit = { var:temp > 0.1 }
+            add_province_modifier = demd_prov_piety_modifier_small
+    		change_variable = { name = temp subtract = 0.1 }
+    	}
+        set_variable = { name = temp value = university_prestige_bonus }
+    	remove_all_province_modifier_instances = demd_prov_prestige_modifier_big
+    	remove_all_province_modifier_instances = demd_prov_prestige_modifier_medium
+    	remove_all_province_modifier_instances = demd_prov_prestige_modifier_small
+    	while = {
+            limit = { var:temp > 0.4 }
+            add_province_modifier = demd_prov_prestige_modifier_big
+    		change_variable = { name = temp subtract = 0.4 }
+    	}
+    	while = {
+            limit = { var:temp > 0.2 }
+            add_province_modifier = demd_prov_prestige_modifier_medium
+    		change_variable = { name = temp subtract = 0.2 }
+    	}
+    	while = {
+            limit = { var:temp > 0.1 }
+            add_province_modifier = demd_prov_prestige_modifier_small
+    		change_variable = { name = temp subtract = 0.1 }
+    	}
+    	remove_province_modifier = demd_prov_hospital_8
+    	remove_province_modifier = demd_prov_hospital_7
+    	remove_province_modifier = demd_prov_hospital_6
+    	remove_province_modifier = demd_prov_hospital_5
+    	remove_province_modifier = demd_prov_hospital_4
+    	remove_province_modifier = demd_prov_hospital_3
+    	remove_province_modifier = demd_prov_hospital_2
+    	remove_province_modifier = demd_prov_hospital_1
+    	if = { 
+    		limit = { var:hospital_level = 1 } 
+    		add_province_modifier = demd_prov_hospital_1
+    	}
+    	else_if = { 
+    		limit = { var:hospital_level = 2 } 
+    		add_province_modifier = demd_prov_hospital_2
+    	}
+    	else_if = { 
+    		limit = { var:hospital_level = 3 } 
+    		add_province_modifier = demd_prov_hospital_3
+    	}	
+    	else_if = { 
+    		limit = { var:hospital_level = 4 } 
+    		add_province_modifier = demd_prov_hospital_4
+    	}
+    	else_if = { 
+    		limit = { var:hospital_level = 5 } 
+    		add_province_modifier = demd_prov_hospital_5
+    	}
+    	else_if = { 
+    		limit = { var:hospital_level = 6 } 
+    		add_province_modifier = demd_prov_hospital_6
+    	}
+    	else_if = { 
+    		limit = { var:hospital_level = 7 } 
+    		add_province_modifier = demd_prov_hospital_7
+    	}
+    	else_if = { 
+    		limit = { var:hospital_level > 7 } 
+    		add_province_modifier = demd_prov_hospital_8
+    	}
+    	set_variable = { name = research_produced value = research_produced }
+        county = {
+            change_development_level = -1000
+            change_development_level = prev.var:research_produced
+        }
 	}
 }
 

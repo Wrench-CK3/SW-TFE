@@ -1,6 +1,6 @@
 ﻿#############################################
 # DEMD Population System
-# by Vertimnus (NaniteSystems)
+# by Vertimnus
 # This file was compiled by a machine from jomini metascript source code.
 # It should never be manually edited.
 #############################################
@@ -17,7 +17,7 @@ setEdicts = {
 	else_if = {
 		limit = { 
 			county.county_opinion > 15	
-			var:manpower_rate = { compare_value >= prev.var:tax_rate }
+			var:manpower_rate = { compare_value > prev.var:tax_rate }
 			NOT = { has_variable = tax_rate_changed }
 		}
 		demd_increment_tax_rate = yes
@@ -37,6 +37,73 @@ setEdicts = {
 			NOT = { has_variable = manpower_changed }
 		}
 		demd_increment_manpower_rate = yes
+	}
+	if = {
+		limit = {
+			county.county_opinion > 10	
+			var:manpower_rate >= tax_manpower_edict_max
+			var:tax_rate >= tax_manpower_edict_max
+		}		
+		demd_decrement_city_rights = yes
+	}
+	else_if = {
+		limit = {
+			county.county_opinion < 0
+			var:manpower_rate < tax_manpower_edict_max 
+			var:tax_rate < tax_manpower_edict_max 
+		}		
+		demd_increment_city_rights = yes
+	}
+    if = {
+		limit = { 
+			NOR = { 
+				has_variable = religious_tolerance_changed 
+				var:religious_tolerance = 1 				
+			}
+			province_owner = { ai_zeal > very_low_negative_ai_value }
+		}
+		demd_set_religious_tolerance = { LEVEL = 1 }
+	}
+	else_if = {
+		limit = { 
+			NOR = { 
+				has_variable = religious_tolerance_changed 
+				var:religious_tolerance = 2				
+			}
+			province_owner = { ai_zeal < very_low_negative_ai_value }
+		}
+		demd_set_religious_tolerance = { LEVEL = 2 }	
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = cultural_tolerance_changed } 
+		}
+		set_variable = {
+			name = temp	
+			value = {
+				value = var:population
+				multiply = 0.75
+			}
+		}
+		save_scope_as = home
+		if = {
+			limit = {
+				NOT = { var:cultural_tolerance = 1 }
+				NOT = { culture.var:supergroup = province_owner.culture.var:supergroup }
+				any_in_list = {
+					variable = prov_neighbors
+					culture = prev.province_owner.culture
+					var:population = { compare_value > scope:home.var:temp }
+				}
+			}
+			demd_set_cultural_tolerance = { LEVEL = 1 }
+		}
+		else_if = {
+			limit = {
+				NOT = { var:cultural_tolerance = 2 }
+			}
+			demd_set_cultural_tolerance = { LEVEL = 2 }
+		}
 	}
 }
 

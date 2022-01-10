@@ -51,6 +51,14 @@ demd_assign_special_resources = {
 
 #############################################################################
 demd_set_up_trade_node_network = { 
+
+	add_to_global_variable_list = { name = trade_nodes target = title:k_mann_the_isles }
+	title:k_ireland = {
+        add_to_variable_list = { 
+			name = outlet_nodes target = title:k_ireland 
+		}
+    }
+
     add_to_global_variable_list = { name = trade_nodes target = title:k_ireland }
 	title:k_ireland = {
         add_to_variable_list = { 
@@ -349,7 +357,7 @@ demd_set_up_trade_node_network = {
 			name = outlet_nodes target = title:k_mordvinia
 		}
 		add_to_variable_list = { 
-			name = outlet_nodes target = title:k_alania
+			name = outlet_nodes target = title:k_caucasus
 		}
 	}
 	add_to_global_variable_list = { name = trade_nodes target = title:k_nikaea }
@@ -393,8 +401,8 @@ demd_set_up_trade_node_network = {
 		}
 	}
 
-	add_to_global_variable_list = { name = trade_nodes target = title:k_alania }
-	title:k_alania = {
+	add_to_global_variable_list = { name = trade_nodes target = title:k_caucasus }
+	title:k_caucasus = {
 		add_to_variable_list = { 
 			name = outlet_nodes target = title:k_georgia
 		}
